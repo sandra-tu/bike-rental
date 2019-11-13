@@ -13,11 +13,11 @@ public class Bike {
   //private Collection<Booking> bookings;
   private static AtomicLong idCounter = new AtomicLong();
 
-  public Bike(Provider provider, BikeType bikeType, BigDecimal fullReplaceVal) {
+  public Bike(Provider provider, BikeType bikeType) {
     String id = createBikeID();
     this.provider = provider.getProviderID();
     this.bikeType = bikeType;
-    this.fullReplaceVal = fullReplaceVal;
+    this.fullReplaceVal = bikeType.getReplacementValue();
     HashMap<BikeType, BigDecimal> providerDailyPrices = provider.getDailyRentalPrice();
     this.dailyRentalPrice = providerDailyPrices.get(bikeType);
   }
