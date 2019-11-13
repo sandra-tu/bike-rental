@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,12 +23,11 @@ class TestDateRange {
                 LocalDate.of(2018, 1, 10));
         this.dateRange4 = new DateRange(LocalDate.of(2020, 1, 1),
                 LocalDate.of(2020, 1, 10));
-        this.dateRange5 = new DateRange(LocalDate.of(2020, 2, 19),
-                LocalDate.of(2020, 2, 8));
+        this.dateRange5 = new DateRange(LocalDate.of(2020, 2, 8),
+                LocalDate.of(2020, 2, 19));
         this.dateRange6 = new DateRange(LocalDate.of(2020, 1, 7),
                 LocalDate.of(2020, 1, 7));
-        this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7), //Check whether this is then okay
-                LocalDate.of(2019, 1, 10));
+
     }
 
     // Sample JUnit tests checking toYears works
@@ -45,8 +45,8 @@ class TestDateRange {
     void testOverlapsTrue() {
         // TODO: check we can see when two date ranges overlap
         assertTrue(this.dateRange1.overlaps(this.dateRange2));
-        assertTrue(this.dateRange7.overlaps(this.dateRange7));
         assertTrue(this.dateRange4.overlaps(this.dateRange4));
+        assertTrue(this.dateRange5.overlaps(this.dateRange5));
         assertTrue(this.dateRange4.overlaps(this.dateRange6));
     }
 
@@ -64,5 +64,9 @@ class TestDateRange {
     @Test
     void testEndBeforeStartDate() {
         //Use dateRange8
+        Assertions.assertThrows(AssertionError.class, () -> {
+            this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7), //Check whether this is then okay
+                    LocalDate.of(2019, 1, 10));
+        });
     }
 }

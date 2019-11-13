@@ -11,6 +11,7 @@ public class DateRange {
     public DateRange(LocalDate start, LocalDate end) {
         this.start = start;
         this.end = end;
+        assert !this.start.isAfter(this.end);
     }
     
     public LocalDate getStart() {
@@ -31,8 +32,18 @@ public class DateRange {
 
     public Boolean overlaps(DateRange other) {
         // TODO: implement date range intersection checking
-        assert false;
-        return null;
+        LocalDate start1 = this.getStart();
+        LocalDate start2 = other.getStart();
+        LocalDate end1 = this.getEnd();
+        LocalDate end2 = other.getEnd();
+        boolean overlaps;
+        if (start1.isAfter(end2) || start2.isAfter(end1)) {
+            overlaps = false;
+        } else {
+            overlaps = true;
+        }
+        
+        return overlaps;
     }
 
     @Override
