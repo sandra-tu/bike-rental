@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class TestDateRange {
     private DateRange dateRange1, dateRange2, dateRange3, dateRange4,
-        dateRange5, dateRange7, dateRange8;
+        dateRange5, dateRange6, dateRange7;
 
     @BeforeEach
     void setUp() throws Exception { //Maybe it throws and exception if it can't create these objects
@@ -24,9 +24,9 @@ class TestDateRange {
                 LocalDate.of(2020, 1, 10));
         this.dateRange5 = new DateRange(LocalDate.of(2020, 2, 19),
                 LocalDate.of(2020, 2, 8));
-        this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7),
+        this.dateRange6 = new DateRange(LocalDate.of(2020, 1, 7),
                 LocalDate.of(2020, 1, 7));
-        this.dateRange8 = new DateRange(LocalDate.of(2020, 1, 7), //Check whether this is then okay
+        this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7), //Check whether this is then okay
                 LocalDate.of(2019, 1, 10));
     }
 
