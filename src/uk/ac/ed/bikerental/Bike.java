@@ -1,5 +1,6 @@
 package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Bike {
@@ -15,7 +16,7 @@ public class Bike {
 
   public Bike(Provider provider, BikeType bikeType) {
     String id = createBikeID();
-    this.provider = provider.getProviderID();
+    this.provider = provider;
     this.bikeType = bikeType;
     this.fullReplaceVal = bikeType.getReplacementValue();
     HashMap<BikeType, BigDecimal> providerDailyPrices = provider.getDailyRentalPrice();
