@@ -42,7 +42,6 @@ public class DateRange {
         } else {
             overlaps = true;
         }
-        
         return overlaps;
     }
 

@@ -62,11 +62,10 @@ class TestDateRange {
     // TODO: put some of your own unit tests here
     
     @Test
-    void testEndBeforeStartDate() {
-        //Use dateRange8
+    void testEndBeforeStartDate() { //Also shouldn't this date range be declared in the BeforeEach bit?
         Assertions.assertThrows(AssertionError.class, () -> {
-            this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7), //Check whether this is then okay
-                    LocalDate.of(2019, 1, 10));
+            this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7),
+                    LocalDate.of(2019, 1, 10)); //Why would this throw an error? the 7th is before the 10th
         });
     }
 }
