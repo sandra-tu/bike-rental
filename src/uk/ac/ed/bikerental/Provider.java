@@ -1,6 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.math.BigDecimal;
+<<<<<<< HEAD
 import java.util.Set;
 import java.util.HashMap;
 
@@ -33,4 +34,19 @@ public class Provider {
         return this.dailyRentalPrice;
     }
     
+=======
+
+public class Provider {
+
+    public int getProviderID() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public HashMap<BikeType, BigDecimal> getDailyRentalPrice() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+>>>>>>> 6fc9503b587b06c154271797414f53c3ccd7b0e1
 }

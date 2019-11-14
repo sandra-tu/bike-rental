@@ -26,6 +26,7 @@ public class TestLocation {
         assertEquals(false, far);
     }
     
+    // Tests to assert that the postcode is valid
     @Test
     public void testExpectedAssertions() {
         Assertions.assertThrows(AssertionError.class, () -> {

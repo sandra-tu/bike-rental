@@ -16,7 +16,7 @@ public class Bike {
 
   public Bike(Provider provider, BikeType bikeType) {
     String id = createBikeID();
-    this.provider = provider.getProviderID(); //consider changing to just this.provider = provider;
+    this.provider = provider;
     this.bikeType = bikeType;
     this.fullReplaceVal = bikeType.getReplacementValue();
     HashMap<BikeType, BigDecimal> providerDailyPrices = provider.getDailyRentalPrice();
