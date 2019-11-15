@@ -1,4 +1,5 @@
 package uk.ac.ed.bikerental;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -15,7 +16,7 @@ public class Bike {
   private static AtomicLong idCounter = new AtomicLong();
 
   public Bike(Provider provider, BikeType bikeType) {
-    String id = createBikeID();
+    String id = this.createBikeID();
     this.provider = provider;
     this.bikeType = bikeType;
     this.fullReplaceVal = bikeType.getReplacementValue();
