@@ -2,20 +2,33 @@ package uk.ac.ed.bikerental;
 
 import java.math.BigDecimal;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.HashMap;
 
 public class Provider {
     
-    private int providerID;
+    private Integer providerID;
     private String providerName;
     private Location providerAddress;
+    private BigDecimal depositRate;
+    private HashMap<BikeType, BigDecimal> dailyRentalPrice; //change from dailyPrice to dailyRentalPrice in UML cwk2
     private Set<Provider> partnerProviders;
     private Set<Bike> stock;
-    private HashMap<BikeType, BigDecimal> dailyRentalPrice; //change from dailyPrice to dailyRentalPrice in UML cwk2
+    private static AtomicLong idCounter = new AtomicLong();
     
-    public Provider() {
-        
+    public Provider(String providerName, Location providerAddress, BigDecimal depositRate,
+            HashMap<BikeType, BigDecimal> dailyRentalPrice, Set<Provider> partnerProviders) {
+        this.providerID = createProviderID();
+        this.providerName = providerName;
+        this.providerAddress = providerAddress;
+        this.depositRate = depositRate;
+        this.dailyRentalPrice = dailyRentalPrice;
+        this.partnerProviders = partnerProviders;
     }
+    
+    public Integer createProviderID() {
+        return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
+      }
     
     public int getProviderID() {
         return this.providerID;
@@ -29,8 +42,9 @@ public class Provider {
         return this.providerAddress;
     }
     
-    public HashMap<BikeType, BigDecimal> getDailyRentalPrice(){
-        return this.dailyRentalPrice;
+    //Returns the daily rental price for a given bike type
+    public BigDecimal getDailyRentalPrice(BikeType bikeType){
+        return (this.dailyRentalPrice).get(bikeType);
     }
 }
     

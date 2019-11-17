@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Bike {
 
-  private String id;
+  private Integer id;
   private Provider provider;
   private BikeType bikeType;
   private BigDecimal fullReplaceVal;
@@ -16,20 +16,19 @@ public class Bike {
   private static AtomicLong idCounter = new AtomicLong();
 
   public Bike(Provider provider, BikeType bikeType) {
-    String id = this.createBikeID();
+    this.id = createBikeID();
     this.provider = provider;
     this.bikeType = bikeType;
     this.fullReplaceVal = bikeType.getReplacementValue();
-    HashMap<BikeType, BigDecimal> providerDailyPrices = provider.getDailyRentalPrice();
-    this.dailyRentalPrice = providerDailyPrices.get(bikeType);
+    this.dailyRentalPrice = provider.getDailyRentalPrice(bikeType);
   }
 
   public int getProviderID() {
     return this.provider.getProviderID();
   }
 
-  public String createBikeID() {
-    return String.valueOf(idCounter.getAndIncrement());
+  public Integer createBikeID() {
+    return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
   }
 
     public BikeType getType() {
