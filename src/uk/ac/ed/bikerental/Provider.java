@@ -42,9 +42,22 @@ public class Provider {
         return this.providerAddress;
     }
     
+    public BigDecimal getDepositRate() {
+        return depositRate;
+    }
+    
     //Returns the daily rental price for a given bike type
     public BigDecimal getDailyRentalPrice(BikeType bikeType){
         return (this.dailyRentalPrice).get(bikeType);
     }
+    
+    public void printSummary() {
+        System.out.println("Name:     " + getProviderName());
+        System.out.println("ID:       " + getProviderID());
+        System.out.println("Address:  " + getProviderAddress());
+        System.out.println("DepositR: " + getDepositRate() + "\n");
+    }
+
+    
 }
     
