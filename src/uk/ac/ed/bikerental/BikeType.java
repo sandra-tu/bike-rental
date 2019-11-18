@@ -7,10 +7,9 @@ public class BikeType {
     private BikeTypes bikeType;
     private BigDecimal dailyPrice;
     
-    
     public BikeType(BikeTypes bikeType, BigDecimal dailyPrice) {
         this.bikeType = bikeType;
-        this.dailyPrice = dailyPrice;
+        this.dailyPrice = dailyPrice; //I don't think it needs this line
     }
     
     public enum BikeTypes{
@@ -19,6 +18,10 @@ public class BikeType {
         HYBRIDBIKE,
         EBIKE,
         OTHERBIKE
+    }
+    
+    public BigDecimal getDailyRentalPrice() {
+        return this.dailyPrice;
     }
     
     public BigDecimal getReplacementValue() {

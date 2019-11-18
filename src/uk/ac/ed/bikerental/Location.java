@@ -33,6 +33,11 @@ public class Location {
         return address;
     }
     // You can add your own methods here
+    
+    public String formatAddress() {
+        return this.address + ", " + this.postcode + ".";    
+    }
+    
     public static void main(String[] args) {
         Location loc1 = new Location("EH165AY", "27 East Preston Street");
         Location loc2 = new Location("EH89QE", "27 East Preston Street");
