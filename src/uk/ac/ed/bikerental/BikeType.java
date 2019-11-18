@@ -4,17 +4,19 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class BikeType {
-    private Provider provider;
     private BikeTypes bikeType;
+    private BigDecimal dailyPrice;
     
-    public BikeType(Provider provider, BikeTypes bikeType) {
-        this.provider = provider;
+    
+    public BikeType(BikeTypes bikeType, BigDecimal dailyPrice) {
         this.bikeType = bikeType;
+        this.dailyPrice = dailyPrice;
     }
     
     public BigDecimal getReplacementValue() {
         // TODO: Implement Bike.getReplacementValue
-        // How do you access the specific provider for this specific bikeType?
+        // How do you access the specific provider for this specific bikeType? hehe i guess we won't
+        
         assert false;
         return null;
     }
