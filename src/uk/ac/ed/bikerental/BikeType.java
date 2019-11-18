@@ -13,6 +13,14 @@ public class BikeType {
         this.dailyPrice = dailyPrice;
     }
     
+    public enum BikeTypes{
+        ROADBIKE,
+        MOUNTAINBIKE,
+        HYBRIDBIKE,
+        EBIKE,
+        OTHERBIKE
+    }
+    
     public BigDecimal getReplacementValue() {
         // TODO: Implement Bike.getReplacementValue
         // How do you access the specific provider for this specific bikeType? hehe i guess we won't
@@ -20,4 +28,5 @@ public class BikeType {
         assert false;
         return null;
     }
+    
 }
