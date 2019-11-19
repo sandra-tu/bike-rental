@@ -23,4 +23,12 @@ public class Quote {
     public BigDecimal gettotalDepositPrice() {return totalDepositPrice;}
     public boolean getDeliveryToCustomer() {return deliveryToCustomer;}
     public boolean getIsPaid() {return isPaid;}
+    
+    public BigDecimal calculateDailyRentalPrice() {
+        BigDecimal dailySum = new BigDecimal("00.00");
+        for(Bike bike : bikes) {
+            dailySum = dailySum.add(bike.getDailyRentalPrice());
+        }
+        return dailySum;
+    }
 }
