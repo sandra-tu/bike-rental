@@ -59,6 +59,7 @@ public class Provider {
         
         HashMap<BikeType, BigDecimal> DailyRentalPrices = new HashMap<>();
         
+        
         //Is there a way to automatically iterate through all values of enum class?
         //If BikeType no longer needs RentalPrice attribute then this chunk can be deleted
         BikeType roadBike = new BikeType(BikeTypes.ROADBIKE, roadBRentalPrice);
