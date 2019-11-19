@@ -7,7 +7,7 @@ public class BikeType {
     private BikeTypes bikeType;
     private BigDecimal replacementValue; // Should this be final? Or maybe it just is by virtue of there not being a setter
     
-    public BikeType(BikeTypes bikeType) {
+    public BikeType(BikeTypes bikeType, BigDecimal replacementValue) {
         this.bikeType = bikeType;
         this.replacementValue = replacementValue;
     }
@@ -23,6 +23,11 @@ public class BikeType {
     public BigDecimal getReplacementValue() {
         // TODO: Implement Bike.getReplacementValue
         return replacementValue;
+    }
+    
+    public static void main(String[] args) {
+        BikeType mountain = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(30.00));
+        System.out.println(mountain.getReplacementValue());
     }
     
 }
