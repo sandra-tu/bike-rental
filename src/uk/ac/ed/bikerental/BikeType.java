@@ -5,9 +5,11 @@ import java.util.Objects;
 
 public class BikeType {
     private BikeTypes bikeType;
+    private BigDecimal replacementValue; // Should this be final? Or maybe it just is by virtue of there not being a setter
     
     public BikeType(BikeTypes bikeType) {
         this.bikeType = bikeType;
+        this.replacementValue = replacementValue;
     }
     
     public enum BikeTypes{
@@ -20,10 +22,7 @@ public class BikeType {
     
     public BigDecimal getReplacementValue() {
         // TODO: Implement Bike.getReplacementValue
-        // How do you access the specific provider for this specific bikeType? hehe i guess we won't
-        
-        assert false;
-        return null;
+        return replacementValue;
     }
     
 }
