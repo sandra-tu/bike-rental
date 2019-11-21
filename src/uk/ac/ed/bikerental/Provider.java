@@ -69,6 +69,10 @@ public class Provider {
         return (this.dailyRentalPrice).get(bikeType);
     }
     
+    public Set<BikeType> getStockedBikeTypes() {
+        return dailyRentalPrice.keySet();
+    }
+    
     public void printSummary() {
         System.out.println("Name:     " + getProviderName());
         System.out.println("ID:       " + getProviderID());
