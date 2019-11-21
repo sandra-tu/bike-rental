@@ -1,6 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,7 +14,7 @@ public class Bike {
     private BikeType bikeType;
     private BigDecimal fullReplaceVal;
     private BigDecimal dailyRentalPrice;
-    //private BikeStatuses bikeStatus;
+    private BikeStatuses bikeStatus;
     //private Collection<Booking> bookings;
     private static AtomicLong idCounter = new AtomicLong();
 
@@ -23,6 +24,7 @@ public class Bike {
         this.bikeType = bikeType;
         this.fullReplaceVal = bikeType.getReplacementValue();
         this.dailyRentalPrice = provider.getDailyRentalPrice(bikeType);
+        this.bikeStatus = BikeStatuses.AT_MAIN_PROVIDER;
     }
 
     public Integer getBikeID() {
@@ -48,6 +50,30 @@ public class Bike {
     
     public BigDecimal getDailyRentalPrice() {
         return dailyRentalPrice;
+    }
+    
+    public enum BikeStatuses {
+        AT_MAIN_PROVIDER,
+        AT_PARTNER,
+        IN_USE,
+        OUT_FOR_DELIVERY,
+        OVERNIGHT_TRANSIT
+    }
+    
+    public void setBikeStatus(BikeStatuses status) {
+        this.bikeStatus = status;
+    }
+    
+    public BikeStatuses getBikeStatus() {
+        return this.bikeStatus;
+    }
+    
+    public ArrayList<DateRange> getDateRangesBooked() {
+        ArrayList<DateRange> bookedDates = new ArrayList<>();
+        for (Booking booking : bookings) {
+            
+        }
+        return bookedDates;
     }
 
 //    public void printSummary() {
