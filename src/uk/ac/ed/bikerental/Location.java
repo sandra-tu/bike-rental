@@ -35,21 +35,4 @@ public class Location {
     public String formatAddress() {
         return this.address + ", " + this.postcode + ".";    
     }
-    
-    public static void main(String[] args) {
-        Location loc1 = new Location("EH165AY", "27 East Preston Street");
-        Location loc2 = new Location("EH89QE", "27 East Preston Street");
-        Location loc3 = new Location("123456", "27 East Preston Street");
-        Location loc4 = new Location("KY123AA", "27 East Preston Street");
-        Location loc5 = new Location("eh234bv", "27 East Preston Street");
-        Location loc6 = new Location("b1", "27 East Preston Street");
-        Location loc7 = new Location("1a", "27 East Preston Street");
-
-
-        System.out.println(loc1.isNearTo(loc2));
-        System.out.println(loc2.isNearTo(loc3));
-        System.out.println(loc3.isNearTo(loc4));
-        System.out.println(loc4.isNearTo(loc5));
-        System.out.println(loc5.isNearTo(loc7));
-    }
 }
