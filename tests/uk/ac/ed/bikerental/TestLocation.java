@@ -12,9 +12,9 @@ public class TestLocation {
     @BeforeEach
     void setUp() throws Exception{
         // TODO: setup some resources before each test
-    	this.loc1 = new Location("EH15 7TT", "ookyspooky");
-    	this.loc2 = new Location("EH5 4NG", "hmmm");
-    	this.loc3 = new Location("GB12 6FF", "longwalk");
+    	this.loc1 = new Location("EH15 7TT", "1 Newington Rd.");
+    	this.loc2 = new Location("EH5 4NG", "1 Newington Rd.");
+    	this.loc3 = new Location("GB12 6FF", "1 Newington Rd.");
     }
     
     // TODO: put some tests here
@@ -30,11 +30,11 @@ public class TestLocation {
     @Test
     public void testExpectedAssertions() {
         Assertions.assertThrows(AssertionError.class, () -> {
-            this.loc4 = new Location("1234 231", "wrong");
+            this.loc4 = new Location("1234 231", "1 Newington Rd.");
         });
         
         Assertions.assertThrows(AssertionError.class, () -> {
-            this.loc4 = new Location("123", "wrong");
+            this.loc4 = new Location("123", "1 Newington Rd.");
         });
     }
 }

@@ -6,8 +6,6 @@ public class Location {
 
     public Location(String postcode, String address) {
         assert postcode.length() >= 6;
-        assert Character.isLetter(postcode.charAt(0));
-        assert Character.isLetter(postcode.charAt(1));
         this.postcode = postcode;
         this.address = address;
     }
@@ -26,14 +24,14 @@ public class Location {
     }
 
     public String getPostcode() {
-        return postcode;
+        return this.postcode;
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
-    // You can add your own methods here
     
+    // You can add your own methods here
     public String formatAddress() {
         return this.address + ", " + this.postcode + ".";    
     }
@@ -45,11 +43,13 @@ public class Location {
         Location loc4 = new Location("KY123AA", "27 East Preston Street");
         Location loc5 = new Location("eh234bv", "27 East Preston Street");
         Location loc6 = new Location("b1", "27 East Preston Street");
+        Location loc7 = new Location("1a", "27 East Preston Street");
+
 
         System.out.println(loc1.isNearTo(loc2));
         System.out.println(loc2.isNearTo(loc3));
         System.out.println(loc3.isNearTo(loc4));
         System.out.println(loc4.isNearTo(loc5));
-        System.out.println(loc5.isNearTo(loc6));
+        System.out.println(loc5.isNearTo(loc7));
     }
 }
