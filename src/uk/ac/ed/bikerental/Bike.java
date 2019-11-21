@@ -15,7 +15,7 @@ public class Bike {
     private BigDecimal fullReplaceVal;
     private BigDecimal dailyRentalPrice;
     private BikeStatuses bikeStatus;
-    //private Collection<Booking> bookings;
+    private ArrayList<Booking> bookings;
     private static AtomicLong idCounter = new AtomicLong();
 
     public Bike(Provider provider, BikeType bikeType) {
@@ -71,7 +71,7 @@ public class Bike {
     public ArrayList<DateRange> getDateRangesBooked() {
         ArrayList<DateRange> bookedDates = new ArrayList<>();
         for (Booking booking : bookings) {
-            
+            bookedDates.add(booking.getBookingDateRange());
         }
         return bookedDates;
     }

@@ -9,6 +9,10 @@ public class Booking {
     public Booking(DateRange dateRange) {
         this.dateRange = dateRange;
     }
+    
+    public DateRange getBookingDateRange() {
+        return this.dateRange;
+    }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
