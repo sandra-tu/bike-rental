@@ -30,7 +30,7 @@ public class DateRange {
         return ChronoUnit.DAYS.between(this.getStart(), this.getEnd());
     }
 
-    public Boolean overlaps(DateRange other) {
+    public boolean overlaps(DateRange other) {
         // TODO: implement date range intersection checking
         LocalDate start1 = this.getStart();
         LocalDate start2 = other.getStart();

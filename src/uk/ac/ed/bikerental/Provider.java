@@ -73,6 +73,10 @@ public class Provider {
         return dailyRentalPrice.keySet();
     }
     
+    public Set<Bike> getProviderStock() {
+        return this.stock;
+    }
+    
     public void printSummary() {
         System.out.println("Name:     " + getProviderName());
         System.out.println("ID:       " + getProviderID());

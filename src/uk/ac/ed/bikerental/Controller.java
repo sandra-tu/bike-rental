@@ -15,14 +15,24 @@ public class Controller {
         ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
         
         for (Provider provider : providersInRange) {
-            for (BikeType bikeType : bikesRequested) {
+            Set<Bike> providerStockCopy = provider.getProviderStock();
+            for (BikeType bikeTypeRequested : bikesRequested) {
                 Set<BikeType> stockedBikeTypes = provider.getStockedBikeTypes();
-                if (stockedBikeTypes.contains(bikeType)) {
-                    
+                if (stockedBikeTypes.contains(bikeTypeRequested)) {
+                //Only continue searching if the provider has bikes of the requested type
+                    for (Bike bikeInStock : providerStockCopy) {
+                        BikeType providerStockBikeType = bikeInStock.getType();
+                        if (bikeTypeRequested == providerStockBikeType) {
+                            boolean match;
+                            match = isBikeConcurrentWithInput(bikeInStock, dateRangeRequested);
+                            if (match == true) {
+                                providerStockCopy.remove(bikeInStock);
+                            }
+                        }
+                    }
                 }
             }
         }
-        
         return quoteList;
     }
 
@@ -37,6 +47,20 @@ public class Controller {
             }
         }
         return providersInRange;
+    }
+    
+    //Helper method for generateQuotes()
+    //Loop through bookings
+    public boolean isBikeConcurrentWithInput(Bike bike, DateRange dateRangeRequested) {
+        boolean concurrent = true;
+        ArrayList<DateRange> bikeBookedDates = bike.getDateRangesBooked();
+        while (concurrent) {
+            for (DateRange dateRange : bikeBookedDates) {
+                boolean overlaps = (dateRange.overlaps(dateRangeRequested));
+                concurrent = concurrent && !overlaps;
+            }
+        }
+        return concurrent;
     }
     
     public static void main(String[] args) {
