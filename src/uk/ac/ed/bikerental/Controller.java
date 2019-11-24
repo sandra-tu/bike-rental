@@ -1,8 +1,6 @@
 package uk.ac.ed.bikerental;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Controller {
     
@@ -17,14 +15,27 @@ public class Controller {
         ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
         for (Provider provider : providersInRange) {
             Set<Bike> providerStock = provider.getProviderStock();
+            Set<Bike> matchedBikeSet = new HashSet<>(); //Bikes that match the input requirements
             for (BikeType bikeType : bikesRequested) {
                 if (providerHasBikeType(provider, bikeType)) {
                     Set<Bike> bikesOfType = bikesOfType(providerStock, bikeType);
                     Set<Bike> bikesAvailible = bikesAvailibleDateRange(providerStock, dateRangeRequested);
+                    Set<Bike> intersection = new HashSet<>(bikesOfType);
+                    intersection.retainAll(bikesAvailible);
+                    if (intersection.isEmpty()) {
+                        break;
+                    }
+                    Bike bikeArray[] = new Bike[intersection.size()];
+                    bikeArray = intersection.toArray(bikeArray);
+                    Bike matchedBike = bikeArray[0];
+                    matchedBikeSet.add(matchedBike);
+                    providerStock.remove(matchedBike);
                 }
             }
-            
+            Quote quote = new Quote(matchedBikeSet, provider, dateRangeRequested, hireLocation);
+            quoteList.add(quote);           
         }
+        return quoteList;
     }
 
     //Helper methods for generateQuotes()
