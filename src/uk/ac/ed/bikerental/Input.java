@@ -11,8 +11,7 @@ public class Input {
     private Location hireLocation;
     
     public Input(LocalDate dateStart, LocalDate dateEnd, ArrayList<BikeType> bikesRequested,
-        Location hireLocation) {
-        
+        Location hireLocation) {        
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.bikesRequested = bikesRequested;

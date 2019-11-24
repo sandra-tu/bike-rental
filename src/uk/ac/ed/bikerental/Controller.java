@@ -1,6 +1,9 @@
 package uk.ac.ed.bikerental;
 
+import java.math.BigDecimal;
 import java.util.*;
+
+import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Controller {
     
@@ -92,8 +95,27 @@ public class Controller {
     }
     
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
+        Location location = new Location("EH165AY", "Holyrood rd.");
+        BigDecimal depositRate = new BigDecimal(0.2);
+        Provider provider1 = new Provider("Provider1", location, depositRate, null);
+        BikeType mountainBikeType = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
+        BikeType roadBikeType = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(110.00));
+        Bike bike1 = new Bike(provider1, mountainBikeType);
+        Bike bike2 = new Bike(provider1, mountainBikeType);
+        Bike bike3 = new Bike(provider1, mountainBikeType);
+        Bike bike4 = new Bike(provider1, roadBikeType);
+        Bike bike5 = new Bike(provider1, roadBikeType);
+        Set<Bike> stock = new HashSet<>();
+        stock.add(bike1);
+        stock.add(bike2);
+        stock.add(bike3);
+        stock.add(bike4);
+        stock.add(bike5);
+        Set<BikeType> requestedBikeTypes = new HashSet<>();
+        requestedBikeTypes.add(mountainBikeType);
+        //Set<Quotes>
+        
+        
     }
 
 }

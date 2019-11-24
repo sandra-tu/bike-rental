@@ -1,13 +1,10 @@
 package uk.ac.ed.bikerental;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.*;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class TestInput {
@@ -28,8 +25,12 @@ public class TestInput {
     public void constructorTest() {
         BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(20.00));
         BikeType roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(15.00));
-        BikeType[] bikesRequested1 = {mountainBike};
-        BikeType[] bikesRequested2 = {mountainBike, mountainBike, roadBike};
+        ArrayList<BikeType> bikesRequested1 = new ArrayList<BikeType>(
+                Arrays.asList(mountainBike));
+        ArrayList<BikeType> bikesRequested2 = new ArrayList<BikeType>(
+                Arrays.asList(mountainBike, 
+                              mountainBike, 
+                              roadBike));        
         Location location = new Location("EH165AY", "Street name");
         
         input1 = new Input(LocalDate.of(2019, 1, 7), LocalDate.of(2019, 1, 10),
@@ -41,7 +42,8 @@ public class TestInput {
     @Test(expected = IllegalArgumentException.class)
     public void constructorExceptionTest() {
         BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(20.00));
-        BikeType[] bikesRequested1 = {mountainBike};
+        ArrayList<BikeType> bikesRequested1 = new ArrayList<BikeType>(
+                Arrays.asList(mountainBike));
         Location location = new Location("EH165AY", "Street name");
         
         input3 = new Input(LocalDate.of(2019, 1, 7), LocalDate.of(2019, 1, 1),
