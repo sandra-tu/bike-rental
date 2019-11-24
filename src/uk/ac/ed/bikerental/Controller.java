@@ -43,7 +43,7 @@ public class Controller {
     //Returns a list of providers that are near to the customer
     public ArrayList<Provider> getProvidersInRange(Location locationRequested) {
         ArrayList<Provider> providersInRange = new ArrayList<>();
-        for (Provider provider : providersInRange) {
+        for (Provider provider : providers) {
             Location providerLocation = provider.getProviderAddress();
             if (providerLocation.isNearTo(locationRequested)) {
                 providersInRange.add(provider);
