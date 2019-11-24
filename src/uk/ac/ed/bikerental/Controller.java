@@ -1,6 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Controller {
@@ -14,29 +15,10 @@ public class Controller {
         Location hireLocation = input.getRequestedLocation();
         ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
         
-        for (Provider provider : providersInRange) {
-            Set<Bike> providerStockCopy = provider.getProviderStock();
-            for (BikeType bikeTypeRequested : bikesRequested) {
-                Set<BikeType> stockedBikeTypes = provider.getStockedBikeTypes();
-                if (stockedBikeTypes.contains(bikeTypeRequested)) {
-                //Only continue searching if the provider has bikes of the requested type
-                    for (Bike bikeInStock : providerStockCopy) {
-                        BikeType providerStockBikeType = bikeInStock.getType();
-                        if (bikeTypeRequested == providerStockBikeType) {
-                            boolean match;
-                            match = isBikeConcurrentWithInput(bikeInStock, dateRangeRequested);
-                            if (match == true) {
-                                providerStockCopy.remove(bikeInStock);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return quoteList;
     }
 
-    //Helper method for generateQuotes()
+    //Helper methods for generateQuotes()
+    
     //Returns a list of providers that are near to the customer
     public ArrayList<Provider> getProvidersInRange(Location locationRequested) {
         ArrayList<Provider> providersInRange = new ArrayList<>();
@@ -49,18 +31,43 @@ public class Controller {
         return providersInRange;
     }
     
-    //Helper method for generateQuotes()
-    //Loop through bookings
-    public boolean isBikeConcurrentWithInput(Bike bike, DateRange dateRangeRequested) {
-        boolean concurrent = true;
-        ArrayList<DateRange> bikeBookedDates = bike.getDateRangesBooked();
-        while (concurrent) {
-            for (DateRange dateRange : bikeBookedDates) {
-                boolean overlaps = (dateRange.overlaps(dateRangeRequested));
-                concurrent = concurrent && !overlaps;
+    //Returns a boolean indicating whether a given provider has a certain bike type
+    public boolean providerHasBikeType(Provider provider, BikeType bikeType) {
+        Set<BikeType> providerBikeTypes = provider.getStockedBikeTypes();
+        boolean hasBikeType = providerBikeTypes.contains(bikeType);
+        return hasBikeType;
+    }
+    
+    //Returns a subset of the provider's bikes that are of type bikeType given as an argument
+    public Set<Bike> bikesOfType(Set<Bike> providerStock, BikeType bikeType) {
+        Set<Bike> outputBikes = new HashSet<>();
+        for (Bike bike : providerStock) {
+            BikeType stockType = bike.getType();
+            if (stockType == bikeType) {
+                outputBikes.add(bike);
             }
+            //providerStock.remove(bike);
         }
-        return concurrent;
+        return outputBikes;
+    }
+    
+    //Returns bikes that are availible for a given date range
+    public Set<Bike> bikesAvailibleDateRange(Set<Bike> bikeSet, DateRange dateRangeRequested) {
+        Set<Bike> bikesAvailible = new HashSet<>();
+        for (Bike bike : bikeSet) {
+            ArrayList<DateRange>  dateRanges = bike.getDateRangesBooked();
+            boolean overlaps = false;
+            for (DateRange dateRange : dateRanges) {
+                if (dateRange.overlaps(dateRangeRequested)) {
+                    overlaps = true;
+                }
+            }
+            if (!overlaps) {
+                bikesAvailible.add(bike);
+            }
+            //bikeSet.remove(bike); // Do we need this line?
+        }
+        return bikesAvailible;
     }
     
     public static void main(String[] args) {
