@@ -13,6 +13,21 @@ public class Quote {
     private boolean deliveryToCustomer;
     private boolean isPaid;
     
+    public Quote(Set<Bike> bikes, Provider provider, DateRange dateRange, Location locationOfHire) {
+        this.bikes = bikes;
+        this.provider = provider;
+        this.dateRange = dateRange;
+        this.locationOfHire = locationOfHire;
+    }
+    
+    //SETTERS
+    public void setDeliveryToCustomer(boolean delivery) {
+        this.deliveryToCustomer = delivery;
+    }
+    
+    public void setIsPaid(boolean paid) {
+        this.isPaid = paid;
+    }
     
     //GETTERS
     public Set<Bike> getBikes() {return bikes;}

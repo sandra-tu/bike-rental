@@ -13,8 +13,18 @@ public class Controller {
         DateRange dateRangeRequested = input.getRequestedDateRange();
         ArrayList<BikeType> bikesRequested = input.getBikesRequested();
         Location hireLocation = input.getRequestedLocation();
-        ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
         
+        ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
+        for (Provider provider : providersInRange) {
+            Set<Bike> providerStock = provider.getProviderStock();
+            for (BikeType bikeType : bikesRequested) {
+                if (providerHasBikeType(provider, bikeType)) {
+                    Set<Bike> bikesOfType = bikesOfType(providerStock, bikeType);
+                    Set<Bike> bikesAvailible = bikesAvailibleDateRange(providerStock, dateRangeRequested);
+                }
+            }
+            
+        }
     }
 
     //Helper methods for generateQuotes()
