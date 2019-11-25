@@ -48,6 +48,14 @@ public class Provider {
         return depositRate;
     }
     
+    public void setPartnerProviders(Set<Provider> partners) {
+        this.partnerProviders = partners;
+    }
+    
+    public void setStock(Set<Bike> bikeStock) {
+        this.stock = bikeStock;
+    }
+    
   //Should be final only if not null (how do we do that???)
     public HashMap<BikeType, BigDecimal> setDailyRentalPrice(BikeType bikeType, BigDecimal price) {
         
