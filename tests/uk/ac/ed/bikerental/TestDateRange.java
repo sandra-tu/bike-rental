@@ -65,7 +65,7 @@ class TestDateRange {
     void testEndBeforeStartDate() { //Also shouldn't this date range be declared in the BeforeEach bit? it can't be because it throws an error
         Assertions.assertThrows(AssertionError.class, () -> {
             this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7),
-                    LocalDate.of(2019, 1, 10)); //Why would this throw an error? the 7th is before the 10th, the years are janked
+                    LocalDate.of(2019, 1, 7)); 
         });
     }
 }
