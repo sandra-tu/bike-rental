@@ -18,8 +18,10 @@ public class Quote {
         this.provider = provider;
         this.dateRange = dateRange;
         this.locationOfHire = locationOfHire;
+        this.totalRentalPrice = getTotalRentalPrice(this.bikes);
+        this.totalDepositPrice = getTotalDepositPrice(this.bikes, this.provider);
     }
-    
+
     //SETTERS
     public void setDeliveryToCustomer(boolean delivery) {
         this.deliveryToCustomer = delivery;
@@ -46,4 +48,26 @@ public class Quote {
         }
         return dailySum;
     }
+    
+    public BigDecimal getTotalRentalPrice(Set<Bike> bikeSet) {
+        BigDecimal totalRentalPrice = new BigDecimal(0.00);
+        for (Bike bike : bikeSet) {
+            BigDecimal rentalPrice = new BigDecimal(0.00);
+            rentalPrice = bike.getDailyRentalPrice();
+            totalRentalPrice = totalRentalPrice.add(rentalPrice);
+        }
+        return totalRentalPrice;
+    }
+    
+    private BigDecimal getTotalDepositPrice(Set<Bike> bikeSet, Provider provider) {
+        BigDecimal totalDepositPrice = new BigDecimal(0.00);
+        BigDecimal depositRate = provider.getDepositRate();
+        for (Bike bike : bikeSet) {
+            BigDecimal depositPrice = bike.getFullReplaceVal().multiply(depositRate);
+            totalDepositPrice = totalDepositPrice.add(depositPrice);
+        }
+        return totalDepositPrice;
+    }
+    
+    
 }
