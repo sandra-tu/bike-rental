@@ -8,7 +8,7 @@ public class TestLocation {
 	private Location loc1, loc2, loc3, loc4;
 	
     @BeforeEach
-    void setUp() throws Exception{
+    void setUp() throws Exception {
         // TODO: setup some resources before each test
     	this.loc1 = new Location("EH15 7TT", "1 Newington Rd.");
     	this.loc2 = new Location("EH5 4NG", "1 Newington Rd.");
@@ -19,7 +19,7 @@ public class TestLocation {
     // TODO: put some tests here
     @Test
     public void testIsNearTo() {
-        assertEquals(true, loc1.isNearTo(loc2));
+        assertEquals(true, loc1.isNearTo(loc2));      //Should these not rather be assertTrue()?
         assertEquals(false, loc1.isNearTo(loc3));
         assertEquals(false, loc1.isNearTo(loc4));
     }
