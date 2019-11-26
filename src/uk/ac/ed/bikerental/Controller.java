@@ -91,12 +91,13 @@ public class Controller {
         return bikesAvailible;
     }
     
-    public Booking bookQuote(Quote quote) {
+    public Invoice bookQuote(Quote quote) {
         Booking booking;
         if(quote.getIsPaid()) {
             booking = new Booking(quote);
             booking.getProvider().addBooking(booking);
-            return booking;
+            Invoice invoice = new Invoice(booking);
+            return invoice;
         } else {
             return null;
         }

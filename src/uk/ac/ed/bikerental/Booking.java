@@ -3,6 +3,7 @@ package uk.ac.ed.bikerental;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
 
@@ -16,6 +17,8 @@ public class Booking{
     private boolean depositPaid = false;
     private boolean depositReturned = false;
     private boolean deliveryRequired = false; //ADD TO CWK2
+    private BigDecimal totalRentalPrice;
+    private BigDecimal totalDeposit;
     private MockDeliveryService delivery;
     private BookingStatuses bookingStatus;
     private static AtomicLong orderNumCounter = new AtomicLong();
@@ -27,6 +30,8 @@ public class Booking{
         this.dateRange = quote.getDateRange();
         this.provider = quote.getProvider();
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
+        this.totalRentalPrice = quote.getTotalRentalPrice();
+        this.totalDeposit = quote.getTotalDepositPrice();
     }
     
     public Integer createOrderNum() {
@@ -41,6 +46,8 @@ public class Booking{
     public Provider getReturnProvider() {return this.returnProvider;}
     public boolean getDepositIsPaid() {return this.depositPaid;}
     public boolean getDepositReturned() {return this.depositReturned;}
+    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;}
+    public BigDecimal getTotalDeposit() {return this.totalDeposit;}
     public BookingStatuses getBookingStatus() {return this.bookingStatus;}
     
     //SETTERS

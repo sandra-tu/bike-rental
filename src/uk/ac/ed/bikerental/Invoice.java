@@ -14,6 +14,7 @@ public class Invoice {
         this.orderNumber = booking.gerOrderNum();
         this.dateRange = booking.getBookingDateRange();
         this.bikesBooked = booking.getBikeCollection();
-        //this.totalRentalPrice = booking.get
+        this.totalRentalPrice = booking.getTotalRentalPrice();
+        this.totalDeposit = booking.getTotalDeposit();
     }
 }
