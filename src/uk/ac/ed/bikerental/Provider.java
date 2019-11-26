@@ -18,6 +18,7 @@ public class Provider {
     private Set<Provider> partnerProviders;
     private Set<Bike> stock;
     private Set<Booking> providerBookings;
+    private Location address;
     private static AtomicLong idCounter = new AtomicLong();
     
     //Recheck constructor given rental price constructor
@@ -81,6 +82,10 @@ public class Provider {
     
     public Set<Bike> getProviderStock() {
         return this.stock;
+    }
+    
+    public Location getAddress() {
+        return this.address;
     }
     
     public void printSummary() {

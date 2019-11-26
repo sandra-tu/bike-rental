@@ -2,10 +2,11 @@ package uk.ac.ed.bikerental;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+import java.time.LocalDate;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
 
-public class Booking implements Deliverable{
+public class Booking{
     
     private Integer orderNum;
     private Set<Bike> bikeCollection;
@@ -79,22 +80,13 @@ public class Booking implements Deliverable{
         this.depositReturned = true;
     }
     
-    public void setDeliveryRequired() {
+    public void setDeliveryRequired(Location customer) {
         this.deliveryRequired = true;
-        this.setDelivery();
+        Location providerAddress = this.getProvider().getAddress();
+        LocalDate pickup = this.getBookingDateRange().getStart();
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(this.bikeCollection, providerAddress, customer, pickup);
     }
     
-    public void setDelivery() {
-        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(deliverable, pickupLocation, dropoffLocation, pickupDate); //??
-    }
-    
-    public void onPickup() {
-        this.setBookingStatus(BookingStatuses.OUT_FOR_DELIVERY);
-    }
-    
-    public void onDropoff() {
-        //this.
-    }
     
     public enum BookingStatuses{
         PRECOMMENCEMENT,

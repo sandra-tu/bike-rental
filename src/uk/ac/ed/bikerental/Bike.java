@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
-public class Bike{
+public class Bike implements Deliverable{
 
     private Integer id;
     private Provider provider;
@@ -79,6 +79,14 @@ public class Bike{
     
     public void addBooking(Booking booking) {
         this.bookings.add(booking);
+    }
+    
+    public void onPickup() {
+        
+    }
+    
+    public void onDropoff() {
+        
     }
     
     public ArrayList<DateRange> getDateRangesBooked() {
