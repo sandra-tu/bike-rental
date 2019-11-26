@@ -89,7 +89,6 @@ public class Controller {
             if (!overlaps) {
                 bikesAvailible.add(bike);
             }
-            //bikeSet.remove(bike); // Do we need this line?
         }
         return bikesAvailible;
     }

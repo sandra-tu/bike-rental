@@ -55,13 +55,10 @@ public class Provider {
     public void setStock(Set<Bike> bikeStock) {
         this.stock = bikeStock;
     }
-    
-  //Should be final only if not null (how do we do that???)
+   
     public HashMap<BikeType, BigDecimal> setDailyRentalPrice(BikeType bikeType, BigDecimal price) {
-        
         HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>();
-        
-        
+               
         //Is there a way to automatically iterate through all values of enum class?
         //If BikeType no longer needs RentalPrice attribute then this chunk can be deleted
         if(!dailyRentalPrice.containsKey(bikeType)){

@@ -12,7 +12,7 @@ public class Bike {
     private Integer id;
     private Provider provider;
     private BikeType bikeType;
-    private BigDecimal fullReplaceVal;
+    private BigDecimal replacementValue;
     private BigDecimal dailyRentalPrice;
     private BikeStatuses bikeStatus;
     private ArrayList<Booking> bookings;
@@ -22,7 +22,7 @@ public class Bike {
         this.id = createBikeID();
         this.provider = provider;
         this.bikeType = bikeType;
-        this.fullReplaceVal = bikeType.getReplacementValue();
+        this.replacementValue = bikeType.getReplacementValue();
         this.dailyRentalPrice = provider.getDailyRentalPrice(bikeType);
         this.bikeStatus = BikeStatuses.AT_MAIN_PROVIDER;
     }
@@ -45,7 +45,7 @@ public class Bike {
     }
     
     public BigDecimal getFullReplaceVal() {
-        return fullReplaceVal;
+        return replacementValue;
     }
     
     public BigDecimal getDailyRentalPrice() {
