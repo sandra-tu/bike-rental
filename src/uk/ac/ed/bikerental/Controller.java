@@ -75,7 +75,7 @@ public class Controller {
         return outputBikes;
     }
     
-    //Returns bikes that are availible for a given date range
+    //Returns bikes that are available for a given date range
     public Set<Bike> bikesAvailibleDateRange(Set<Bike> bikeSet, DateRange dateRangeRequested) {
         Set<Bike> bikesAvailible = new HashSet<>();
         for (Bike bike : bikeSet) {
@@ -91,6 +91,16 @@ public class Controller {
             }
         }
         return bikesAvailible;
+    }
+    
+    public Booking bookQuote(Quote quote) {
+        Booking booking;
+        if(quote.getIsPaid()) {
+            booking = new Booking(quote);
+            return booking;
+        } else {
+            return null;
+        }
     }
     
     public static void main(String[] args) {
