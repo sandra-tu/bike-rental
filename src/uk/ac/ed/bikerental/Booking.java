@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
 
-public class Booking {
+public class Booking implements Deliverable{
     
     private Integer orderNum;
     private Set<Bike> bikeCollection;
@@ -14,11 +14,15 @@ public class Booking {
     private Provider returnProvider;
     private boolean depositPaid = false;
     private boolean depositReturned = false;
+    private boolean deliveryRequired = false; //ADD TO CWK2
+    private MockDeliveryService delivery;
     private BookingStatuses bookingStatus;
     private static AtomicLong orderNumCounter = new AtomicLong();
     
     //CONSTRUCTOR
     public Booking(Quote quote) {
+        this.orderNum = createOrderNum();
+        this.bikeCollection = quote.getBikes();
         this.dateRange = quote.getDateRange();
         this.provider = quote.getProvider();
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
@@ -65,6 +69,31 @@ public class Booking {
             default:
                 return;
         }
+    }
+    
+    public void setDepositPaid(){
+        this.depositPaid = true;
+    }
+    
+    public void setDepositReturned() {
+        this.depositReturned = true;
+    }
+    
+    public void setDeliveryRequired() {
+        this.deliveryRequired = true;
+        this.setDelivery();
+    }
+    
+    public void setDelivery() {
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(deliverable, pickupLocation, dropoffLocation, pickupDate);
+    }
+    
+    public void onPickup() {
+        this.setBookingStatus(BookingStatuses.OUT_FOR_DELIVERY);
+    }
+    
+    public void onDropoff() {
+        //this.
     }
     
     public enum BookingStatuses{

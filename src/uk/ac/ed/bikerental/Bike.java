@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
-public class Bike {
+public class Bike{
 
     private Integer id;
     private Provider provider;
@@ -88,6 +88,7 @@ public class Bike {
         }
         return bookedDates;
     }
+
 
 //    public void printSummary() {
 //        System.out.println("ID:          " + getBikeID());
