@@ -6,6 +6,8 @@ public class Location {
 
     public Location(String postcode, String streetAddress) {
         assert postcode.length() >= 6;
+        assert Character.isLetter(postcode.charAt(0));
+        assert Character.isLetterOrDigit(postcode.charAt(1));
         this.postcode = postcode;
         this.streetAddress = streetAddress;
     }
