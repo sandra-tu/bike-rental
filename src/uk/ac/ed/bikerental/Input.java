@@ -5,30 +5,27 @@ import java.util.ArrayList;
 
 public class Input {
     
-    private LocalDate dateStart;
-    private LocalDate dateEnd;
-    private ArrayList<BikeType> bikesRequested; //Tested as an array (Just let me know if you change it)
+    private DateRange dateRange;
+    private ArrayList<BikeType> bikesRequested; 
     private Location hireLocation;
     
-    public Input(LocalDate dateStart, LocalDate dateEnd, ArrayList<BikeType> bikesRequested,
+    public Input(DateRange dateRange, ArrayList<BikeType> bikesRequested,
         Location hireLocation) {        
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
+        this.dateRange = dateRange;
         this.bikesRequested = bikesRequested;
         this.hireLocation = hireLocation;
     }
     
     public LocalDate getStartDate() {
-        return this.dateStart;
+        return this.dateRange.getStart();
     }
     
     public LocalDate getEndDate() {
-        return this.dateEnd;
+        return this.dateRange.getEnd();
     }
     
     public DateRange getRequestedDateRange() {
-        DateRange dateRange = new DateRange(this.getStartDate(), this.getEndDate());
-        return dateRange;
+        return this.dateRange;
     }
     
     public ArrayList<BikeType> getBikesRequested() {
