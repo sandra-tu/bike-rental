@@ -85,7 +85,7 @@ public class Booking implements Deliverable{
     }
     
     public void setDelivery() {
-        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(deliverable, pickupLocation, dropoffLocation, pickupDate);
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(deliverable, pickupLocation, dropoffLocation, pickupDate); //??
     }
     
     public void onPickup() {
