@@ -27,23 +27,33 @@ public class SystemTests {
         
         // Put your test setup here
         
-        //BikeType
+        //Bike types
         BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
         BikeType roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(110.00));
         BikeType eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(120.00));
         BikeType otherBike = new BikeType(BikeTypes.OTHERBIKE, new BigDecimal(130.00));
 
         //Locations
-        Location location1 = new Location("EH89QE", "Street name");
-        Location location2 = new Location("EH165AY", "Street name");
-        Location location3 = new Location("G138AB", "Street name");
-        Location location4 = new Location("KY144AA", "Street name");
+        //(for Provider addresses)
+        Location locationP1 = new Location("EH89QE", "Street name");
+        Location locationP2 = new Location("EH165AY", "Street name");
+        Location locationP3 = new Location("G138AB", "Street name");
+        Location locationP4 = new Location("KY144AA", "Street name");
+        //(for customer searches)
+        Location locationC1 = new Location("EH45AH", "Street name");
+        Location locationC2 = new Location("G149KL", "Street name");
+        Location locationC3 = new Location("KY12AB", "Street name");
+        Location locationC4 = new Location("LD12AH", "Street name");
+        
+        //Date ranges
+        DateRange dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
+        DateRange dateRange2 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 5, 1));
         
         //Providers
-        Provider provider1 = new Provider("Provider1", location1, new BigDecimal(0.2), null);
-        Provider provider2 = new Provider("Provider2", location2, new BigDecimal(0.15), null);
-        Provider provider3 = new Provider("Provider3", location3, new BigDecimal(0.1), null);
-        Provider provider4 = new Provider("Provider4", location4, new BigDecimal(0.25), null);
+        Provider provider1 = new Provider("Provider1", locationP1, new BigDecimal(0.2), null);
+        Provider provider2 = new Provider("Provider2", locationP2, new BigDecimal(0.15), null);
+        Provider provider3 = new Provider("Provider3", locationP3, new BigDecimal(0.1), null);
+        Provider provider4 = new Provider("Provider4", locationP4, new BigDecimal(0.25), null);
 
         //Setup partner providers
         Set<Provider> partnersOf1 = new HashSet<>();
@@ -99,10 +109,29 @@ public class SystemTests {
                 bike4_7, bike4_8};
         Set<Bike> provider4Stock = new HashSet<>(Arrays.asList(arrayProvider4));
         provider4.setStock(provider4Stock);
+        
+        //ArrayList of BikeType for Input
+        ArrayList<BikeType> requestedBikes1 = new ArrayList<>();
+        requestedBikes1.add(mountainBike);
+        
+        ArrayList<BikeType> requestedBikes2 = new ArrayList<>();
+        requestedBikes2.add(mountainBike);
+        requestedBikes2.add(mountainBike);
+        requestedBikes2.add(mountainBike);
 
-        Input input1 = new Input();
+        ArrayList<BikeType> requestedBikes3 = new ArrayList<>();
+        requestedBikes3.add(mountainBike);
+        requestedBikes3.add(roadBike);
+        requestedBikes3.add(eBike);
         
-        
+        //Inputs
+        Input input1 = new Input(dateRange1, requestedBikes1, locationC1);
+        Input input2 = new Input(dateRange1, requestedBikes1, locationC4); //Should return no quotes
+        Input input3 = new Input(dateRange2, requestedBikes2, locationC1);
+        Input input4 = new Input(dateRange1, requestedBikes3, locationC1);
+        Input input5 = new Input(dateRange1, requestedBikes2, locationC2);
+        Input input6 = new Input(dateRange1, requestedBikes3, locationC3);
+
     }
     
     // TODO: Write system tests covering the three main use cases

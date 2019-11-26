@@ -51,4 +51,7 @@ public class TestInput {
         this.input3 = new Input(dateRange, null, location);
         this.input4 = new Input(dateRange, bikesRequested1, null);
     }
+    
+    //Still need to test all methods
+    
 }
