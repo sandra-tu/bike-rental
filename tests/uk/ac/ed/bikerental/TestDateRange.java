@@ -13,7 +13,7 @@ class TestDateRange {
         dateRange5, dateRange6;
 
     @BeforeEach
-    void setUp() throws Exception { //Maybe it throws and exception if it can't create these objects
+    void setUp() throws Exception {
         // Setup resources before each test
         this.dateRange1 = new DateRange(LocalDate.of(2019, 1, 7),
                 LocalDate.of(2019, 1, 10));
@@ -27,7 +27,6 @@ class TestDateRange {
                 LocalDate.of(2020, 2, 19));
         this.dateRange6 = new DateRange(LocalDate.of(2020, 1, 7),
                 LocalDate.of(2020, 1, 7));
-
     }
 
     // Sample JUnit tests checking toYears works
@@ -41,6 +40,15 @@ class TestDateRange {
         assertEquals(3, this.dateRange3.toYears());
     }
 
+    // TODO: put some of your own unit tests here
+    @Test
+    void testEndBeforeStartDate() {
+        Assertions.assertThrows(AssertionError.class, () -> {
+            new DateRange(LocalDate.of(2020, 1, 7),
+                    LocalDate.of(2019, 1, 7)); 
+        });
+    }
+    
     @Test
     void testOverlapsTrue() {
         // TODO: check we can see when two date ranges overlap
@@ -58,14 +66,11 @@ class TestDateRange {
         assertFalse(this.dateRange5.overlaps(this.dateRange4));
         assertFalse(this.dateRange6.overlaps(this.dateRange5));
     }
-
-    // TODO: put some of your own unit tests here
     
     @Test
-    void testEndBeforeStartDate() {
-        Assertions.assertThrows(AssertionError.class, () -> {
-            new DateRange(LocalDate.of(2020, 1, 7),
-                    LocalDate.of(2019, 1, 7)); 
-        });
+    void testEquals() {
+        assertTrue(this.dateRange1.equals(this.dateRange1));
+        assertFalse(this.dateRange1.equals(this.dateRange2));
     }
+    
 }

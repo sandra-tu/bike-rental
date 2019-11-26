@@ -2,12 +2,12 @@ package uk.ac.ed.bikerental;
 
 public class Location {
     private String postcode;
-    private String address;
+    private String streetAddress;
 
-    public Location(String postcode, String address) {
+    public Location(String postcode, String streetAddress) {
         assert postcode.length() >= 6;
         this.postcode = postcode;
-        this.address = address;
+        this.streetAddress = streetAddress;
     }
 
     public boolean isNearTo(Location other) {
@@ -28,11 +28,11 @@ public class Location {
     }
 
     public String getAddress() {
-        return this.address;
+        return this.streetAddress;
     }
     
     // You can add your own methods here
     public String formatAddress() {
-        return this.address + ", " + this.postcode + ".";    
+        return this.streetAddress + ", " + this.postcode + ".";    
     }
 }

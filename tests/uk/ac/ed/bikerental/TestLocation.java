@@ -16,7 +16,7 @@ public class TestLocation {
     	this.loc4 = new Location("123 456", "1 Newington Rd.");
     }
     
-    // TODO: put some tests here
+    // TODO: put some tests here    
     @Test
     public void testIsNearTo() {
         assertEquals(true, loc1.isNearTo(loc2));      //Should these not rather be assertTrue()?
