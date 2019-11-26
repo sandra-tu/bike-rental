@@ -25,9 +25,7 @@ public class Controller {
                     Set<Bike> bikesAvailible = bikesAvailibleDateRange(providerStock, dateRangeRequested);
                     Set<Bike> intersection = new HashSet<>(bikesOfType);
                     intersection.retainAll(bikesAvailible);
-                    if (intersection.isEmpty()) {
-                        break;
-                    }
+                    if (intersection.isEmpty()) {break;}
                     Bike bikeArray[] = new Bike[intersection.size()];
                     bikeArray = intersection.toArray(bikeArray);
                     Bike matchedBike = bikeArray[0];

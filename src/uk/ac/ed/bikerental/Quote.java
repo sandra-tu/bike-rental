@@ -18,8 +18,8 @@ public class Quote {
         this.provider = provider;
         this.dateRange = dateRange;
         this.locationOfHire = locationOfHire;
-        this.totalRentalPrice = getTotalRentalPrice(this.bikes);
-        this.totalDepositPrice = getTotalDepositPrice(this.bikes, this.provider);
+        this.setTotalRentalPrice(this.bikes);
+        this.setTotalDepositPrice(this.bikes, this.provider);
     }
 
     //SETTERS
@@ -27,19 +27,39 @@ public class Quote {
         this.deliveryToCustomer = delivery;
     }
     
-    public void setIsPaid() {
+    public void setIsPaid() { //Should this now not rather be called setToPaid()
         this.isPaid = true;
     }
     
+    public void setTotalRentalPrice(Set<Bike> bikeSet) {
+        BigDecimal totalRentalPrice = new BigDecimal(0.00);
+        for (Bike bike : bikeSet) {
+            BigDecimal rentalPrice = new BigDecimal(0.00);
+            rentalPrice = bike.getDailyRentalPrice();
+            totalRentalPrice = totalRentalPrice.add(rentalPrice);
+        }
+        this.totalRentalPrice = totalRentalPrice;
+    }
+    
+    private void setTotalDepositPrice(Set<Bike> bikeSet, Provider provider) {
+        BigDecimal totalDepositPrice = new BigDecimal(0.00);
+        BigDecimal depositRate = provider.getDepositRate();
+        for (Bike bike : bikeSet) {
+            BigDecimal depositPrice = bike.getFullReplaceVal().multiply(depositRate);
+            totalDepositPrice = totalDepositPrice.add(depositPrice);
+        }
+        this.totalDepositPrice = totalDepositPrice;
+    }
+    
     //GETTERS
-    public Set<Bike> getBikes() {return bikes;}
-    public Provider getProvider() {return provider;}
-    public DateRange getDateRange() {return dateRange;}
-    public Location getLocationOfHire() {return locationOfHire;}
-    public BigDecimal getTotalRentalPrice() {return totalRentalPrice;} 
-    public BigDecimal gettotalDepositPrice() {return totalDepositPrice;}
-    public boolean getDeliveryToCustomer() {return deliveryToCustomer;}
-    public boolean getIsPaid() {return isPaid;}
+    public Set<Bike> getBikes() {return this.bikes;}
+    public Provider getProvider() {return this.provider;}
+    public DateRange getDateRange() {return this.dateRange;}
+    public Location getLocationOfHire() {return this.locationOfHire;}
+    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;} 
+    public BigDecimal getTotalDepositPrice() {return this.totalDepositPrice;}
+    public boolean getDeliveryToCustomer() {return this.deliveryToCustomer;}
+    public boolean getIsPaid() {return this.isPaid;}
     
     public BigDecimal calculateDailyRentalPrice() {
         BigDecimal dailySum = new BigDecimal("00.00");
@@ -47,26 +67,6 @@ public class Quote {
             dailySum = dailySum.add(bike.getDailyRentalPrice());
         }
         return dailySum;
-    }
-    
-    public BigDecimal getTotalRentalPrice(Set<Bike> bikeSet) {
-        BigDecimal totalRentalPrice = new BigDecimal(0.00);
-        for (Bike bike : bikeSet) {
-            BigDecimal rentalPrice = new BigDecimal(0.00);
-            rentalPrice = bike.getDailyRentalPrice();
-            totalRentalPrice = totalRentalPrice.add(rentalPrice);
-        }
-        return totalRentalPrice;
-    }
-    
-    private BigDecimal getTotalDepositPrice(Set<Bike> bikeSet, Provider provider) {
-        BigDecimal totalDepositPrice = new BigDecimal(0.00);
-        BigDecimal depositRate = provider.getDepositRate();
-        for (Bike bike : bikeSet) {
-            BigDecimal depositPrice = bike.getFullReplaceVal().multiply(depositRate);
-            totalDepositPrice = totalDepositPrice.add(depositPrice);
-        }
-        return totalDepositPrice;
     }
  
 }
