@@ -11,7 +11,7 @@ public class Quote {
     private BigDecimal totalRentalPrice;
     private BigDecimal totalDepositPrice;
     private boolean deliveryToCustomer;
-    private boolean isPaid;
+    private boolean isPaid = false;
     
     public Quote(Set<Bike> bikes, Provider provider, DateRange dateRange, Location locationOfHire) {
         this.bikes = bikes;
@@ -27,8 +27,8 @@ public class Quote {
         this.deliveryToCustomer = delivery;
     }
     
-    public void setIsPaid(boolean paid) {
-        this.isPaid = paid;
+    public void setIsPaid() {
+        this.isPaid = true;
     }
     
     //GETTERS

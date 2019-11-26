@@ -17,6 +17,7 @@ public class Provider {
     private HashMap<BikeType, BigDecimal> dailyRentalPrice; //change from dailyPrice to dailyRentalPrice in UML cwk2
     private Set<Provider> partnerProviders;
     private Set<Bike> stock;
+    private Set<Booking> providerBookings;
     private static AtomicLong idCounter = new AtomicLong();
     
     //Recheck constructor given rental price constructor
