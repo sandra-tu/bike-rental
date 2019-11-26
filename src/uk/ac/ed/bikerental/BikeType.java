@@ -11,15 +11,21 @@ public class BikeType {
     public static Set<BikeTypes> bikeTypeSet = new HashSet<>();
     
     public BikeType(BikeTypes bikeType, BigDecimal replacementValue) {
-        assert !bikeTypeSet.contains(bikeType);
+//        assert !bikeTypeSet.contains(bikeType);
         this.bikeType = bikeType;
-        this.replacementValue = replacementValue;
+        if (replacementValue.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Replacement vlaue cannot be negative");
+        } else {
+            this.replacementValue = replacementValue;
+        }
+        
         //Throws error if the replacement value has already been set for a bike type
-//        if (bikeTypeSet.contains(bikeType)) {
-//            throw new IllegalArgumentException("This bike type already exists");
-//        } else {
-//        bikeTypeSet.add(bikeType);
-//        }
+        if (bikeTypeSet.contains(bikeType)) {
+            throw new IllegalArgumentException("This bike type already exists");
+        } else {
+            bikeTypeSet.add(bikeType);
+        }
+                
     }
         
     public enum BikeTypes{

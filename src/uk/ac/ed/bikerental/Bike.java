@@ -3,6 +3,7 @@ package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
@@ -15,7 +16,7 @@ public class Bike {
     private BigDecimal replacementValue;
     private BigDecimal dailyRentalPrice;
     private BikeStatuses bikeStatus;
-    private ArrayList<Booking> bookings;
+    private Set<Booking> bookings;
     private static AtomicLong idCounter = new AtomicLong();
 
     public Bike(Provider provider, BikeType bikeType) {
@@ -52,6 +53,10 @@ public class Bike {
         return dailyRentalPrice;
     }
     
+    public Set<Booking> getBookings() {
+        return this.bookings;
+    }
+    
     public enum BikeStatuses {
         AT_MAIN_PROVIDER,
         AT_PARTNER,
@@ -66,6 +71,14 @@ public class Bike {
     
     public BikeStatuses getBikeStatus() {
         return this.bikeStatus;
+    }
+    
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+    
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
     }
     
     public ArrayList<DateRange> getDateRangesBooked() {

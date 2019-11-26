@@ -17,19 +17,21 @@ class TestBikeType {
     void setUp() throws Exception {
         this.mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
         this.roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(150.00));
-        this.eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(200.00));
+        this.eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(9.00));
         this.otherBike = new BikeType(BikeTypes.OTHERBIKE, new BigDecimal(250.00));
     }
     
     @Test
-    void testForDuplicatedBikeType() {
-        
-    }
-    
     public void testExpectedAssertions() {
-        Assertions.assertThrows(AssertionError.class, () -> {
-            BikeType mountainBike2 = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(0.00));
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(1.00));
+        });
+        
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(-1.00));
         });
     }
+    
+    //More tests once interface has been implemented
 
 }
