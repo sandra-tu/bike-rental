@@ -131,6 +131,10 @@ public class SystemTests {
         Input input4 = new Input(dateRange1, requestedBikes3, locationC1);
         Input input5 = new Input(dateRange1, requestedBikes2, locationC2);
         Input input6 = new Input(dateRange1, requestedBikes3, locationC3);
+        
+        //Generated Quotes
+        Set<Quote> quotes1 = new HashSet<>();
+        quotes1 = generateQuotes(input1);
 
     }
     
