@@ -83,7 +83,7 @@ public class SystemTests {
         Bike bike3_3 = new Bike(provider3, roadBike);
         Bike bike3_4 = new Bike(provider3, eBike);
         Bike bike3_5 = new Bike(provider3, eBike);
-        Bike arrayProvider3[] = {bike3_1, bike3_2, bike3_3, bike3_4};
+        Bike arrayProvider3[] = {bike3_1, bike3_2, bike3_3, bike3_4, bike3_5};
         Set<Bike> provider3Stock = new HashSet<>(Arrays.asList(arrayProvider3));
         provider3.setStock(provider3Stock);
         
@@ -100,6 +100,7 @@ public class SystemTests {
         Set<Bike> provider4Stock = new HashSet<>(Arrays.asList(arrayProvider4));
         provider4.setStock(provider4Stock);
 
+        Input input1 = new Input();
         
         
     }
