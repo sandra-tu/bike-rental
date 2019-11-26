@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class TestDateRange {
     private DateRange dateRange1, dateRange2, dateRange3, dateRange4,
-        dateRange5, dateRange6, dateRange7;
+        dateRange5, dateRange6;
 
     @BeforeEach
     void setUp() throws Exception { //Maybe it throws and exception if it can't create these objects
@@ -62,9 +62,9 @@ class TestDateRange {
     // TODO: put some of your own unit tests here
     
     @Test
-    void testEndBeforeStartDate() { //Also shouldn't this date range be declared in the BeforeEach bit? it can't be because it throws an error
+    void testEndBeforeStartDate() {
         Assertions.assertThrows(AssertionError.class, () -> {
-            this.dateRange7 = new DateRange(LocalDate.of(2020, 1, 7),
+            new DateRange(LocalDate.of(2020, 1, 7),
                     LocalDate.of(2019, 1, 7)); 
         });
     }

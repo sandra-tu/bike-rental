@@ -10,7 +10,10 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 public class TestInput {
     private Input input1, input2, input3, input4;
     
+    //@Sandra - please help
     //Is the duplicated code in the two tests necessary? Or is there some way to avoid that?
+    //Is the setUp() basically a constructor test? Because it feels like it might be exactly what
+    //    it's doing
     
     @BeforeEach
     void setUp() throws Exception {
