@@ -71,6 +71,10 @@ public class Provider {
         return dailyRentalPrice;
     }
     
+    public void addBooking(Booking b) {
+        this.providerBookings.add(b);
+    }
+    
     //Returns the daily rental price for a given bike type
     public BigDecimal getDailyRentalPrice(BikeType bikeType){
         return (this.dailyRentalPrice).get(bikeType);

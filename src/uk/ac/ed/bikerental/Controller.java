@@ -95,6 +95,7 @@ public class Controller {
         Booking booking;
         if(quote.getIsPaid()) {
             booking = new Booking(quote);
+            booking.getProvider().addBooking(booking);
             return booking;
         } else {
             return null;
