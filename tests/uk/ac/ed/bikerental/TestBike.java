@@ -15,6 +15,8 @@ public class TestBike {
     
     private Bike bike1, bike2, bike3;
     private Booking booking1;
+    private Quote quote1;
+    private Provider provider1;
     
     @BeforeEach
     void setUp() {
@@ -38,7 +40,7 @@ public class TestBike {
     public void testSetBookings() {
         Set<Booking> bookingSet = new HashSet<>();
         bookingSet.add(booking1);
-        System.out.println(this.booking1 == null); //Why is the whole object null?!?!?!?!?!
+        System.out.println(this.booking1 == null); //Why is the whole object null?!?!?!?!?! // HMMMMMM
         this.bike1.setBookings(bookingSet);
         assertEquals(bookingSet, this.bike1.getBookings());
     }
