@@ -54,7 +54,7 @@ public class Quote {
     
     //GETTERS
     public Set<Bike> getBikes() {return this.bikes;}
-    public Provider getProvider() {return this.provider;}
+    public int getProviderID() {return this.provider.getProviderID();}
     public DateRange getDateRange() {return this.dateRange;}
     public Location getLocationOfHire() {return this.locationOfHire;}
     public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;} 

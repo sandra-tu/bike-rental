@@ -35,7 +35,7 @@ public class Provider {
         return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
       }
     
-    public int getProviderID() {
+    public Integer getProviderID() {
         return this.providerID;
     }
     

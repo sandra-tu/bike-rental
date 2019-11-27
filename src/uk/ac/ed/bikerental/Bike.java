@@ -11,7 +11,7 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Bike implements Deliverable{
 
-    private final Integer id;
+    private final int id;
     private Provider provider;
     private BikeType bikeType;
     private BigDecimal replacementValue;
@@ -29,8 +29,8 @@ public class Bike implements Deliverable{
         this.bikeStatus = BikeStatuses.AT_MAIN_PROVIDER;
     }
 
-    public Integer getBikeID() {
-        return id;
+    public int getBikeID() {
+        return this.id;
     }
 
     public int getProviderID() {
