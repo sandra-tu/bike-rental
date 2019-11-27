@@ -3,6 +3,9 @@ package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+
+import uk.ac.ed.bikerental.BikeType.BikeTypes;
+
 import java.util.HashSet;
 
 import java.util.HashMap;
@@ -59,15 +62,13 @@ public class Provider {
         this.stock = bikeStock;
     }
    
-    public HashMap<BikeType, BigDecimal> setDailyRentalPrice(BikeType bikeType, BigDecimal price) {
-        HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>();
-               
-        if(!dailyRentalPrice.containsKey(bikeType)){
-            dailyRentalPrice.put(bikeType, price);
+    public HashMap<BikeType, BigDecimal> setDailyRentalPrice(BikeType bikeType, BigDecimal price) {               
+        if(!this.dailyRentalPrice.containsKey(bikeType)){
+            this.dailyRentalPrice.put(bikeType, price);
         } else {
-            dailyRentalPrice.replace(bikeType, price);
+            this.dailyRentalPrice.replace(bikeType, price);
         }
-        return dailyRentalPrice;
+        return this.dailyRentalPrice;
     }
     
     public void addBooking(Booking b) {
@@ -127,6 +128,13 @@ public class Provider {
         System.out.println("DepositR: " + getDepositRate() + "\n");
     }
 
+    public static void main(String[] args) {
+        Location loc = new Location("EH165AY", "Street");
+        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
+        BikeType eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
+        prov.setDailyRentalPrice(eBike, new BigDecimal(100.00));
+        System.out.println(prov.getDailyRentalPrice(eBike));
+    }
     
 }
     

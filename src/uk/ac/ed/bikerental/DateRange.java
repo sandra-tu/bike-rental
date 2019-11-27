@@ -57,17 +57,17 @@ public class DateRange {
      * Method for seeing the number of days the DateRange spans
      * @return a long representing the number of days
      */
-
     public long toDays() {
         return ChronoUnit.DAYS.between(this.getStart(), this.getEnd());
     }
     
     /**
-     * Method to check if this DateRange overlaps with another given DateRange
-     * @param other the other DateRange object to check for overlaps with
-     * @return      a boolean representing whether there is an overlap or not
+     * Method to check if this DateRange overlaps with another given DateRange. Returns true when
+     * the start or end date of one DateRange is within the range of the other DateRange
+     * 
+     * @param other  a DateRange object that will be compared another DateRange object
+     * @return       a boolean representing whether there is an overlap or not
      */
-
     public boolean overlaps(DateRange other) {
         // TODO: implement date range intersection checking
         LocalDate start1 = this.getStart();
@@ -91,25 +91,21 @@ public class DateRange {
      * 
      * @return an int specifying which bucket the object should be stored in
      */
-    
     @Override
     public int hashCode() {
         // hashCode method allowing use in collections
         return Objects.hash(end, start);
     }
     
-    
     /**
      * equals method for testing equality in tests
      * 
-     * A method that overrides the normal equals(), and compares Location objects and assessing 
-     * whether they are equal. This is done by comparing the streetAddress field and the postcode
-     * field.
+     * A method that overrides the normal equals(), and compares DateRange objects and assesses 
+     * whether they are equal. This is done by comparing the start and end date for each DateRange.
      * 
      * @param  obj a Location that requires comparison
      * @return     a boolean to indicate whether or not the two locations are equal
      */
-    
     @Override
     public boolean equals(Object obj) {
         // equals method for testing equality in tests

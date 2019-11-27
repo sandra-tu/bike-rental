@@ -114,10 +114,15 @@ public class Bike{
         System.out.println("ID:          " + getBikeID());
         System.out.println("Provided by: " + getProviderID());
         System.out.println("Full replacement value: " + getFullReplaceVal());
-        //System.out.println("Daily rental Price:     " + getDailyRentalPrice() + "\n");
+        System.out.println("Daily rental Price:     " + getDailyRentalPrice() + "\n");
     }
     
     public static void main(String[] args) {
+        Location loc = new Location("EH165AY", "Street");
+        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
+        BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
+        Bike bike = new Bike(prov, bikeType);
         
+        bike.printSummary();
     }
 }
