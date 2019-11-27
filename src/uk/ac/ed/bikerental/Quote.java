@@ -1,11 +1,12 @@
 package uk.ac.ed.bikerental;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.math.BigDecimal;
 
 public class Quote {
-    private final Set<Bike> bikes;
+    private final Set<Bike> bikes = new HashSet<>();
     private final Provider provider;
     private final DateRange dateRange;
     private final Location locationOfHire;
@@ -15,7 +16,7 @@ public class Quote {
     private boolean isPaid = false;
     
     public Quote(Set<Bike> bikes, Provider provider, DateRange dateRange, Location locationOfHire) {
-        this.bikes = bikes;
+        this.bikes.addAll(bikes);
         this.provider = provider;
         this.dateRange = dateRange;
         this.locationOfHire = locationOfHire;
@@ -33,13 +34,14 @@ public class Quote {
     }
     
     public void setTotalRentalPrice(Set<Bike> bikeSet) {
-        BigDecimal totalRentalPrice = new BigDecimal(0.00);
+        BigDecimal totalRentalPrice = BigDecimal.ZERO;
         for (Bike bike : bikeSet) {
-            BigDecimal rentalPrice = new BigDecimal(0.00);
-            rentalPrice = bike.getDailyRentalPrice();
-            totalRentalPrice = totalRentalPrice.add(rentalPrice);
+            totalRentalPrice = totalRentalPrice.add(bike.getDailyRentalPrice());
         }
         this.totalRentalPrice = totalRentalPrice;
+        if (totalRentalPrice.equals(null)) {
+            System.out.println("sum is null");
+        }
     }
     
     private void setTotalDepositPrice(Set<Bike> bikeSet, Provider provider) {

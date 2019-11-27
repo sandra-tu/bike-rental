@@ -19,7 +19,7 @@ public class Provider {
     private Set<Provider> partnerProviders = new HashSet<Provider>();
     private Set<Bike> stock = new HashSet<Bike>();
     private Set<Booking> providerBookings = new HashSet<Booking>();
-    private Location address = new Location("test", "test");
+    private Location address = new Location("testtest", "test");
 
     private static AtomicLong idCounter = new AtomicLong();
     
