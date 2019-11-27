@@ -1,5 +1,6 @@
 package uk.ac.ed.bikerental;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ import uk.ac.ed.bikerental.Bike.BikeStatuses;
 
 public class Booking{
     
-    private Integer orderNum;
+    private final Integer orderNum;
     private Set<Bike> bikeCollection;
     private DateRange dateRange;
     private Provider provider;
@@ -104,6 +105,23 @@ public class Booking{
         COMPLETE
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderNum);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Booking other = (Booking) obj;
+        return Objects.equals(orderNum, other.orderNum);
+    }
+    
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 

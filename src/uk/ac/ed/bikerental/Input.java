@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Input {
+    //Do we need equals and hash methods for this class?
     
     private DateRange dateRange;
     private ArrayList<BikeType> bikesRequested; 

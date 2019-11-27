@@ -11,7 +11,7 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Bike implements Deliverable{
 
-    private Integer id;
+    private final Integer id;
     private Provider provider;
     private BikeType bikeType;
     private BigDecimal replacementValue;
@@ -37,6 +37,8 @@ public class Bike implements Deliverable{
         return this.provider.getProviderID();
     }
 
+    //Should this method not perhaps be private?
+    //Or maybe it doesn't need to be if the id field is final
     public Integer createBikeID() {
         return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
     }
