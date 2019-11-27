@@ -1,8 +1,9 @@
 package uk.ac.ed.bikerental;
 
+import java.util.Objects;
+
 public class Location {
-    private String postcode;
-    private String streetAddress;
+    private String postcode, streetAddress;
 
     public Location(String postcode, String streetAddress) {
         assert postcode.length() >= 6;
@@ -31,6 +32,24 @@ public class Location {
 
     public String getAddress() {
         return this.streetAddress;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(postcode, streetAddress);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Location other = (Location) obj;
+        return Objects.equals(postcode, other.postcode) 
+                && Objects.equals(streetAddress, other.streetAddress);
     }
     
     // You can add your own methods here
