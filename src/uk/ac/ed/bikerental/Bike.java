@@ -84,10 +84,12 @@ public class Bike implements Deliverable{
         this.bookings.add(booking);
     }
     
+    @Override
     public void onPickup() {
         
     }
     
+    @Override
     public void onDropoff() {
         
     }

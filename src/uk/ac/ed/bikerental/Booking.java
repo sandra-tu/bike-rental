@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.math.BigDecimal;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
+import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Booking {
     
@@ -91,11 +92,15 @@ public class Booking {
     }
     
     public void setDeliveryRequired(Location customerLocation) {
+        //Dummy bike object just to see
+        BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100));
+        Bike bike = new Bike(provider, bikeType);
+        
         this.deliveryRequired = true;
         Location providerAddress = this.getProvider().getAddress();
         LocalDate pickupDate = this.getBookingDateRange().getStart();
-        Deliverable diliverable = new Deliverable(); //Seems like you'd have to make this object somewhere so that you can add it as an argument in your next line
-        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(this.bikeCollection, //Here, instead of having bikeCollection
+        //Deliverable diliverable = new Deliverable();
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(bike, //So with one bike object it seems to work
                 providerAddress, customerLocation, pickupDate);
     }
     
