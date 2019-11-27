@@ -3,6 +3,9 @@ package uk.ac.ed.bikerental;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+
+import com.sun.istack.internal.Nullable;
+
 import java.time.LocalDate;
 import java.math.BigDecimal;
 
@@ -11,7 +14,7 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Booking {
     
-    //See at bottom for inheritted empty methods from Deliverable class
+    //See at bottom for inherited empty methods from Deliverable class <-- delete?
     
     private final Integer orderNum;
     private Set<Bike> bikeCollection;
@@ -23,12 +26,28 @@ public class Booking {
     private boolean deliveryRequired = false; //ADD TO CWK2
     private BigDecimal totalRentalPrice;
     private BigDecimal totalDeposit;
-    private MockDeliveryService delivery;
     private BookingStatuses bookingStatus;
     private static AtomicLong orderNumCounter = new AtomicLong();
     
     //CONSTRUCTOR
-    public Booking(Quote quote) {
+    //Constructor overloading for optional delivery and returning to a partner
+    public Booking(Quote quote, boolean deliveryRequired, Location customerLocation, 
+                  Provider returnProvider) {
+        this.orderNum = createOrderNum();
+        this.bikeCollection = quote.getBikes();
+        this.dateRange = quote.getDateRange();
+        this.provider = quote.getProvider();
+        this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
+        this.totalRentalPrice = quote.getTotalRentalPrice();
+        this.totalDeposit = quote.getTotalDepositPrice();
+        this.returnProvider = returnProvider;
+        if(deliveryRequired) {
+            this.setDeliveryRequired(customerLocation);
+        }
+        this.setReturnProvider(returnProvider);
+    }
+    
+    public Booking(Quote quote, boolean deliveryRequired, Provider returnProvider) {
         this.orderNum = createOrderNum();
         this.bikeCollection = quote.getBikes();
         this.dateRange = quote.getDateRange();
@@ -91,10 +110,18 @@ public class Booking {
         this.depositReturned = true;
     }
     
+    public void setReturnProvider(Provider provider) {
+        if(this.getProvider().verifyPartner(provider)) {
+            this.returnProvider = provider;
+        }else {
+            throw new IllegalArgumentException("Requested return provider is not a partner"); //should I throw an exception here??
+        }
+    }
+    
     public void setDeliveryRequired(Location customerLocation) {
         //Dummy bike object just to see
-        BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100));
-        Bike bike = new Bike(provider, bikeType);
+        //BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100)); 
+        //Bike bike = new Bike(provider, bikeType);
         BikeCollection bikeCol = new BikeCollection(this);
         
         this.deliveryRequired = true;

@@ -19,6 +19,10 @@ public class Invoice {
         this.totalDeposit = booking.getTotalDeposit();
     }
     
+    public void printInvoice() {
+        //details for formatting invoiceOutput
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(invoiceNum);

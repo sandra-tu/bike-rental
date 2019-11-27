@@ -3,6 +3,8 @@ package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
 import java.util.*;
 
+import com.sun.istack.internal.Nullable;
+
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Controller {
@@ -91,10 +93,11 @@ public class Controller {
         return bikesAvailible;
     }
     
-    public Invoice bookQuote(Quote quote) {
+    public Invoice bookQuote(Quote quote, boolean deliveryRequired, @Nullable Location customerLocation,
+                             @Nullable Provider returnProvider) {
         Booking booking;
         if(quote.getIsPaid()) {
-            booking = new Booking(quote);
+            booking = new Booking(quote, deliveryRequired, );
             booking.getProvider().addBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;

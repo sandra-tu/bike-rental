@@ -93,6 +93,18 @@ public class Provider {
         return this.address;
     }
     
+    public void addPartnerProvider(Provider p) {
+        this.partnerProviders.add(p);
+    }
+    
+    public boolean verifyPartner(Provider p) {
+        if(this.partnerProviders.contains(p) && p.partnerProviders.contains(this)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(providerID);
