@@ -49,11 +49,11 @@ public class Bike implements Deliverable{
     }
     
     public BigDecimal getFullReplaceVal() {
-        return replacementValue;
+        return this.replacementValue;
     }
     
     public BigDecimal getDailyRentalPrice() {
-        return dailyRentalPrice;
+        return this.dailyRentalPrice;
     }
     
     public Set<Booking> getBookings() {

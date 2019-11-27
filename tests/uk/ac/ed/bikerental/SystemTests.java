@@ -165,9 +165,27 @@ public class SystemTests {
         
     }
     
-    //Test: Use Case 1 - Finding a quote
+    //Tests: Use Case 1 - Finding a quote
     
-    //Test: Use Case 2 - Booking a quote
+    //Test 1.1: Checks each quote only has bikes from one provider
+    
+    //Test 1.2: Checks provider field in quote mathces the actual provider of the bikes
+    
+    //Test 1.3: Checks the quoted providers are in range
+    
+    //Test 1.4: Checks the returned bikes are of the type
+    
+    //Test 1.5: Checks all the bikes are availible for the required dateRange
+    
+    //Test 1.6: Checks daily rental price is correct
+    
+    //Test 1.7: Checks desposit price is correct
+    
+    
+    
+    
+    
+    //Tests: Use Case 2 - Booking a quote
 //    Place a booking 
 //    Unique booking number
 //    If customer has requested DeliveryService then should return
