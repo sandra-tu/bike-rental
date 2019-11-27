@@ -3,6 +3,9 @@ package uk.ac.ed.bikerental;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import uk.ac.ed.bikerental.BikeType.BikeTypes;
+
 import java.math.BigDecimal;
 
 public class Quote {
@@ -10,8 +13,8 @@ public class Quote {
     private final Provider provider;
     private final DateRange dateRange;
     private final Location locationOfHire;
-    private BigDecimal totalRentalPrice;
-    private BigDecimal totalDepositPrice;
+    private BigDecimal totalRentalPrice = BigDecimal.ZERO;
+    private BigDecimal totalDepositPrice = BigDecimal.ZERO;
     private boolean deliveryToCustomer;
     private boolean isPaid = false;
     
@@ -36,11 +39,14 @@ public class Quote {
     public void setTotalRentalPrice(Set<Bike> bikeSet) {
         BigDecimal totalRentalPrice = BigDecimal.ZERO;
         for (Bike bike : bikeSet) {
+            if (bike.getDailyRentalPrice().equals(null)){
+                throw new IllegalArgumentException("daily rental price null");
+            }
             totalRentalPrice = totalRentalPrice.add(bike.getDailyRentalPrice());
         }
         this.totalRentalPrice = totalRentalPrice;
         if (totalRentalPrice.equals(null)) {
-            System.out.println("sum is null");
+            throw new IllegalArgumentException("daily rental price null");
         }
     }
     
@@ -59,7 +65,7 @@ public class Quote {
     public Provider getProvider() {return this.provider;}
     public DateRange getDateRange() {return this.dateRange;}
     public Location getLocationOfHire() {return this.locationOfHire;}
-    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;} 
+    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice = BigDecimal.ZERO;} 
     public BigDecimal getTotalDepositPrice() {return this.totalDepositPrice;}
     public boolean getDeliveryToCustomer() {return this.deliveryToCustomer;}
     public boolean getIsPaid() {return this.isPaid;}
@@ -90,6 +96,16 @@ public class Quote {
                 && Objects.equals(provider, other.provider)
                 && Objects.equals(dateRange, other.dateRange)
                 && Objects.equals(locationOfHire, other.locationOfHire);
+    }
+    
+    public static void main(String[] args) {
+        Location loc = new Location("EH165AY", "Street");
+        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
+        BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
+        Bike bike = new Bike(prov, bikeType);
+        Set<Bike> set = new HashSet<>();
+        set.add(bike);
+        setTotalRentalPrice(set);
     }
  
 }
