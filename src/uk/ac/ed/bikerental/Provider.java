@@ -3,6 +3,7 @@ package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.HashSet;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
@@ -15,11 +16,11 @@ public class Provider {
     private String providerName;
     private Location providerAddress;
     private BigDecimal depositRate;
-    private HashMap<BikeType, BigDecimal> dailyRentalPrice; //change from dailyPrice to dailyRentalPrice in UML cwk2
-    private Set<Provider> partnerProviders;
-    private Set<Bike> stock;
-    private Set<Booking> providerBookings;
-    private Location address;
+    private HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>(); //change from dailyPrice to dailyRentalPrice in UML cwk2
+    private Set<Provider> partnerProviders = new HashSet<Provider>();
+    private Set<Bike> stock = new HashSet<Bike>();
+    private Set<Booking> providerBookings = new HashSet<Booking>();
+    private Location address = new Location("test", "test");
     private static AtomicLong idCounter = new AtomicLong();
     
     //Recheck constructor given rental price constructor
@@ -30,7 +31,7 @@ public class Provider {
         this.depositRate = depositRate;
     }
     
-    public Integer createProviderID() {
+    public Integer createProviderID() { //make private?
         return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
       }
     
@@ -61,8 +62,6 @@ public class Provider {
     public HashMap<BikeType, BigDecimal> setDailyRentalPrice(BikeType bikeType, BigDecimal price) {
         HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>();
                
-        //Is there a way to automatically iterate through all values of enum class?
-        //If BikeType no longer needs RentalPrice attribute then this chunk can be deleted
         if(!dailyRentalPrice.containsKey(bikeType)){
             dailyRentalPrice.put(bikeType, price);
         } else {
