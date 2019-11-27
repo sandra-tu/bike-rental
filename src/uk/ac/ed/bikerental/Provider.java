@@ -23,12 +23,11 @@ public class Provider {
     private static AtomicLong idCounter = new AtomicLong();
     
     //Recheck constructor given rental price constructor
-    public Provider(String providerName, Location providerAddress, BigDecimal depositRate, Set<Provider> partnerProviders) {
+    public Provider(String providerName, Location providerAddress, BigDecimal depositRate) {
         this.providerID = createProviderID();
         this.providerName = providerName;
         this.providerAddress = providerAddress;
         this.depositRate = depositRate;
-        this.partnerProviders = partnerProviders;
     }
     
     public Integer createProviderID() {
