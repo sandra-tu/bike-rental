@@ -93,16 +93,57 @@ public class Controller {
         return bikesAvailible;
     }
     
-    public Invoice bookQuote(Quote quote, boolean deliveryRequired, @Nullable Location customerLocation,
-                             @Nullable Provider returnProvider) {
+    //bookQuote() overloaded for optional delivery and return to partner
+    public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation,
+                             Provider returnProvider) {
         Booking booking;
         if(quote.getIsPaid()) {
-            booking = new Booking(quote, deliveryRequired, );
+            booking = new Booking(quote, deliveryRequired, customerLocation, returnProvider);
             booking.getProvider().addBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
-            return null;
+            throw new IllegalArgumentException("Payment needs to be made before Booking is created");
+            //return null;
+        }
+    }
+    
+    //Delivery required but return to original provider
+    public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation) {
+        Booking booking;
+        if(quote.getIsPaid()) {
+            booking = new Booking(quote, deliveryRequired, customerLocation);
+            booking.getProvider().addBooking(booking);
+            Invoice invoice = new Invoice(booking);
+            return invoice;
+        } else {
+            throw new IllegalArgumentException("Payment needs to be made before Booking is created");
+        }
+    }
+    
+    //Delivery not required but return to partner provider
+    public Invoice bookQuote(Quote quote, boolean deliveryRequired, Provider returnProvider) {
+        Booking booking;
+        if(quote.getIsPaid()) {
+            booking = new Booking(quote, deliveryRequired, returnProvider);
+            booking.getProvider().addBooking(booking);
+            Invoice invoice = new Invoice(booking);
+            return invoice;
+        } else {
+            throw new IllegalArgumentException("Payment needs to be made before Booking is created");
+        }
+    }
+    
+    //Neither is required
+    public Invoice bookQuote(Quote quote, boolean deliveryRequired) {
+        Booking booking;
+        if(quote.getIsPaid()) {
+            booking = new Booking(quote, deliveryRequired);
+            booking.getProvider().addBooking(booking);
+            Invoice invoice = new Invoice(booking);
+            return invoice;
+        } else {
+            throw new IllegalArgumentException("Payment needs to be made before Booking is created");
         }
     }
     

@@ -47,6 +47,7 @@ public class Booking {
         this.setReturnProvider(returnProvider);
     }
     
+    //Delivery not required but requested return to partner
     public Booking(Quote quote, boolean deliveryRequired, Provider returnProvider) {
         this.orderNum = createOrderNum();
         this.bikeCollection = quote.getBikes();
@@ -55,6 +56,38 @@ public class Booking {
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
+        if(deliveryRequired) {
+            throw new IllegalArgumentException("Please pass customer location");
+        }
+        this.setReturnProvider(returnProvider);
+    }
+    
+    //Delivery required but return to original provider
+    public Booking(Quote quote, boolean deliveryRequired, Location customerLocation) {
+        this.orderNum = createOrderNum();
+        this.bikeCollection = quote.getBikes();
+        this.dateRange = quote.getDateRange();
+        this.provider = quote.getProvider();
+        this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
+        this.totalRentalPrice = quote.getTotalRentalPrice();
+        this.totalDeposit = quote.getTotalDepositPrice();
+        if(deliveryRequired) {
+            this.setDeliveryRequired(customerLocation);;
+        }
+    }
+    
+    //Neither is required
+    public Booking(Quote quote, boolean deliveryRequired) {
+        this.orderNum = createOrderNum();
+        this.bikeCollection = quote.getBikes();
+        this.dateRange = quote.getDateRange();
+        this.provider = quote.getProvider();
+        this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
+        this.totalRentalPrice = quote.getTotalRentalPrice();
+        this.totalDeposit = quote.getTotalDepositPrice();
+        if(deliveryRequired) {
+            throw new IllegalArgumentException("Please pass customer location");
+        }
     }
     
     public Integer createOrderNum() {
