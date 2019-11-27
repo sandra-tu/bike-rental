@@ -1,13 +1,14 @@
 package uk.ac.ed.bikerental;
 
+import java.util.Objects;
 import java.util.Set;
 import java.math.BigDecimal;
 
 public class Quote {
-    private Set<Bike> bikes;
-    private Provider provider;
-    private DateRange dateRange;
-    private Location locationOfHire;
+    private final Set<Bike> bikes;
+    private final Provider provider;
+    private final DateRange dateRange;
+    private final Location locationOfHire;
     private BigDecimal totalRentalPrice;
     private BigDecimal totalDepositPrice;
     private boolean deliveryToCustomer;
@@ -67,6 +68,26 @@ public class Quote {
             dailySum = dailySum.add(bike.getDailyRentalPrice());
         }
         return dailySum;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(bikes, provider, dateRange, locationOfHire);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Quote other = (Quote) obj;
+        return Objects.equals(bikes, other.bikes) 
+                && Objects.equals(provider, other.provider)
+                && Objects.equals(dateRange, other.dateRange)
+                && Objects.equals(locationOfHire, other.locationOfHire);
     }
  
 }

@@ -7,10 +7,11 @@ import java.util.concurrent.atomic.AtomicLong;
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Provider {
     
-    private Integer providerID;
+    private final Integer providerID;
     private String providerName;
     private Location providerAddress;
     private BigDecimal depositRate;
@@ -90,6 +91,23 @@ public class Provider {
     
     public Location getAddress() {
         return this.address;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(providerID);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Provider other = (Provider) obj;
+        return Objects.equals(providerID, other.providerID);
     }
     
     public void printSummary() {
