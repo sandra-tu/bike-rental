@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.HashSet;
 
-import uk.ac.ed.bikerental.BikeType.BikeTypes;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -17,10 +15,12 @@ public class Provider {
     private Location providerAddress;
     private BigDecimal depositRate;
     private HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>(); //change from dailyPrice to dailyRentalPrice in UML cwk2
+
     private Set<Provider> partnerProviders = new HashSet<Provider>();
     private Set<Bike> stock = new HashSet<Bike>();
     private Set<Booking> providerBookings = new HashSet<Booking>();
     private Location address = new Location("test", "test");
+
     private static AtomicLong idCounter = new AtomicLong();
     
     //Recheck constructor given rental price constructor
