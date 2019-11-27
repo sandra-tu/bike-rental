@@ -11,6 +11,8 @@ public class Controller {
     
     private Set<Provider> providers;
     
+    //Use case 1:
+    
     public ArrayList<Quote> generateQuotes(Input input) {
         ArrayList<Quote> quoteList = new ArrayList<>();
         DateRange dateRangeRequested = input.getRequestedDateRange();
@@ -93,6 +95,8 @@ public class Controller {
         return bikesAvailible;
     }
     
+    //Use case 2:
+    
     //bookQuote() overloaded for optional delivery and return to partner
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation,
                              Provider returnProvider) {
@@ -103,7 +107,8 @@ public class Controller {
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
-            throw new IllegalArgumentException("Payment needs to be made before Booking is created");
+            throw new IllegalArgumentException("Payment needs to be made before "
+                    + "Booking is created");
             //return null;
         }
     }
@@ -150,7 +155,7 @@ public class Controller {
     public static void main(String[] args) {
         Location location = new Location("EH165AY", "Holyrood rd.");
         BigDecimal depositRate = new BigDecimal(0.2);
-        Provider provider1 = new Provider("Provider1", location, depositRate, null);
+        Provider provider1 = new Provider("Provider1", location, depositRate);
         BikeType mountainBikeType = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
         BikeType roadBikeType = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(110.00));
         Bike bike1 = new Bike(provider1, mountainBikeType);

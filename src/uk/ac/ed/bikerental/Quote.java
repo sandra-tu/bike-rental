@@ -39,14 +39,14 @@ public class Quote {
     public void setTotalRentalPrice(Set<Bike> bikeSet) {
         BigDecimal totalRentalPrice = BigDecimal.ZERO;
         for (Bike bike : bikeSet) {
-            if (bike.getDailyRentalPrice().equals(null)){
-                throw new IllegalArgumentException("daily rental price null");
+            if (bike.getDailyRentalPrice() == null){
+                throw new IllegalArgumentException("daily rental price null 1");
             }
             totalRentalPrice = totalRentalPrice.add(bike.getDailyRentalPrice());
         }
         this.totalRentalPrice = totalRentalPrice;
-        if (totalRentalPrice.equals(null)) {
-            throw new IllegalArgumentException("daily rental price null");
+        if (totalRentalPrice == null) {
+            throw new IllegalArgumentException("daily rental price null 2");
         }
     }
     

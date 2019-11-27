@@ -69,6 +69,20 @@ public class SystemTests {
         this.provider2 = new Provider("Provider2", locationP2, new BigDecimal(0.15));
         this.provider3 = new Provider("Provider3", locationP3, new BigDecimal(0.1));
         this.provider4 = new Provider("Provider4", locationP4, new BigDecimal(0.25));
+        
+        provider1.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
+        
+        provider2.setDailyRentalPrice(roadBike, new BigDecimal(10.00));
+        provider2.setDailyRentalPrice(eBike, new BigDecimal(10.00));
+        
+        provider3.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
+        provider3.setDailyRentalPrice(eBike, new BigDecimal(10.00));
+        provider3.setDailyRentalPrice(roadBike, new BigDecimal(10.00));
+
+        provider4.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
+        provider4.setDailyRentalPrice(eBike, new BigDecimal(10.00));
+        provider4.setDailyRentalPrice(roadBike, new BigDecimal(10.00));
+        
 
         //Setup partner providers
         Set<Provider> partnersOf1 = new HashSet<>();

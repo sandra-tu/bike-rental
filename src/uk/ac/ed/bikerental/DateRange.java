@@ -10,14 +10,15 @@ import java.util.function.BooleanSupplier;
  */
 
 public class DateRange {
+    
     /**
      * Represents the start date and end date of a date range
      */
-    
     private LocalDate start, end;
     
     /**
      * Class constructor
+     * 
      * @param start LocalDate object for start date
      * @param end   LocalDate object for end date
      */
@@ -29,9 +30,9 @@ public class DateRange {
     
     /**
      * Getter method for start
+     * 
      * @return the start date of the DateRange
      */
-    
     public LocalDate getStart() {
         return this.start;
     }
@@ -40,7 +41,6 @@ public class DateRange {
      * Getter method for end
      * @return the end date of the DateRange
      */
-    
     public LocalDate getEnd() {
         return this.end;
     }
@@ -49,7 +49,6 @@ public class DateRange {
      * Method for seeing the number of years the DateRange spans
      * @return a long representing the number of years
      */
-
     public long toYears() {
         return ChronoUnit.YEARS.between(this.getStart(), this.getEnd());
     }
