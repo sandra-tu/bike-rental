@@ -25,7 +25,7 @@ public class TestBike {
         this.bike2 = new Bike(null, mountainBike);
         this.bike3 = new Bike(null, mountainBike);
         
-        this.booking1 = new Booking(null);
+        this.booking1 = new Booking(null, false);
     }
     
     //Test that the createBikeID method is working correctly
