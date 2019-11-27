@@ -28,7 +28,7 @@ public class Quote {
         this.deliveryToCustomer = delivery;
     }
     
-    public void setIsPaid() { //Should this now not rather be called setToPaid()
+    public void setToPaid() {
         this.isPaid = true;
     }
     

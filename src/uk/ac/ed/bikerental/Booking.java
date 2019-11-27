@@ -4,18 +4,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.sun.istack.internal.Nullable;
-
 import java.time.LocalDate;
 import java.math.BigDecimal;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
-import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Booking {
-    
-    //See at bottom for inherited empty methods from Deliverable class <-- delete?
-    
+        
     private final Integer orderNum;
     private Set<Bike> bikeCollection;
     private DateRange dateRange;
@@ -102,6 +97,7 @@ public class Booking {
     public Provider getReturnProvider() {return this.returnProvider;}
     public boolean getDepositIsPaid() {return this.depositPaid;}
     public boolean getDepositReturned() {return this.depositReturned;}
+    public boolean getDeliveryReturned() {return this.deliveryRequired;}
     public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;}
     public BigDecimal getTotalDeposit() {return this.totalDeposit;}
     public BookingStatuses getBookingStatus() {return this.bookingStatus;}
