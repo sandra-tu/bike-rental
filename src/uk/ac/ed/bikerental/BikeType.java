@@ -41,6 +41,24 @@ public class BikeType {
         return replacementValue;
     }
     
+    @Override
+    public int hashCode() {
+        return Objects.hash(bikeType, replacementValue);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BikeType other = (BikeType) obj;
+        return Objects.equals(bikeType, other.bikeType) 
+                && Objects.equals(replacementValue, other.replacementValue);
+    }
+    
     public static void main(String[] args) {
         BikeType mountain = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(30.00));
         BikeType city = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(20.00));
