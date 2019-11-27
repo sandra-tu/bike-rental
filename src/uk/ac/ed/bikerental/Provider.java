@@ -15,7 +15,7 @@ public class Provider {
     private String providerName;
     private Location providerAddress;
     private BigDecimal depositRate;
-    private HashMap<BikeType, BigDecimal> dailyRentalPrice; //change from dailyPrice to dailyRentalPrice in UML cwk2
+    private HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>(); //change from dailyPrice to dailyRentalPrice in UML cwk2
     private Set<Provider> partnerProviders;
     private Set<Bike> stock;
     private Set<Booking> providerBookings;
