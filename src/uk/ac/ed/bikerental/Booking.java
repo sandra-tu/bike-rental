@@ -95,12 +95,13 @@ public class Booking {
         //Dummy bike object just to see
         BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100));
         Bike bike = new Bike(provider, bikeType);
+        BikeCollection bikeCol = new BikeCollection(this);
         
         this.deliveryRequired = true;
         Location providerAddress = this.getProvider().getAddress();
         LocalDate pickupDate = this.getBookingDateRange().getStart();
-        //Deliverable diliverable = new Deliverable();
-        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(bike, //So with one bike object it seems to work
+        //Deliverable deliverable = new Deliverable();
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(bikeCol, //So with one bike object it seems to work
                 providerAddress, customerLocation, pickupDate);
     }
     
