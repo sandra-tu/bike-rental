@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
 
-public class Booking{
+public class Booking {
+    
+    //See at bottom for inheritted empty methods from Deliverable class
     
     private final Integer orderNum;
     private Set<Bike> bikeCollection;
@@ -52,9 +54,9 @@ public class Booking{
     public BookingStatuses getBookingStatus() {return this.bookingStatus;}
     
     //SETTERS
-    public void setBookingStatus(BookingStatuses bookingStat) {
-        this.bookingStatus = bookingStat;
-        switch(bookingStat) {
+    public void setBookingStatus(BookingStatuses bookingStatus) {
+        this.bookingStatus = bookingStatus;
+        switch(bookingStatus) {
             case OUT_FOR_DELIVERY:
                 for(Bike bike : bikeCollection) {
                     bike.setBikeStatus(BikeStatuses.OUT_FOR_DELIVERY);
@@ -88,13 +90,14 @@ public class Booking{
         this.depositReturned = true;
     }
     
-    public void setDeliveryRequired(Location customer) {
+    public void setDeliveryRequired(Location customerLocation) {
         this.deliveryRequired = true;
         Location providerAddress = this.getProvider().getAddress();
-        LocalDate pickup = this.getBookingDateRange().getStart();
-        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(this.bikeCollection, providerAddress, customer, pickup);
+        LocalDate pickupDate = this.getBookingDateRange().getStart();
+        Deliverable diliverable = new Deliverable(); //Seems like you'd have to make this object somewhere so that you can add it as an argument in your next line
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(this.bikeCollection, //Here, instead of having bikeCollection
+                providerAddress, customerLocation, pickupDate);
     }
-    
     
     public enum BookingStatuses{
         PRECOMMENCEMENT,
@@ -120,11 +123,6 @@ public class Booking{
             return false;
         Booking other = (Booking) obj;
         return Objects.equals(orderNum, other.orderNum);
-    }
-    
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
     }
 
 }
