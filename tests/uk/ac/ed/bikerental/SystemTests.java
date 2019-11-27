@@ -82,16 +82,9 @@ public class SystemTests {
         this.provider1.setPartnerProviders(partnersOf1);
         this.provider3.setPartnerProviders(partnersOf3);
         this.provider4.setPartnerProviders(partnersOf4);
-
-        //Mock quote
-        Quote quoteMock = new Quote();
-        
-        //Mock bookings
-        Booking bookingMock = new Booking(quoteMock, false);
-        
+       
         //Bikes and adding to stock
         this.bike1_1 = new Bike(provider1, mountainBike);
-        this.bike1_1.addBooking(bookingMock);
         this.bike1_2 = new Bike(provider1, mountainBike);
         this.bike1_3 = new Bike(provider1, mountainBike);
         this.bike1_4 = new Bike(provider1, mountainBike);
@@ -134,10 +127,47 @@ public class SystemTests {
         Set<Bike> provider4Stock = new HashSet<>(Arrays.asList(arrayProvider4));
         this.provider4.setStock(provider4Stock);
         
+        //Mock quote
+        Quote quoteMock = new Quote(provider1Stock, provider1, 
+                new DateRange(LocalDate.of(1,1,1), LocalDate.of(1,1,1)), locationP1);
+        
+        //Mock bookings
+        Booking bookingMock = new Booking(quoteMock, false);
+        
+        //Add mock bookings to all bikes
+        bike1_1.addBooking(bookingMock);
+        bike1_2.addBooking(bookingMock);
+        bike1_3.addBooking(bookingMock);
+        bike1_4.addBooking(bookingMock);
+
+        bike2_1.addBooking(bookingMock);
+        bike2_2.addBooking(bookingMock);
+        bike2_3.addBooking(bookingMock);
+        bike2_4.addBooking(bookingMock);
+        bike2_5.addBooking(bookingMock);
+        bike2_6.addBooking(bookingMock);
+        bike2_7.addBooking(bookingMock);
+        
+        bike3_1.addBooking(bookingMock);
+        bike3_2.addBooking(bookingMock);
+        bike3_3.addBooking(bookingMock);
+        bike3_4.addBooking(bookingMock);
+        bike3_5.addBooking(bookingMock);
+
+        bike4_1.addBooking(bookingMock);
+        bike4_2.addBooking(bookingMock);
+        bike4_3.addBooking(bookingMock);
+        bike4_4.addBooking(bookingMock);
+        bike4_5.addBooking(bookingMock);
+        bike4_6.addBooking(bookingMock);
+        bike4_7.addBooking(bookingMock);
+        bike4_8.addBooking(bookingMock);
+        bike4_9.addBooking(bookingMock);
+        
         //ArrayList of BikeType for Input
         this.requestedBikes1 = new ArrayList<>();
         this.requestedBikes1.add(mountainBike);
-        
+
         this.requestedBikes2 = new ArrayList<>();
         this.requestedBikes2.add(mountainBike);
         this.requestedBikes2.add(mountainBike);
@@ -149,9 +179,9 @@ public class SystemTests {
         this.requestedBikes3.add(eBike);
         
         //Inputs
-        this.input1 = new Input(dateRange1, this.requestedBikes1, locationC1);
-        this.input2 = new Input(dateRange1, this.requestedBikes1, locationC4); //Should return no quotes
-        this.input3 = new Input();
+        this.input1 = new Input(dateRange1, requestedBikes1, locationC1);
+        this.input2 = new Input(dateRange1, requestedBikes1, locationC4); //Should return no quotes
+        this.input3 = new Input(dateRange1, requestedBikes3, locationC3); //Test 1.1
 //        this.input3 = new Input(dateRange2, this.requestedBikes2, locationC1);
 //        this.input4 = new Input(dateRange1, this.requestedBikes3, locationC1);
 //        this.input5 = new Input(dateRange1, this.requestedBikes2, locationC2);
@@ -173,13 +203,6 @@ public class SystemTests {
     
     // TODO: Write system tests covering the three main use cases
 
-    @Test
-    void myFirstTest() {
-        // JUnit tests look like this
-        assertEquals("The moon", "cheese"); // Should fail
-        
-    }
-    
     //Tests: Use Case 1 - Finding a quote
     
     //Test 1.1: Checks provider field in quote mathces the actual provider of the bikes &
@@ -198,9 +221,9 @@ public class SystemTests {
     @Test
     void test2ExpectedProvider() {
         Set<Provider> expectedProviders = new HashSet<>();
-        expectedProviders.add(provider1);
+        expectedProviders.add(provider3);
         Set<Provider> quoteProviders = new HashSet<>();
-        for (Quote quote : quotes6) {
+        for (Quote quote : quotes3) {
             quoteProviders.add(quote.getProvider());
         }
         assertTrue(expectedProviders.equals(quoteProviders));
