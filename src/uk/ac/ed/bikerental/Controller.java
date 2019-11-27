@@ -103,7 +103,7 @@ public class Controller {
         Booking booking;
         if(quote.getIsPaid()) {
             booking = new Booking(quote, deliveryRequired, customerLocation, returnProvider);
-            booking.getProvider().addBooking(booking);
+            booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -118,7 +118,7 @@ public class Controller {
         Booking booking;
         if(quote.getIsPaid()) {
             booking = new Booking(quote, deliveryRequired, customerLocation);
-            booking.getProvider().addBooking(booking);
+            booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -131,7 +131,7 @@ public class Controller {
         Booking booking;
         if(quote.getIsPaid()) {
             booking = new Booking(quote, deliveryRequired, returnProvider);
-            booking.getProvider().addBooking(booking);
+            booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -144,7 +144,7 @@ public class Controller {
         Booking booking;
         if(quote.getIsPaid()) {
             booking = new Booking(quote, deliveryRequired);
-            booking.getProvider().addBooking(booking);
+            booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {

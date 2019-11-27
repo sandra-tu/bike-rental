@@ -62,7 +62,8 @@ public class TestBike {
     public void testAddBooking() {
         Set<Booking> bookingSet = new HashSet<>();
         bookingSet.add(booking1);
-        this.bike2.addBooking(booking1);
+        this.bike2.addBikeBooking(booking1);
         assertEquals(bookingSet, this.bike2.getBookings());
     }
+    
 }

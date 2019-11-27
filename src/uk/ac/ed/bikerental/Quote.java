@@ -23,7 +23,7 @@ public class Quote {
         this.provider = provider;
         this.dateRange = dateRange;
         this.locationOfHire = locationOfHire;
-        this.setTotalRentalPrice(this.bikes);
+        this.calculateTotalRentalPrice(this.bikes);
         this.setTotalDepositPrice(this.bikes, this.provider);
     }
 
@@ -36,16 +36,15 @@ public class Quote {
         this.isPaid = true;
     }
     
-    public void setTotalRentalPrice(Set<Bike> bikeSet) {
-        BigDecimal totalRentalPrice = BigDecimal.ZERO;
+    //Set the total rental price for the quote
+    public void calculateTotalRentalPrice(Set<Bike> bikeSet) {
         for (Bike bike : bikeSet) {
-            if (bike.getDailyRentalPrice() == null){
+            if (bike.getDailyRentalPrice() == null) {
                 throw new IllegalArgumentException("daily rental price null 1");
             }
-            totalRentalPrice = totalRentalPrice.add(bike.getDailyRentalPrice());
+            this.totalRentalPrice = this.totalRentalPrice.add(bike.getDailyRentalPrice());
         }
-        this.totalRentalPrice = totalRentalPrice;
-        if (totalRentalPrice == null) {
+        if (this.totalRentalPrice == null) {
             throw new IllegalArgumentException("daily rental price null 2");
         }
     }
@@ -105,7 +104,7 @@ public class Quote {
         Bike bike = new Bike(prov, bikeType);
         Set<Bike> set = new HashSet<>();
         set.add(bike);
-        setTotalRentalPrice(set);
+        //setTotalRentalPrice(set);
     }
  
 }

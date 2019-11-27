@@ -71,7 +71,8 @@ public class Provider {
         return this.dailyRentalPrice;
     }
     
-    public void addBooking(Booking b) {
+    //Why do we have this method?
+    public void addProviderBooking(Booking b) {
         this.providerBookings.add(b);
     }
     

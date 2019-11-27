@@ -1,8 +1,10 @@
 package uk.ac.ed.bikerental;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
@@ -17,7 +19,7 @@ public class Bike{
     private BigDecimal replacementValue;
     private BigDecimal dailyRentalPrice;
     private BikeStatuses bikeStatus;
-    private Set<Booking> bookings;
+    private Set<Booking> bookings = new HashSet<>();
     private static AtomicLong idCounter = new AtomicLong();
 
     public Bike(Provider provider, BikeType bikeType) {
@@ -77,11 +79,17 @@ public class Bike{
     }
     
     public void setBookings(Set<Booking> bookings) {
-        this.bookings = bookings;
+        this.bookings.addAll(bookings);
+        if (bookings != null) {
+            assert(this.bookings != null);
+        }
     }
     
-    public void addBooking(Booking booking) {
+    public void addBikeBooking(Booking booking) {
         this.bookings.add(booking);
+        if (booking != null) {
+            assert(this.bookings != null);
+        }
     }
 
     public ArrayList<DateRange> getDateRangesBooked() {
@@ -114,14 +122,24 @@ public class Bike{
         System.out.println("ID:          " + getBikeID());
         System.out.println("Provided by: " + getProviderID());
         System.out.println("Full replacement value: " + getFullReplaceVal());
-        System.out.println("Daily rental Price:     " + getDailyRentalPrice() + "\n");
+        System.out.println("Daily rental Price:     " + getDailyRentalPrice());
+        System.out.println("Bookings: " + getBookings() + "\n");
+
     }
     
     public static void main(String[] args) {
         Location loc = new Location("EH165AY", "Street");
-        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
         BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
+        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
+        prov.setDailyRentalPrice(bikeType, new BigDecimal(2.00));
         Bike bike = new Bike(prov, bikeType);
+        Set<Bike> bikeSet = new HashSet<>();
+        bikeSet.add(bike);
+        Quote quoteMock = new Quote(bikeSet, prov, 
+                new DateRange(LocalDate.of(1,1,1), LocalDate.of(1,1,1)), loc);
+        Booking bookingMock = new Booking(quoteMock, false);
+        System.out.println(bookingMock);
+        bike.addBikeBooking(bookingMock);
         
         bike.printSummary();
     }

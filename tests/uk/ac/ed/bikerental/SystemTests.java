@@ -149,34 +149,34 @@ public class SystemTests {
         Booking bookingMock = new Booking(quoteMock, false);
         
         //Add mock bookings to all bikes
-        bike1_1.addBooking(bookingMock);
-        bike1_2.addBooking(bookingMock);
-        bike1_3.addBooking(bookingMock);
-        bike1_4.addBooking(bookingMock);
+        bike1_1.addBikeBooking(bookingMock);
+        bike1_2.addBikeBooking(bookingMock);
+        bike1_3.addBikeBooking(bookingMock);
+        bike1_4.addBikeBooking(bookingMock);
 
-        bike2_1.addBooking(bookingMock);
-        bike2_2.addBooking(bookingMock);
-        bike2_3.addBooking(bookingMock);
-        bike2_4.addBooking(bookingMock);
-        bike2_5.addBooking(bookingMock);
-        bike2_6.addBooking(bookingMock);
-        bike2_7.addBooking(bookingMock);
+        bike2_1.addBikeBooking(bookingMock);
+        bike2_2.addBikeBooking(bookingMock);
+        bike2_3.addBikeBooking(bookingMock);
+        bike2_4.addBikeBooking(bookingMock);
+        bike2_5.addBikeBooking(bookingMock);
+        bike2_6.addBikeBooking(bookingMock);
+        bike2_7.addBikeBooking(bookingMock);
         
-        bike3_1.addBooking(bookingMock);
-        bike3_2.addBooking(bookingMock);
-        bike3_3.addBooking(bookingMock);
-        bike3_4.addBooking(bookingMock);
-        bike3_5.addBooking(bookingMock);
+        bike3_1.addBikeBooking(bookingMock);
+        bike3_2.addBikeBooking(bookingMock);
+        bike3_3.addBikeBooking(bookingMock);
+        bike3_4.addBikeBooking(bookingMock);
+        bike3_5.addBikeBooking(bookingMock);
 
-        bike4_1.addBooking(bookingMock);
-        bike4_2.addBooking(bookingMock);
-        bike4_3.addBooking(bookingMock);
-        bike4_4.addBooking(bookingMock);
-        bike4_5.addBooking(bookingMock);
-        bike4_6.addBooking(bookingMock);
-        bike4_7.addBooking(bookingMock);
-        bike4_8.addBooking(bookingMock);
-        bike4_9.addBooking(bookingMock);
+        bike4_1.addBikeBooking(bookingMock);
+        bike4_2.addBikeBooking(bookingMock);
+        bike4_3.addBikeBooking(bookingMock);
+        bike4_4.addBikeBooking(bookingMock);
+        bike4_5.addBikeBooking(bookingMock);
+        bike4_6.addBikeBooking(bookingMock);
+        bike4_7.addBikeBooking(bookingMock);
+        bike4_8.addBikeBooking(bookingMock);
+        bike4_9.addBikeBooking(bookingMock);
         
         //ArrayList of BikeType for Input
         this.requestedBikes1 = new ArrayList<>();
@@ -218,6 +218,13 @@ public class SystemTests {
     // TODO: Write system tests covering the three main use cases
 
     //Tests: Use Case 1 - Finding a quote
+    
+    @Test
+    void testNotNull() {
+        assertEquals(1, 1);
+        //assertNotNull(provider1);
+        //assertNotNull(quotes1);
+    }
     
     //Test 1.1: Checks provider field in quote matches the actual provider of the bikes &
     //          Checks each quote only has bikes from one provider

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class TestInput {
