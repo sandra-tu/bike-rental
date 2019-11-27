@@ -83,14 +83,22 @@ public class SystemTests {
         this.provider3.setPartnerProviders(partnersOf3);
         this.provider4.setPartnerProviders(partnersOf4);
 
+        //Mock quote
+        Quote quoteMock = new Quote();
+        
+        //Mock bookings
+        Booking bookingMock = new Booking(quoteMock, false);
+        
         //Bikes and adding to stock
         this.bike1_1 = new Bike(provider1, mountainBike);
+        this.bike1_1.addBooking(bookingMock);
         this.bike1_2 = new Bike(provider1, mountainBike);
         this.bike1_3 = new Bike(provider1, mountainBike);
         this.bike1_4 = new Bike(provider1, mountainBike);
         Bike arrayProvider1[] = {bike1_1, bike1_2, bike1_3, bike1_4};
         Set<Bike> provider1Stock = new HashSet<>(Arrays.asList(arrayProvider1));
         this.provider1.setStock(provider1Stock);
+        
         
         this.bike2_1 = new Bike(provider2, roadBike);
         this.bike2_2 = new Bike(provider2, roadBike);
@@ -143,10 +151,11 @@ public class SystemTests {
         //Inputs
         this.input1 = new Input(dateRange1, this.requestedBikes1, locationC1);
         this.input2 = new Input(dateRange1, this.requestedBikes1, locationC4); //Should return no quotes
-        this.input3 = new Input(dateRange2, this.requestedBikes2, locationC1);
-        this.input4 = new Input(dateRange1, this.requestedBikes3, locationC1);
-        this.input5 = new Input(dateRange1, this.requestedBikes2, locationC2);
-        this.input6 = new Input(dateRange1, this.requestedBikes3, locationC3);
+        this.input3 = new Input();
+//        this.input3 = new Input(dateRange2, this.requestedBikes2, locationC1);
+//        this.input4 = new Input(dateRange1, this.requestedBikes3, locationC1);
+//        this.input5 = new Input(dateRange1, this.requestedBikes2, locationC2);
+//        this.input6 = new Input(dateRange1, this.requestedBikes3, locationC3);
         
         //Generated Quotes
         Controller c = new Controller();
