@@ -9,7 +9,7 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Controller {
     
-    private Set<Provider> providers;
+    private Set<Provider> providers = new HashSet<Provider>();
     
     //Use case 1:
     
@@ -48,7 +48,7 @@ public class Controller {
     //Returns a list of providers that are near to the customer
     public ArrayList<Provider> getProvidersInRange(Location locationRequested) {
         ArrayList<Provider> providersInRange = new ArrayList<>();
-        for (Provider provider : providers) {
+        for (Provider provider : this.providers) {
             Location providerLocation = provider.getProviderAddress();
             if (providerLocation.isNearTo(locationRequested)) {
                 providersInRange.add(provider);
@@ -150,6 +150,10 @@ public class Controller {
         } else {
             throw new IllegalArgumentException("Payment needs to be made before Booking is created");
         }
+    }
+    
+    public void addProvider(Provider p) {
+        this.providers.add(p);
     }
     
     public static void main(String[] args) {

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicLong;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
@@ -19,7 +20,11 @@ public class Bike{
     private BigDecimal replacementValue;
     private BigDecimal dailyRentalPrice;
     private BikeStatuses bikeStatus;
+<<<<<<< HEAD
     private Set<Booking> bookings = new HashSet<>();
+=======
+    private Set<Booking> bookings = new HashSet<Booking>();
+>>>>>>> 3024ee3525f4d3bc20af92284140ca8638aaecef
     private static AtomicLong idCounter = new AtomicLong();
 
     public Bike(Provider provider, BikeType bikeType) {
