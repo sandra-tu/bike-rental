@@ -65,10 +65,10 @@ public class SystemTests {
         this.dateRange2 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 5, 1));
         
         //Providers
-        this.provider1 = new Provider("Provider1", locationP1, new BigDecimal(0.2), null);
-        this.provider2 = new Provider("Provider2", locationP2, new BigDecimal(0.15), null);
-        this.provider3 = new Provider("Provider3", locationP3, new BigDecimal(0.1), null);
-        this.provider4 = new Provider("Provider4", locationP4, new BigDecimal(0.25), null);
+        this.provider1 = new Provider("Provider1", locationP1, new BigDecimal(0.2));
+        this.provider2 = new Provider("Provider2", locationP2, new BigDecimal(0.15));
+        this.provider3 = new Provider("Provider3", locationP3, new BigDecimal(0.1));
+        this.provider4 = new Provider("Provider4", locationP4, new BigDecimal(0.25));
 
         //Setup partner providers
         Set<Provider> partnersOf1 = new HashSet<>();
