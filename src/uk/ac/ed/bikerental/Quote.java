@@ -13,8 +13,8 @@ public class Quote {
     private final Provider provider;
     private final DateRange dateRange;
     private final Location locationOfHire;
-    private BigDecimal totalRentalPrice = BigDecimal.ZERO;
-    private BigDecimal totalDepositPrice = BigDecimal.ZERO;
+    private BigDecimal totalRentalPrice;
+    private BigDecimal totalDepositPrice;
     private boolean deliveryToCustomer;
     private boolean isPaid = false;
     
@@ -105,7 +105,7 @@ public class Quote {
         Bike bike = new Bike(prov, bikeType);
         Set<Bike> set = new HashSet<>();
         set.add(bike);
-        setTotalRentalPrice(set);
+        //setTotalRentalPrice(set);
     }
  
 }
