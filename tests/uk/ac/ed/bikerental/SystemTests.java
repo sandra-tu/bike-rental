@@ -28,11 +28,11 @@ public class SystemTests {
     private Bike bike1_1, bike1_2, bike1_3, bike1_4;
     private Bike bike2_1, bike2_2, bike2_3, bike2_4, bike2_5, bike2_6, bike2_7;
     private Bike bike3_1, bike3_2, bike3_3, bike3_4, bike3_5;
-    private Bike bike4_1, bike4_2, bike4_3, bike4_4, bike4_5, bike4_6, bike4_7, bike4_8;
+    private Bike bike4_1, bike4_2, bike4_3, bike4_4, bike4_5, bike4_6, bike4_7, bike4_8, bike4_9;
     
     private ArrayList<BikeType> requestedBikes1, requestedBikes2, requestedBikes3;
     private Input input1, input2, input3, input4, input5, input6;
-    private ArrayList<Quote> quotes1;
+    private ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
     
 
     @BeforeEach
@@ -51,9 +51,9 @@ public class SystemTests {
         //Locations
         //(for Provider addresses)
         this.locationP1 = new Location("EH89QE", "Street name");
-        this.locationP2 = new Location("EH165AY", "Street name");
+        this.locationP2 = new Location("EH165A", "Street name");
         this.locationP3 = new Location("G138AB", "Street name");
-        this.locationP4 = new Location("KY144AA", "Street name");
+        this.locationP4 = new Location("KY144A", "Street name");
         //(for customer searches)
         this.locationC1 = new Location("EH45AH", "Street name");
         this.locationC2 = new Location("G149KL", "Street name");
@@ -116,12 +116,13 @@ public class SystemTests {
         this.bike4_2 = new Bike(provider4, mountainBike);
         this.bike4_3 = new Bike(provider4, mountainBike);
         this.bike4_4 = new Bike(provider4, mountainBike);
-        this.bike4_5 = new Bike(provider4, eBike);
+        this.bike4_5 = new Bike(provider4, roadBike);
         this.bike4_6 = new Bike(provider4, eBike);
         this.bike4_7 = new Bike(provider4, eBike);
         this.bike4_8 = new Bike(provider4, eBike);
+        this.bike4_9 = new Bike(provider4, eBike);
         Bike arrayProvider4[] = {bike4_1, bike4_2, bike4_3, bike4_4, bike4_5, bike4_6, 
-                bike4_7, bike4_8};
+                bike4_7, bike4_8, bike4_9};
         Set<Bike> provider4Stock = new HashSet<>(Arrays.asList(arrayProvider4));
         this.provider4.setStock(provider4Stock);
         
@@ -150,7 +151,12 @@ public class SystemTests {
         //Generated Quotes
         Controller c = new Controller();
         this.quotes1 = c.generateQuotes(input1);
-        
+        this.quotes2 = c.generateQuotes(input2);
+        this.quotes3 = c.generateQuotes(input3);
+        this.quotes4 = c.generateQuotes(input4);
+        this.quotes5 = c.generateQuotes(input5);
+        this.quotes6 = c.generateQuotes(input6);
+       
         //Quotes
         
 
@@ -167,7 +173,29 @@ public class SystemTests {
     
     //Tests: Use Case 1 - Finding a quote
     
-    //Test 1.1: Checks each quote only has bikes from one provider
+    //Test 1.1: Checks provider field in quote mathces the actual provider of the bikes &
+    //          Checks each quote only has bikes from one provider
+    @Test
+    void test1ExpectedProvider() {
+        Set<Provider> expectedProviders = new HashSet<>();
+        expectedProviders.add(provider1);
+        Set<Provider> quoteProviders = new HashSet<>();
+        for (Quote quote : quotes1) {
+            quoteProviders.add(quote.getProvider());
+        }
+        assertTrue(expectedProviders.equals(quoteProviders));
+    }
+    
+    @Test
+    void test2ExpectedProvider() {
+        Set<Provider> expectedProviders = new HashSet<>();
+        expectedProviders.add(provider1);
+        Set<Provider> quoteProviders = new HashSet<>();
+        for (Quote quote : quotes6) {
+            quoteProviders.add(quote.getProvider());
+        }
+        assertTrue(expectedProviders.equals(quoteProviders));
+    }
     
     //Test 1.2: Checks provider field in quote mathces the actual provider of the bikes
     

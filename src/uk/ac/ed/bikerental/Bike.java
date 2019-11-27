@@ -11,7 +11,7 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Bike implements Deliverable{
 
-    private final int id;
+    private final Integer id;
     private Provider provider;
     private BikeType bikeType;
     private BigDecimal replacementValue;
@@ -29,11 +29,11 @@ public class Bike implements Deliverable{
         this.bikeStatus = BikeStatuses.AT_MAIN_PROVIDER;
     }
 
-    public int getBikeID() {
+    public Integer getBikeID() {
         return this.id;
     }
 
-    public int getProviderID() {
+    public Integer getProviderID() {
         return this.provider.getProviderID();
     }
 
@@ -120,33 +120,16 @@ public class Bike implements Deliverable{
     }
 
 
-//    public void printSummary() {
-//        System.out.println("ID:          " + getBikeID());
-//        System.out.println("Provided by: " + getProviderID());
-//        System.out.println("Full replacement value: " + getFullReplaceVal());
-//        //System.out.println("Daily rental Price:     " + getDailyRentalPrice() + "\n");
-//    }
+    public void printSummary() {
+        System.out.println("ID:          " + getBikeID());
+        System.out.println("Provided by: " + getProviderID());
+        System.out.println("Full replacement value: " + getFullReplaceVal());
+        //System.out.println("Daily rental Price:     " + getDailyRentalPrice() + "\n");
+    }
     
-//    public static void main(String[] args) {
-//        Location location1 = new Location("EH165AY", "22 Holyrood Park Road");
-//        HashMap<BikeType, BigDecimal> DailyRentalPrices = new HashMap<>();
-//        BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE);
-//        //BikeType roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(30.0));
-//        
-//        //DailyRentalPrices.put(mountainBike, new BigDecimal(5.00));
-//        //DailyRentalPrices.put(roadBike, new BigDecimal(4.00));
-//        
-//        Provider provider1 = new Provider("Provider1", location1, new BigDecimal(0.2), null);
-//        //Provider provider2 = new Provider("Provider2", location1, new BigDecimal(0.3), 
-//        //        DailyRentalPrices, null);
-//        //provider1.printSummary();
-//        //provider2.printSummary();
-//        
-//        Bike bike1 = new Bike(provider1, mountainBike);
-//        Bike bike2 = new Bike(provider1, mountainBike);
-//        Bike bike3 = new Bike(provider1, mountainBike);
-//        bike1.printSummary();
-//        bike2.printSummary();
-//        bike3.printSummary();        
-//    }
+    public static void main(String[] args) {
+        BikeType eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(100));
+        Bike bike1 = new Bike(null, eBike);  
+        bike1.printSummary();
+    }
 }
