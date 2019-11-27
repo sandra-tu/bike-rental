@@ -118,8 +118,6 @@ public class Bike{
     }
     
     public static void main(String[] args) {
-        BikeType eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(100));
-        Bike bike1 = new Bike(null, eBike);  
-        bike1.printSummary();
+        
     }
 }

@@ -54,7 +54,7 @@ public class SystemTests {
         this.locationP2 = new Location("EH165A", "Street name");
         this.locationP3 = new Location("G138AB", "Street name");
         this.locationP4 = new Location("KY144A", "Street name");
-        //(for customer searches)
+        //(for customer addresses)
         this.locationC1 = new Location("EH45AH", "Street name");
         this.locationC2 = new Location("G149KL", "Street name");
         this.locationC3 = new Location("KY12AB", "Street name");
@@ -205,7 +205,7 @@ public class SystemTests {
 
     //Tests: Use Case 1 - Finding a quote
     
-    //Test 1.1: Checks provider field in quote mathces the actual provider of the bikes &
+    //Test 1.1: Checks provider field in quote matches the actual provider of the bikes &
     //          Checks each quote only has bikes from one provider
     @Test
     void test1ExpectedProvider() {
@@ -219,7 +219,7 @@ public class SystemTests {
     }
     
     @Test
-    void test2ExpectedProvider() {
+    void test2ExpectedProvider() { //Null pointer????
         Set<Provider> expectedProviders = new HashSet<>();
         expectedProviders.add(provider3);
         Set<Provider> quoteProviders = new HashSet<>();
@@ -229,17 +229,17 @@ public class SystemTests {
         assertTrue(expectedProviders.equals(quoteProviders));
     }
     
-    //Test 1.2: Checks provider field in quote mathces the actual provider of the bikes
+    //Test 1.2: Checks provider field in quote matches the actual provider of the bikes
     
     //Test 1.3: Checks the quoted providers are in range
     
     //Test 1.4: Checks the returned bikes are of the type
     
-    //Test 1.5: Checks all the bikes are availible for the required dateRange
+    //Test 1.5: Checks all the bikes are available for the required dateRange
     
     //Test 1.6: Checks daily rental price is correct
     
-    //Test 1.7: Checks desposit price is correct
+    //Test 1.7: Checks deposit price is correct
     
     
     
@@ -249,6 +249,11 @@ public class SystemTests {
 //    Place a booking 
 //    Unique booking number
 //    If customer has requested DeliveryService then should return
+        
+    
+    //Test 2.1: Checks that a quote is only booked if a payment has been made
+    
+    //Test 2.2: Checks that Booking overloading works
     
     //Test invoice details
     

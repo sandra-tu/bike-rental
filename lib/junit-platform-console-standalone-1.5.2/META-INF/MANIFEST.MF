@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Created-By: 11.0.4 (AdoptOpenJDK 11.0.4+11)
+Built-By: JUnit Team
+Build-Date: 2019-09-08
+Build-Time: 20:32:11.818+0200
+Build-Revision: 389262238a3e30b15506dae9fcd2399e2be51953
+Specification-Title: junit-platform-console-standalone
+Specification-Version: 1.5.2
+Specification-Vendor: junit.org
+Implementation-Title: junit-platform-console-standalone
+Implementation-Version: 1.5.2
+Implementation-Vendor: junit.org
+Main-Class: org.junit.platform.console.ConsoleLauncher
+Engine-Version-junit-jupiter: 5.5.2
+Engine-Version-junit-vintage: 5.5.2
+Multi-Release: true
+
