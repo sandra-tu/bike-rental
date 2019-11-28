@@ -56,6 +56,10 @@ public class Provider {
         return depositRate;
     }
     
+    public Set<Booking> getBookings(){
+        return this.providerBookings;
+    }
+    
     public void setPartnerProviders(Set<Provider> partners) {
         this.partnerProviders = partners;
     }

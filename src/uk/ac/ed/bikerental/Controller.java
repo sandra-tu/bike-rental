@@ -157,6 +157,11 @@ public class Controller {
         this.providers.add(p);
     }
     
+    //Provider getter for testing purposes
+    public Set<Provider> getProviders(){
+        return this.providers;
+    }
+    
     //Use case 3:
     
     public void returnBikesToProvider(Integer bookingNumber) {
