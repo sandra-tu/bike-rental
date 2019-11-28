@@ -1,6 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 import com.sun.istack.internal.Nullable;
@@ -171,14 +172,22 @@ public class Controller {
             booking.setDepositReturned();
         } else {
             //Booking returned to partner provider
-            
+            booking.setBookingStatus(BookingStatuses.AT_PARTNER);
+            booking.setDepositReturned();
+            DeliveryService bookingDelivery = DeliveryServiceFactory.getDeliveryService();
+            BikeCollectionFromPartnerToMainProv bikeCol = 
+                    new BikeCollectionFromPartnerToMainProv(booking);
+            Location pickUp = booking.getReturnProvider().getAddress();
+            Location dropOff =  booking.getProvider().getAddress();
+            LocalDate pickupDate = booking.getBookingDateRange().getEnd();
+
+            bookingDelivery.scheduleDelivery(bikeCol, pickUp, dropOff, pickupDate);
         }
-        //Option 1: at main provider
         
-        //Option 2: at partner provider
     }
     
-    //Helper method: gets all booking from all the providers in the system
+    //Helper methods: 
+    //Gets all booking from all the providers in the system
     public Set<Booking> getAllSystemBookings() {
         Set<Booking> allBookings = new HashSet<>();
         for (Provider provider : this.providers) {
@@ -188,6 +197,7 @@ public class Controller {
         return allBookings;
     }
     
+    //Finds the booking given to order number / booking number / booking ID
     public Booking findBookingByNumber(Integer bookingNumber) {
         Set<Booking> allBookings = this.getAllSystemBookings();
         Booking output = null;
