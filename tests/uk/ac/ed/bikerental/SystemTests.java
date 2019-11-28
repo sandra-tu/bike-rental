@@ -343,9 +343,6 @@ public class SystemTests {
     //Test 2.1: Checks that a quote is only booked if a payment has been made
     @Test
     void testBookingWithoutPayment() {
-<<<<<<< HEAD
-        //c.bookQuote(quotes1.get(0));
-=======
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
             c.bookQuote(quotes1.get(0), false);
         });
