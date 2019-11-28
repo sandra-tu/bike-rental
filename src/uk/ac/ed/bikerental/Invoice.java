@@ -24,7 +24,11 @@ public class Invoice {
     }
     
     //GETTERS
-    
+    public int getInvoiceNum() {return this.invoiceNum;}
+    public DateRange getDateRange() {return this.dateRange;}
+    public Set<Bike> getBikesBooked(){return this.bikesBooked;}
+    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;}
+    public BigDecimal getTotalDeposit() {return this.totalDeposit;}
     
     @Override
     public int hashCode() {
