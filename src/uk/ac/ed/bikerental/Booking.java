@@ -28,39 +28,36 @@ public class Booking {
     //Constructor overloading for optional delivery and returning to a partner
     public Booking(Quote quote, boolean deliveryRequired, Location customerLocation, 
                   Provider returnProvider) {
-        this.orderNum = createOrderNum();
         this.bikeCollection = quote.getBikes();
         this.dateRange = quote.getDateRange();
         this.provider = quote.getProvider();
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
-        this.returnProvider = returnProvider;
         if(deliveryRequired) {
             this.setDeliveryRequired(customerLocation);
         }
         this.setReturnProvider(returnProvider);
+        this.orderNum = createOrderNum();
     }
     
     //Delivery not required but requested return to partner
     public Booking(Quote quote, boolean deliveryRequired, Provider returnProvider) {
-        this.orderNum = createOrderNum();
         this.bikeCollection = quote.getBikes();
         this.dateRange = quote.getDateRange();
         this.provider = quote.getProvider();
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
-        this.returnProvider = returnProvider;
         if(deliveryRequired) {
             throw new IllegalArgumentException("Please pass customer location");
         }
         this.setReturnProvider(returnProvider);
+        this.orderNum = createOrderNum();
     }
     
     //Delivery required but return to original provider
     public Booking(Quote quote, boolean deliveryRequired, Location customerLocation) {
-        this.orderNum = createOrderNum();
         this.bikeCollection = quote.getBikes();
         this.dateRange = quote.getDateRange();
         this.provider = quote.getProvider();
@@ -71,11 +68,11 @@ public class Booking {
         if(deliveryRequired) {
             this.setDeliveryRequired(customerLocation);;
         }
+        this.orderNum = createOrderNum();
     }
     
     //Neither is required
     public Booking(Quote quote, boolean deliveryRequired) {
-        this.orderNum = createOrderNum();
         this.bikeCollection = quote.getBikes();
         this.dateRange = quote.getDateRange();
         this.provider = quote.getProvider();
@@ -86,6 +83,7 @@ public class Booking {
         if(deliveryRequired) {
             throw new IllegalArgumentException("Please pass customer location");
         }
+        this.orderNum = createOrderNum();
     }
     
     public Integer createOrderNum() {

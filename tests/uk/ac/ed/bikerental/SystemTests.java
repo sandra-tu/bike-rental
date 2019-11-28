@@ -403,7 +403,7 @@ public class SystemTests {
     void testInvoice(){
         quotes3.get(0).setIsPaid(true);
         Invoice invoice = c.bookQuote(quotes3.get(0), false);
-        assertEquals(invoice.getInvoiceNum(), 7);
+        assertEquals(invoice.getInvoiceNum(), 6);
         assertEquals(invoice.getDateRange(), dateRange1);
         assertEquals(invoice.getBikesBooked(), quotes3.get(0).getBikes());
         assertEquals(invoice.getTotalRentalPrice(), new BigDecimal("114"));
@@ -449,4 +449,6 @@ public class SystemTests {
     
     
     //Test: Use Case 3 - Returning bikes
+    
+    //Test: Extension - Multiday Pricing Discounts
 }

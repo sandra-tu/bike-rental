@@ -104,9 +104,8 @@ public class Controller {
     //bookQuote() overloaded for optional delivery and return to partner
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation,
                              Provider returnProvider) {
-        Booking booking;
         if(quote.getIsPaid()) {
-            booking = new Booking(quote, deliveryRequired, customerLocation, returnProvider);
+            Booking booking = new Booking(quote, deliveryRequired, customerLocation, returnProvider);
             booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
@@ -118,9 +117,8 @@ public class Controller {
     
     //Delivery required but return to original provider
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation) {
-        Booking booking;
         if(quote.getIsPaid()) {
-            booking = new Booking(quote, deliveryRequired, customerLocation);
+            Booking booking = new Booking(quote, deliveryRequired, customerLocation);
             booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
@@ -131,9 +129,8 @@ public class Controller {
     
     //Delivery not required but return to partner provider
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Provider returnProvider) {
-        Booking booking;
         if(quote.getIsPaid()) {
-            booking = new Booking(quote, deliveryRequired, returnProvider);
+            Booking booking = new Booking(quote, deliveryRequired, returnProvider);
             booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
@@ -144,9 +141,8 @@ public class Controller {
     
     //Neither is required
     public Invoice bookQuote(Quote quote, boolean deliveryRequired) {
-        Booking booking;
         if(quote.getIsPaid()) {
-            booking = new Booking(quote, deliveryRequired);
+            Booking booking = new Booking(quote, deliveryRequired);
             booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
