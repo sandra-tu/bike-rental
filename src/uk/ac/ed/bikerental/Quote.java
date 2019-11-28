@@ -102,6 +102,17 @@ public class Quote {
                 && Objects.equals(locationOfHire, other.locationOfHire);
     }
     
+    public void printSummary() {
+        System.out.println("Bikes:                " + bikes);
+        System.out.println("Provider:             " + provider);
+        System.out.println("DateRange:            " + dateRange);
+        System.out.println("locationOfHire:       " + locationOfHire);
+        System.out.println("Total rental price:   " + totalRentalPrice);
+        System.out.println("Total deposit price:  " + totalDepositPrice);
+        System.out.println("Delivery to customer: " + deliveryToCustomer);
+        System.out.println("Quote is paid for:    " + isPaid + "\n");
+    }
+    
     public static void main(String[] args) {
         Location loc = new Location("EH165AY", "Street");
         Provider prov = new Provider("name", loc, new BigDecimal(0.2));
@@ -118,6 +129,7 @@ public class Quote {
         System.out.println(bike.getDailyRentalPrice());
         System.out.println(quote.getTotalRentalPrice());
         System.out.println(quote.getTotalDepositPrice());
+        quote.printSummary();
 
         //setTotalRentalPrice(set);
     }

@@ -212,11 +212,11 @@ public class SystemTests {
 
         //Generated Quotes
         quotes1 = c.generateQuotes(input1);
-        quotes2 = c.generateQuotes(input2);
-        quotes3 = c.generateQuotes(input3);
-        quotes4 = c.generateQuotes(input4);
-        quotes5 = c.generateQuotes(input5);
-        quotes6 = c.generateQuotes(input6);
+        //quotes2 = c.generateQuotes(input2);
+        //quotes3 = c.generateQuotes(input3);
+        //quotes4 = c.generateQuotes(input4);
+        //quotes5 = c.generateQuotes(input5);
+        //quotes6 = c.generateQuotes(input6);
        
         //Quotes
         

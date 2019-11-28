@@ -20,6 +20,7 @@ public class Controller {
         Location hireLocation = input.getRequestedLocation();
         
         ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
+        
         for (Provider provider : providersInRange) {
             Set<Bike> providerStock = provider.getProviderStock();
             Set<Bike> matchedBikeSet = new HashSet<>(); //Bikes that match the input requirements
@@ -37,8 +38,10 @@ public class Controller {
                     providerStock.remove(matchedBike);
                 }
             }
-            Quote quote = new Quote(matchedBikeSet, provider, dateRangeRequested, hireLocation);
-            quoteList.add(quote);           
+            if (!matchedBikeSet.isEmpty()) {
+                Quote quote = new Quote(matchedBikeSet, provider, dateRangeRequested, hireLocation);
+                quoteList.add(quote); 
+            }      
         }
         return quoteList;
     }
