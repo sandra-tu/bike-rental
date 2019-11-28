@@ -34,6 +34,7 @@ public class SystemTests {
     
     private static ArrayList<BikeType> requestedBikes1, requestedBikes2, requestedBikes3;
     private static Input input1, input2, input3, input4, input5, input6;
+    private static Controller c;
     private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
     
 
@@ -42,7 +43,7 @@ public class SystemTests {
         // Setup mock delivery service before each tests
         DeliveryServiceFactory.setupMockDeliveryService();
         
-        Controller c = new Controller();
+        c = new Controller();
 
         
         // Put your test setup here
@@ -305,11 +306,16 @@ public class SystemTests {
         
     
     //Test 2.1: Checks that a quote is only booked if a payment has been made
+    @Test
+    void testBookingWithoutPayment() {
+        c.bookQuote(quotes1.get(0));
+    }
     
     //Test 2.2: Checks that Booking overloading works
     
-    //Test invoice details
+    //Test 2.3: Checks that an Invoice is returned and that it contains the right details
     
+        
     
     
     
