@@ -6,6 +6,7 @@ import java.util.*;
 import com.sun.istack.internal.Nullable;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
+import uk.ac.ed.bikerental.Booking.BookingStatuses;
 
 public class Controller {
     
@@ -153,11 +154,6 @@ public class Controller {
         this.providers.add(p);
     }
     
-    //Provider getter for testing purposes
-    public Set<Provider> getProviders(){
-        return this.providers;
-    }
-    
     //Use case 3:
     
     public void returnBikesToProvider(Integer bookingNumber) {
@@ -167,6 +163,8 @@ public class Controller {
         
         if (mainProvider.equals(returnProvider)) {
             //Booking returned to main provider
+            booking.setBookingStatus(BookingStatuses.COMPLETE);
+            booking.setDepositReturned();
         } else {
             //Booking returned to partner provider
             
