@@ -166,6 +166,15 @@ public class Controller {
     
     public void returnBikesToProvider(Integer bookingNumber) {
         Booking booking = this.findBookingByNumber(bookingNumber);
+        Provider mainProvider = booking.getProvider();
+        Provider returnProvider = booking.getReturnProvider();
+        
+        if (mainProvider.equals(returnProvider)) {
+            //Booking returned to main provider
+        } else {
+            //Booking returned to partner provider
+            
+        }
         //Option 1: at main provider
         
         //Option 2: at partner provider

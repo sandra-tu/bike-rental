@@ -128,7 +128,10 @@ public class Booking {
                 for(Bike bike : bikeCollection) {
                     bike.setBikeStatus(BikeStatuses.OVERNIGHT_TRANSIT);
                 }
-                
+            case COMPLETE:
+                for(Bike bike : bikeCollection) {
+                    bike.setBikeStatus(BikeStatuses.AT_MAIN_PROVIDER);
+                }
             default:
                 return;
         }
