@@ -225,25 +225,6 @@ public class SystemTests {
 
     }
     
-    @BeforeEach
-    void setupEach() {
-        for(Quote q : quotes1) {
-            q.setIsPaid(false);
-        }
-        
-        for(Quote q : quotes2) {
-            q.setIsPaid(false);
-        }
-        
-        for(Quote q : quotes3) {
-            q.setIsPaid(false);
-        }
-        
-        for(Quote q : quotes4) {
-            q.setIsPaid(false);
-        }
-    }
-    
     // TODO: Write system tests covering the three main use cases
 
     //Tests: Use Case 1 - Finding a quote
@@ -327,6 +308,7 @@ public class SystemTests {
     //Test 2.1: Checks that a quote is only booked if a payment has been made
     @Test
     void testBookingWithoutPayment() {
+        quotes1.get(0).setIsPaid(false);
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
             c.bookQuote(quotes1.get(0), false);
         });
