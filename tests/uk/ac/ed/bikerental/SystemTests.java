@@ -407,12 +407,21 @@ public class SystemTests {
         assertEquals(invoice.getDateRange(), dateRange1);
         assertEquals(invoice.getBikesBooked(), quotes3.get(0).getBikes());
         assertEquals(invoice.getTotalRentalPrice(), new BigDecimal("114"));
-        assertEquals(invoice.getTotalDeposit(), new BigDecimal("82.50"));
+        assertEquals(invoice.getTotalDeposit().stripTrailingZeros(),
+                     new BigDecimal(0.25*(100.00+110.00+120.00)));
     }
     
     //Test 2.4: Checks that bookings are added to the respective providers
     @Test
     void testBookingsAdded() {
+        int[] expectedOrderNum1 = {2};
+        ArrayList<Provider> providers = new ArrayList<Provider>();
+        providers.addAll(c.getProviders());
+        ArrayList<Booking> booking1 = new ArrayList<Booking>();
+        for(Booking b : providers.get(0).getBookings()){
+            
+        }
+        
         
     }
     
