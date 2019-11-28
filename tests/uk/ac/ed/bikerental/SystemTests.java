@@ -360,7 +360,6 @@ public class SystemTests {
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
             c.bookQuote(quotes1.get(0), false, provider4);
         });
->>>>>>> 6212fa962206537592116a150969df18464bf40b
     }
     
     //Test 2.3: Checks that Booking overloading works
