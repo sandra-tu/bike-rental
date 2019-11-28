@@ -1,5 +1,6 @@
 package uk.ac.ed.bikerental;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -7,6 +8,7 @@ import java.util.Set;
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Quote {
     private final Set<Bike> bikes = new HashSet<>();
@@ -23,8 +25,8 @@ public class Quote {
         this.provider = provider;
         this.dateRange = dateRange;
         this.locationOfHire = locationOfHire;
-        this.calculateTotalRentalPrice(this.bikes);
-        this.setTotalDepositPrice(this.bikes, this.provider);
+        this.totalRentalPrice = this.calculateTotalDailyRentalPrice();
+        this.totalDepositPrice = this.calculateTotalDepositPrice();
     }
 
     //SETTERS
@@ -37,26 +39,34 @@ public class Quote {
     }
     
     //Set the total rental price for the quote
-    public void calculateTotalRentalPrice(Set<Bike> bikeSet) {
-        for (Bike bike : bikeSet) {
-            if (bike.getDailyRentalPrice() == null) {
-                throw new IllegalArgumentException("daily rental price null 1");
-            }
-            this.totalRentalPrice = this.totalRentalPrice.add(bike.getDailyRentalPrice());
+//    public void calculateTotalRentalPrice() {
+//        for (Bike bike : this.bikes) {
+//            if (bike.getDailyRentalPrice() == null) {
+//                throw new IllegalArgumentException("daily rental price null 1");
+//            }
+//            this.totalRentalPrice = this.totalRentalPrice.add(bike.getDailyRentalPrice());
+//        }
+//        if (this.totalRentalPrice == null) {
+//            throw new IllegalArgumentException("daily rental price null 2");
+//        }
+//    }
+    
+    public BigDecimal calculateTotalDailyRentalPrice() {
+        BigDecimal sum = BigDecimal.ZERO;
+        for(Bike bike : this.bikes) {
+            sum = sum.add(bike.getDailyRentalPrice());
         }
-        if (this.totalRentalPrice == null) {
-            throw new IllegalArgumentException("daily rental price null 2");
-        }
+        return sum;
     }
     
-    private void setTotalDepositPrice(Set<Bike> bikeSet, Provider provider) {
-        BigDecimal totalDepositPrice = new BigDecimal(0.00);
-        BigDecimal depositRate = provider.getDepositRate();
-        for (Bike bike : bikeSet) {
+    private BigDecimal calculateTotalDepositPrice() {
+        BigDecimal totalDepositPrice = BigDecimal.ZERO;
+        BigDecimal depositRate = this.provider.getDepositRate();
+        for (Bike bike : this.bikes) {
             BigDecimal depositPrice = bike.getFullReplaceVal().multiply(depositRate);
             totalDepositPrice = totalDepositPrice.add(depositPrice);
         }
-        this.totalDepositPrice = totalDepositPrice;
+        return totalDepositPrice;
     }
     
     //GETTERS
@@ -68,14 +78,6 @@ public class Quote {
     public BigDecimal getTotalDepositPrice() {return this.totalDepositPrice;}
     public boolean getDeliveryToCustomer() {return this.deliveryToCustomer;}
     public boolean getIsPaid() {return this.isPaid;}
-    
-    public BigDecimal calculateDailyRentalPrice() {
-        BigDecimal dailySum = new BigDecimal("00.00");
-        for(Bike bike : bikes) {
-            dailySum = dailySum.add(bike.getDailyRentalPrice());
-        }
-        return dailySum;
-    }
     
     @Override
     public int hashCode() {
@@ -101,9 +103,18 @@ public class Quote {
         Location loc = new Location("EH165AY", "Street");
         Provider prov = new Provider("name", loc, new BigDecimal(0.2));
         BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
+        DateRange dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
+        prov.setDailyRentalPrice(bikeType, new BigDecimal(10.00));
+
         Bike bike = new Bike(prov, bikeType);
         Set<Bike> set = new HashSet<>();
         set.add(bike);
+        Quote quote = new Quote(set, prov, dateRange1, loc);
+        quote.calculateTotalDailyRentalPrice();
+        
+        System.out.println(bike.getDailyRentalPrice());
+        System.out.println(quote.getTotalRentalPrice());
+
         //setTotalRentalPrice(set);
     }
  
