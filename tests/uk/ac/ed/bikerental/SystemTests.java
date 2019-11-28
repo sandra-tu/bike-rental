@@ -233,8 +233,10 @@ public class SystemTests {
         //assertNotNull(quotes1);
     }
     
-    //Test 1.1: Checks provider field in quote matches the actual provider of the bikes &
-    //          Checks each quote only has bikes from one provider
+    //Test 1.1: Checks provider field in quote is what is expected, thus checking
+    //          - matches the actual provider of the bikes
+    //          - each quote only has bikes from one provider
+    //          - the provider is in range (near enough to the customer)
     @Test
     void test1ExpectedProvider() {
         Set<Provider> expectedProviders = new HashSet<>();
@@ -247,34 +249,29 @@ public class SystemTests {
     }
     
     @Test
-    void test2ExpectedProvider() { //Null pointer????
+    void test2ExpectedProvider() {
         Set<Provider> expectedProviders = new HashSet<>();
         expectedProviders.add(provider4);
         Set<Provider> quoteProviders = new HashSet<>();
         System.out.println(quotes3);
         for (Quote quote : quotes3) {
             quoteProviders.add(quote.getProvider());
-        }
-        
-        
-        for (Provider prov : quoteProviders) {
-            prov.printSummary();
-        }
-        
+        }       
         assertTrue(expectedProviders.equals(quoteProviders));
     }
     
-    //Test 1.2: Checks provider field in quote matches the actual provider of the bikes
+    //Test 1.2: Checks the returned bikes are of the type
+    @Test
+    void test() {
+        
+    }
     
-    //Test 1.3: Checks the quoted providers are in range
     
-    //Test 1.4: Checks the returned bikes are of the type
+    //Test 1.3: Checks all the bikes are available for the required dateRange
     
-    //Test 1.5: Checks all the bikes are available for the required dateRange
+    //Test 1.4: Checks daily rental price is correct
     
-    //Test 1.6: Checks daily rental price is correct
-    
-    //Test 1.7: Checks deposit price is correct
+    //Test 1.5: Checks deposit price is correct
     
     
     
