@@ -18,6 +18,7 @@ public class Controller {
         DateRange dateRangeRequested = input.getRequestedDateRange();
         ArrayList<BikeType> bikesRequested = input.getBikesRequested();
         Location hireLocation = input.getRequestedLocation();
+        System.out.println(hireLocation.getPostcode());
         
         ArrayList<Provider> providersInRange = getProvidersInRange(hireLocation);
         

@@ -204,7 +204,6 @@ public class SystemTests {
         input1 = new Input(dateRange1, requestedBikes1, locationC1);
         input2 = new Input(dateRange1, requestedBikes1, locationC4); //Should return no quotes
         input3 = new Input(dateRange1, requestedBikes3, locationC3); //Test 1.1
-        input3 = new Input(dateRange2, requestedBikes2, locationC1);
         input4 = new Input(dateRange1, requestedBikes3, locationC1);
         input5 = new Input(dateRange1, requestedBikes2, locationC2);
         input6 = new Input(dateRange1, requestedBikes3, locationC3);
@@ -250,12 +249,18 @@ public class SystemTests {
     @Test
     void test2ExpectedProvider() { //Null pointer????
         Set<Provider> expectedProviders = new HashSet<>();
-        expectedProviders.add(provider3);
+        expectedProviders.add(provider4);
         Set<Provider> quoteProviders = new HashSet<>();
         System.out.println(quotes3);
         for (Quote quote : quotes3) {
             quoteProviders.add(quote.getProvider());
         }
+        
+        
+        for (Provider prov : quoteProviders) {
+            prov.printSummary();
+        }
+        
         assertTrue(expectedProviders.equals(quoteProviders));
     }
     
