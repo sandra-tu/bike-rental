@@ -1,5 +1,7 @@
 package uk.ac.ed.bikerental;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -86,7 +88,9 @@ public class Bike{
         }
     }
     
+    //This method should only be called by provider
     public void addBikeBooking(Booking booking) {
+        assertEquals(booking.getProvider(), this.provider);
         this.bookings.add(booking);
         if (booking != null) {
             assert(this.bookings != null);

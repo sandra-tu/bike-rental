@@ -1,5 +1,7 @@
 package uk.ac.ed.bikerental;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
@@ -71,9 +73,17 @@ public class Provider {
         return this.dailyRentalPrice;
     }
     
-    //Why do we have this method?
-    public void addProviderBooking(Booking b) {
-        this.providerBookings.add(b);
+    public void addProviderBooking(Booking booking) {
+        if (!this.equals(booking.getProvider())) {
+            throw new IllegalArgumentException("This booking is not with this provider");
+        }
+        //Add booking to the provider
+        this.providerBookings.add(booking); 
+        Set<Bike> bikesInBooking = booking.getBikeCollection();
+        //Add the booking to the relevant bikes
+        for (Bike bike : bikesInBooking) {
+            bike.addBikeBooking(booking);
+        }                
     }
     
     //Returns the daily rental price for a given bike type

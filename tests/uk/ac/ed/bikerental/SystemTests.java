@@ -163,35 +163,37 @@ public class SystemTests {
         //Mock bookings
         Booking bookingMock = new Booking(quoteMock, false);
         
-        //Add mock bookings to all bikes
-        bike1_1.addBikeBooking(bookingMock);
-        bike1_2.addBikeBooking(bookingMock);
-        bike1_3.addBikeBooking(bookingMock);
-        bike1_4.addBikeBooking(bookingMock);
-
-        bike2_1.addBikeBooking(bookingMock);
-        bike2_2.addBikeBooking(bookingMock);
-        bike2_3.addBikeBooking(bookingMock);
-        bike2_4.addBikeBooking(bookingMock);
-        bike2_5.addBikeBooking(bookingMock);
-        bike2_6.addBikeBooking(bookingMock);
-        bike2_7.addBikeBooking(bookingMock);
+        //Add mock booking to all providers
         
-        bike3_1.addBikeBooking(bookingMock);
-        bike3_2.addBikeBooking(bookingMock);
-        bike3_3.addBikeBooking(bookingMock);
-        bike3_4.addBikeBooking(bookingMock);
-        bike3_5.addBikeBooking(bookingMock);
-
-        bike4_1.addBikeBooking(bookingMock);
-        bike4_2.addBikeBooking(bookingMock);
-        bike4_3.addBikeBooking(bookingMock);
-        bike4_4.addBikeBooking(bookingMock);
-        bike4_5.addBikeBooking(bookingMock);
-        bike4_6.addBikeBooking(bookingMock);
-        bike4_7.addBikeBooking(bookingMock);
-        bike4_8.addBikeBooking(bookingMock);
-        bike4_9.addBikeBooking(bookingMock);
+        //Add mock bookings to all bikes
+//        bike1_1.addBikeBooking(bookingMock);
+//        bike1_2.addBikeBooking(bookingMock);
+//        bike1_3.addBikeBooking(bookingMock);
+//        bike1_4.addBikeBooking(bookingMock);
+//
+//        bike2_1.addBikeBooking(bookingMock);
+//        bike2_2.addBikeBooking(bookingMock);
+//        bike2_3.addBikeBooking(bookingMock);
+//        bike2_4.addBikeBooking(bookingMock);
+//        bike2_5.addBikeBooking(bookingMock);
+//        bike2_6.addBikeBooking(bookingMock);
+//        bike2_7.addBikeBooking(bookingMock);
+//        
+//        bike3_1.addBikeBooking(bookingMock);
+//        bike3_2.addBikeBooking(bookingMock);
+//        bike3_3.addBikeBooking(bookingMock);
+//        bike3_4.addBikeBooking(bookingMock);
+//        bike3_5.addBikeBooking(bookingMock);
+//
+//        bike4_1.addBikeBooking(bookingMock);
+//        bike4_2.addBikeBooking(bookingMock);
+//        bike4_3.addBikeBooking(bookingMock);
+//        bike4_4.addBikeBooking(bookingMock);
+//        bike4_5.addBikeBooking(bookingMock);
+//        bike4_6.addBikeBooking(bookingMock);
+//        bike4_7.addBikeBooking(bookingMock);
+//        bike4_8.addBikeBooking(bookingMock);
+//        bike4_9.addBikeBooking(bookingMock);
         
         //ArrayList of BikeType for Input
         requestedBikes1 = new ArrayList<>();
@@ -225,7 +227,7 @@ public class SystemTests {
         quotes6 = c.generateQuotes(input6);
        
         //Quotes
-        quote1 = new Quote(provider1Stock, provider1, 
+        quote1 = new Quote(provider4Stock, provider4, 
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);
         quote2 = new Quote(provider2Stock, provider2,
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP2);
@@ -301,7 +303,7 @@ public class SystemTests {
         requestedBike.add(roadBike);
         Input inputTest = new Input(dateRange1, requestedBike, locationC3);
         Booking booking1 = new Booking(quote1, false);
-        bike4_5.addBikeBooking(booking1);
+        provider4.addProviderBooking(booking1);
         ArrayList<Quote> quotesTest = c.generateQuotes(inputTest);
         assertTrue(quotesTest.isEmpty());
     }

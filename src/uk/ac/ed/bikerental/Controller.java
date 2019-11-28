@@ -157,6 +157,19 @@ public class Controller {
         this.providers.add(p);
     }
     
+    //Use case 3:
+    
+    public void returnBikesToProvider(Integer bookingNumber) {
+        //Booking 
+        //Option 1: at main provider
+        
+        //Option 2: at partner provider
+    }
+    
+    
+    
+    //Other:
+    
     public static void main(String[] args) {
         Location location = new Location("EH165AY", "Holyrood rd.");
         BigDecimal depositRate = new BigDecimal(0.2);
