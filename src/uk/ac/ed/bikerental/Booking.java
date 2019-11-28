@@ -90,7 +90,7 @@ public class Booking {
     }
     
     //GETTERS
-    public int gerOrderNum() {return this.orderNum;} 
+    public int getOrderNum() {return this.orderNum;} 
     public Set<Bike> getBikeCollection(){return this.bikeCollection;} 
     public DateRange getBookingDateRange() {return this.dateRange;}
     public Provider getProvider() {return this.provider;}

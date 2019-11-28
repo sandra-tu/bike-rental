@@ -12,7 +12,7 @@ public class Invoice {
     private BigDecimal totalDeposit;
     
     public Invoice(Booking booking) {
-        this.invoiceNum = booking.gerOrderNum();
+        this.invoiceNum = booking.getOrderNum();
         this.dateRange = booking.getBookingDateRange();
         this.bikesBooked = booking.getBikeCollection();
         this.totalRentalPrice = booking.getTotalRentalPrice();
@@ -22,6 +22,9 @@ public class Invoice {
     public void printInvoice() {
         //details for formatting invoiceOutput
     }
+    
+    //GETTERS
+    
     
     @Override
     public int hashCode() {

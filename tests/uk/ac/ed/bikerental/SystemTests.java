@@ -37,7 +37,7 @@ public class SystemTests {
     private static Controller c;
     private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
     
-    private static Quote quote1, quote2;
+    private static Quote quote1, quote2, quote3;
     
 
     @BeforeAll
@@ -107,7 +107,9 @@ public class SystemTests {
         partnersOf4.add(provider3);
         
         provider1.setPartnerProviders(partnersOf1);
+        provider2.addPartnerProvider(provider3);
         provider3.setPartnerProviders(partnersOf3);
+        provider3.addPartnerProvider(provider2);
         provider4.setPartnerProviders(partnersOf4);
        
         //Bikes and adding to stock
@@ -229,6 +231,8 @@ public class SystemTests {
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);
         quote2 = new Quote(provider2Stock, provider2,
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP2);
+        quote3 = new Quote(provider3Stock, provider3,
+                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP3);
 
         //Bookings
         
@@ -373,20 +377,35 @@ public class SystemTests {
     //Test 2.3: Checks that Booking overloading works
     //            - checked for a booking that doesn't require delivery or partner return in the 
     //              test testBookingWithPayment()
-    //Test 2.3.1: a booking that requires both delivery and return to partner
+    //Test 2.3.1: Make a booking that requires both delivery and return to partner
     @Test
     void testBookingDevliveryPartnerReturn() {
         quote1.setIsPaid(true);
-        c.bookQuote(quote1, true, locationC1, provider2);
+        c.bookQuote(quote1, true, locationP1, provider3);
     }
     
+    //Test 2.3.2: Make a booking that doesn't require delivery but return to partner
+    @Test
+    void testBookingNoDeliveryPartnerReturn() {
+        quote2.setIsPaid(true);
+        c.bookQuote(quote2, false, provider3);
+    }
     
-    //          - a booking that requires delivery but return to original provider
-    //          - a booking that doesn't require delivery but return to partner
-  
+    //Test 2.3.3: Make a booking that requires delivery but return to original provider
+    @Test
+    void testBookingDeliveryOriginalReturn() {
+        quote3.setIsPaid(true);
+        c.bookQuote(quote3, true, locationP3);
+    }
     
     //Test 2.3: Checks that an Invoice is returned and that it contains the right details
+    @Test
+    void testInvoice(){
+        quotes3.get(0).setIsPaid(true);
+        Invoice invoice = c.bookQuote(quotes3.get(0), false);
+    }
     
+    //Test 2.4: Checks that bookings are added to the respective providers
         
     
     
