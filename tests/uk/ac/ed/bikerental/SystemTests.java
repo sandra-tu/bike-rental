@@ -458,13 +458,13 @@ public class SystemTests {
         assertEquals(booking1, booking1Found);
         
         Booking booking2Found = c.findBookingByNumber(booking2.getOrderNum());
-        assertEquals(booking1, booking2Found);
+        assertEquals(booking2, booking2Found);
         
         Booking booking3Found = c.findBookingByNumber(booking3.getOrderNum());
-        assertEquals(booking1, booking3Found);
+        assertEquals(booking3, booking3Found);
         
         Booking booking4Found = c.findBookingByNumber(booking4.getOrderNum());
-        assertEquals(booking4, booking1Found);
+        assertEquals(booking4, booking4Found);
     }
     
     @Test 
