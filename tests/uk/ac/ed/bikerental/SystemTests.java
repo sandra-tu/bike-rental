@@ -37,7 +37,7 @@ public class SystemTests {
     private static Controller c;
     private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
     
-    private static Quote quote1;
+    private static Quote quote1, quote2;
     
 
     @BeforeAll
@@ -224,7 +224,9 @@ public class SystemTests {
        
         //Quotes
         quote1 = new Quote(provider1Stock, provider1, 
-                new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);
+                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);
+        quote2 = new Quote(provider2Stock, provider2,
+                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP2);
 
         //Bookings
         
@@ -350,7 +352,8 @@ public class SystemTests {
     //Test 2.3.1: a booking that requires both delivery and return to partner
     @Test
     void testBookingDevliveryPartnerReturn() {
-        
+        quote1.setIsPaid(true);
+        c.bookQuote(quote1, true, locationC1, provider2);
     }
     
     
