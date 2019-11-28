@@ -51,6 +51,7 @@ public class Booking {
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
+        this.returnProvider = returnProvider;
         if(deliveryRequired) {
             throw new IllegalArgumentException("Please pass customer location");
         }
@@ -66,6 +67,7 @@ public class Booking {
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
+        this.returnProvider = this.provider;
         if(deliveryRequired) {
             this.setDeliveryRequired(customerLocation);;
         }
@@ -80,6 +82,7 @@ public class Booking {
         this.bookingStatus = BookingStatuses.PRECOMMENCEMENT;
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
+        this.returnProvider = this.provider;
         if(deliveryRequired) {
             throw new IllegalArgumentException("Please pass customer location");
         }

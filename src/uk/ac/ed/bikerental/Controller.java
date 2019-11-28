@@ -161,13 +161,36 @@ public class Controller {
     //Use case 3:
     
     public void returnBikesToProvider(Integer bookingNumber) {
-        //Booking 
+        Booking booking = this.findBookingByNumber(bookingNumber);
         //Option 1: at main provider
         
         //Option 2: at partner provider
     }
     
+    //Helper method: gets all booking from all the providers in the system
+    public Set<Booking> getAllSystemBookings() {
+        Set<Booking> allBookings = new HashSet<>();
+        for (Provider provider : this.providers) {
+            Set<Booking> providerBookings = provider.getProviderBookings();
+            allBookings.addAll(providerBookings);
+        }
+        return allBookings;
+    }
     
+    public Booking findBookingByNumber(Integer bookingNumber) {
+        Set<Booking> allBookings = this.getAllSystemBookings();
+        Booking output = null;
+        for (Booking booking : allBookings) {
+            Integer orderNum = booking.getOrderNum();
+            if (orderNum.equals(bookingNumber)) {
+                output = booking;
+            }
+        }
+        if (output.equals(null)) {
+            throw new NoSuchElementException("Error: No booking found with this booking number");
+        }
+        return null;
+    }    
     
     //Other:
     
