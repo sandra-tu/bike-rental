@@ -2,6 +2,8 @@ package uk.ac.ed.bikerental;
 
 import org.junit.jupiter.api.*;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -203,18 +205,18 @@ public class SystemTests {
         
         //Inputs
         input1 = new Input(dateRange1, requestedBikes1, locationC1);
-        input2 = new Input(dateRange1, requestedBikes1, locationC4); //Should return no quotes
+        input2 = new Input(dateRange1, requestedBikes1, locationC4); //Test 1.6
         input3 = new Input(dateRange1, requestedBikes3, locationC3); //Test 1.1
-        input4 = new Input(dateRange1, requestedBikes3, locationC1);
+        input4 = new Input(dateRange1, requestedBikes3, locationC1); //Test 1.2
         input5 = new Input(dateRange1, requestedBikes2, locationC2);
         input6 = new Input(dateRange1, requestedBikes3, locationC3);
         
 
         //Generated Quotes
         quotes1 = c.generateQuotes(input1);
-        //quotes2 = c.generateQuotes(input2);
+        quotes2 = c.generateQuotes(input2);
         quotes3 = c.generateQuotes(input3);
-        //quotes4 = c.generateQuotes(input4);
+        quotes4 = c.generateQuotes(input4);
         //quotes5 = c.generateQuotes(input5);
         //quotes6 = c.generateQuotes(input6);
        
@@ -259,25 +261,44 @@ public class SystemTests {
         Set<Provider> expectedProviders = new HashSet<>();
         expectedProviders.add(provider4);
         Set<Provider> quoteProviders = new HashSet<>();
-        System.out.println(quotes3);
         for (Quote quote : quotes3) {
             quoteProviders.add(quote.getProvider());
         }       
         assertTrue(expectedProviders.equals(quoteProviders));
     }
     
-    //Test 1.2: Checks the returned bikes are of the type
+    //Test 1.2: Checks the returned bikes are of the type the customer requested
     @Test
-    void test() {
-        
+    void testBikeTypesInQuote() {
+        for (Quote quote : quotes4) {
+            ArrayList<BikeType> requestedBikeTypes = input4.getBikesRequested();
+            ArrayList<Bike> bikesInQuote = new ArrayList<Bike>(quote.getBikes());
+            ArrayList<BikeType> bikeTypesInQuote = new ArrayList<>();
+            for (Bike bike : bikesInQuote) {
+                bikeTypesInQuote.add(bike.getType());
+            }
+            
+            for (BikeType bikeType : requestedBikeTypes) {
+                if (bikeTypesInQuote.contains(bikeType)) {
+                    bikeTypesInQuote.remove(bikeType);
+                }                
+            }
+            assertTrue(bikeTypesInQuote.isEmpty());
+        }
     }
-    
     
     //Test 1.3: Checks all the bikes are available for the required dateRange
     
     //Test 1.4: Checks daily rental price is correct
     
     //Test 1.5: Checks deposit price is correct
+    
+    //Test 1.6: Check no quotes are returned
+    
+    @Test
+    void testNoQuotesReturned() {
+        assertTrue(quotes2.isEmpty());
+    }
     
     
     
