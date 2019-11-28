@@ -53,8 +53,11 @@ public class Quote {
     
     public BigDecimal calculateTotalDailyRentalPrice() {
         BigDecimal sum = BigDecimal.ZERO;
+        Long numDaysLong = this.getDateRange().toDays() + 1;
+        BigDecimal numDays = new BigDecimal(numDaysLong);
         for(Bike bike : this.bikes) {
-            sum = sum.add(bike.getDailyRentalPrice());
+            BigDecimal bikeTotal = numDays.multiply(bike.getDailyRentalPrice());
+            sum = sum.add(bikeTotal);
         }
         return sum;
     }
@@ -74,7 +77,7 @@ public class Quote {
     public Provider getProvider() {return this.provider;}
     public DateRange getDateRange() {return this.dateRange;}
     public Location getLocationOfHire() {return this.locationOfHire;}
-    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice = BigDecimal.ZERO;} 
+    public BigDecimal getTotalRentalPrice() {return this.totalRentalPrice;} 
     public BigDecimal getTotalDepositPrice() {return this.totalDepositPrice;}
     public boolean getDeliveryToCustomer() {return this.deliveryToCustomer;}
     public boolean getIsPaid() {return this.isPaid;}
@@ -114,6 +117,7 @@ public class Quote {
         
         System.out.println(bike.getDailyRentalPrice());
         System.out.println(quote.getTotalRentalPrice());
+        System.out.println(quote.getTotalDepositPrice());
 
         //setTotalRentalPrice(set);
     }
