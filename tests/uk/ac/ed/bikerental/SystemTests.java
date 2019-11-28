@@ -415,11 +415,33 @@ public class SystemTests {
     @Test
     void testBookingsAdded() {
         int[] expectedOrderNum1 = {2};
+        int[] expectedOrderNum2 = {3};
+        int[] expectedOrderNum3 = {1};
+        int[] expectedOrderNum4 = {4};
         ArrayList<Provider> providers = new ArrayList<Provider>();
         providers.addAll(c.getProviders());
-        ArrayList<Booking> booking1 = new ArrayList<Booking>();
+        int i = 0;
         for(Booking b : providers.get(0).getBookings()){
-            
+            assertEquals(b.getOrderNum(), expectedOrderNum1[i]);
+            i++;
+        }
+        
+        i = 0;
+        for(Booking b : providers.get(1).getBookings()) {
+            assertEquals(b.getOrderNum(), expectedOrderNum2[i]);
+            i++;
+        }
+        
+        i = 0;
+        for(Booking b : providers.get(2).getBookings()) {
+            assertEquals(b.getOrderNum(), expectedOrderNum3[i]);
+            i++;
+        }
+        
+        i = 0;
+        for(Booking b : providers.get(3).getBookings()) {
+            assertEquals(b.getOrderNum(), expectedOrderNum4[i]);
+            i++;
         }
         
         
