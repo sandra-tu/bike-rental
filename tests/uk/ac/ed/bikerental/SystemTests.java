@@ -223,6 +223,11 @@ public class SystemTests {
 
     }
     
+    @BeforeEach
+    void setupEach() {
+        
+    }
+    
     // TODO: Write system tests covering the three main use cases
 
     //Tests: Use Case 1 - Finding a quote
@@ -287,10 +292,38 @@ public class SystemTests {
     //Test 2.1: Checks that a quote is only booked if a payment has been made
     @Test
     void testBookingWithoutPayment() {
-        c.bookQuote(quotes1.get(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+            c.bookQuote(quotes1.get(0), false);
+        });
     }
     
-    //Test 2.2: Checks that Booking overloading works
+    @Test
+    void testBookingWithPayment() {
+        quotes1.get(0).setToPaid();
+        c.bookQuote(quotes1.get(0), false);
+    }
+    
+    //Test 2.2: Checks that verify partner works
+    @Test
+    void testBookingInvalidPartner() {
+        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+            c.bookQuote(quotes1.get(0), false, provider4);
+        });
+    }
+    
+    //Test 2.3: Checks that Booking overloading works
+    //            - checked for a booking that doesn't require delivery or partner return in the 
+    //              test testBookingWithPayment()
+    //Test 2.3.1: a booking that requires both delivery and return to partner
+    @Test
+    void testBookingDevliveryPartnerReturn() {
+        
+    }
+    
+    
+    //          - a booking that requires delivery but return to original provider
+    //          - a booking that doesn't require delivery but return to partner
+  
     
     //Test 2.3: Checks that an Invoice is returned and that it contains the right details
     
