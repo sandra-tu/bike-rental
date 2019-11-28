@@ -89,12 +89,12 @@ public class SystemTests {
         provider2.setDailyRentalPrice(eBike, new BigDecimal(10.00));
         
         provider3.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
-        provider3.setDailyRentalPrice(eBike, new BigDecimal(10.00));
         provider3.setDailyRentalPrice(roadBike, new BigDecimal(10.00));
+        provider3.setDailyRentalPrice(eBike, new BigDecimal(10.00));
 
         provider4.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
-        provider4.setDailyRentalPrice(eBike, new BigDecimal(10.00));
-        provider4.setDailyRentalPrice(roadBike, new BigDecimal(10.00));
+        provider4.setDailyRentalPrice(roadBike, new BigDecimal(11.00));
+        provider4.setDailyRentalPrice(eBike, new BigDecimal(17.00));
         
 
         //Setup partner providers
@@ -211,7 +211,7 @@ public class SystemTests {
         input3 = new Input(dateRange1, requestedBikes3, locationC3); //Test 1.1
         input4 = new Input(dateRange1, requestedBikes3, locationC1); //Test 1.2
         input5 = new Input(dateRange1, requestedBikes2, locationC2);
-        input6 = new Input(dateRange1, requestedBikes3, locationC3);
+        input6 = new Input(dateRange1, requestedBikes3, locationC3); //identical to input3 (delete if not used)
         
 
         //Generated Quotes
@@ -219,8 +219,8 @@ public class SystemTests {
         quotes2 = c.generateQuotes(input2);
         quotes3 = c.generateQuotes(input3);
         quotes4 = c.generateQuotes(input4);
-        //quotes5 = c.generateQuotes(input5);
-        //quotes6 = c.generateQuotes(input6);
+        quotes5 = c.generateQuotes(input5);
+        quotes6 = c.generateQuotes(input6);
        
         //Quotes
         quote1 = new Quote(provider1Stock, provider1, 
@@ -320,6 +320,14 @@ public class SystemTests {
     }
     
     //Test 1.4: Checks daily rental price is correct
+    
+    @Test
+    void testQuoteCorrectDailyRentalPrice() {
+        Quote[] quoteArray = new Quote[quotes3.size()];
+        quotes3.toArray(quoteArray);
+        assertEquals(1, quotes3.size()); //Expected to only be one quote
+        BigDecimal totalRentalPrice = quoteArray[0].getTotalRentalPrice();
+    }
     
     //Test 1.5: Checks deposit price is correct
     
