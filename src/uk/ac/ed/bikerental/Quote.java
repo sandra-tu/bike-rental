@@ -55,11 +55,11 @@ public class Quote {
         BigDecimal sum = BigDecimal.ZERO;
         Long numDaysLong = this.getDateRange().toDays() + 1;
         BigDecimal numDays = new BigDecimal(numDaysLong);
+        
         for(Bike bike : this.bikes) {
-            BigDecimal bikeTotal = numDays.multiply(bike.getDailyRentalPrice());
-            sum = sum.add(bikeTotal);
+            sum = sum.add(bike.getDailyRentalPrice());
         }
-        return sum;
+        return sum.multiply(numDays);
     }
     
     private BigDecimal calculateTotalDepositPrice() {

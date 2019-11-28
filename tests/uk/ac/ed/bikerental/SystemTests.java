@@ -314,9 +314,23 @@ public class SystemTests {
         quotes3.toArray(quoteArray);
         assertEquals(1, quotes3.size()); //Expected to only be one quote
         BigDecimal totalRentalPrice = quoteArray[0].getTotalRentalPrice();
+        BigDecimal expectedRentalPrice = new BigDecimal(3.00*(10.00 + 11.00 + 17.00));
+        assertEquals(expectedRentalPrice.stripTrailingZeros(), 
+                totalRentalPrice.stripTrailingZeros());
     }
     
     //Test 1.5: Checks deposit price is correct
+    
+    @Test
+    void testCorrectDepositPrice() {
+        Quote[] quoteArray = new Quote[quotes3.size()];
+        quotes3.toArray(quoteArray);
+        assertEquals(1, quotes3.size()); //Expected to only be one quote
+        BigDecimal totalDepositPrice = quoteArray[0].getTotalDepositPrice();
+        BigDecimal expectedDepositPrice = new BigDecimal(0.25*(100.00 + 110.00 + 120.00));
+        assertEquals(expectedDepositPrice.stripTrailingZeros(), 
+                totalDepositPrice.stripTrailingZeros());
+    }
     
     //Test 1.6: Check no quotes are returned
     
