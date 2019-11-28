@@ -111,7 +111,6 @@ public class Controller {
         } else {
             throw new IllegalArgumentException("Payment needs to be made before "
                     + "Booking is created");
-            //return null;
         }
     }
     

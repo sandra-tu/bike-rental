@@ -375,8 +375,8 @@ public class SystemTests {
     }
     
     //Test 2.3: Checks that Booking overloading works
-    //            - checked for a booking that doesn't require delivery or partner return in the 
-    //              test testBookingWithPayment()
+    //          - checked for a booking that doesn't require delivery or partner return in the 
+    //            test testBookingWithPayment()
     //Test 2.3.1: Make a booking that requires both delivery and return to partner
     @Test
     void testBookingDevliveryPartnerReturn() {
@@ -403,11 +403,18 @@ public class SystemTests {
     void testInvoice(){
         quotes3.get(0).setIsPaid(true);
         Invoice invoice = c.bookQuote(quotes3.get(0), false);
+        assertEquals(invoice.getInvoiceNum(), 7);
+        assertEquals(invoice.getDateRange(), dateRange1);
+        assertEquals(invoice.getBikesBooked(), quotes3.get(0).getBikes());
+        assertEquals(invoice.getTotalRentalPrice(), new BigDecimal("114"));
+        assertEquals(invoice.getTotalDeposit(), new BigDecimal("82.50"));
     }
     
     //Test 2.4: Checks that bookings are added to the respective providers
+    @Test
+    void testBookingsAdded() {
         
-    
+    }
     
     
     //Test: Use Case 3 - Returning bikes
