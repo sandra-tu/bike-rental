@@ -320,7 +320,7 @@ public class SystemTests {
     
     @Test
     void testBookingWithPayment() {
-        quotes1.get(0).setToPaid();
+        quotes1.get(0).setIsPaid(true);
         c.bookQuote(quotes1.get(0), false);
     }
     
