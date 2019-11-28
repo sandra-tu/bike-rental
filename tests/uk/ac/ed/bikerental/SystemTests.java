@@ -196,10 +196,10 @@ public class SystemTests {
         this.input1 = new Input(dateRange1, requestedBikes1, locationC1);
         this.input2 = new Input(dateRange1, requestedBikes1, locationC4); //Should return no quotes
         this.input3 = new Input(dateRange1, requestedBikes3, locationC3); //Test 1.1
-//        this.input3 = new Input(dateRange2, this.requestedBikes2, locationC1);
-//        this.input4 = new Input(dateRange1, this.requestedBikes3, locationC1);
-//        this.input5 = new Input(dateRange1, this.requestedBikes2, locationC2);
-//        this.input6 = new Input(dateRange1, this.requestedBikes3, locationC3);
+        this.input3 = new Input(dateRange2, this.requestedBikes2, locationC1);
+        this.input4 = new Input(dateRange1, this.requestedBikes3, locationC1);
+        this.input5 = new Input(dateRange1, this.requestedBikes2, locationC2);
+        this.input6 = new Input(dateRange1, this.requestedBikes3, locationC3);
         
         //Generated Quotes
         Controller c = new Controller();
