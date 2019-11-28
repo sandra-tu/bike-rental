@@ -103,6 +103,10 @@ public class Provider {
         return this.stock;
     }
     
+    public Set<Booking> getProviderBookings() {
+        return this.providerBookings;
+    }
+    
     public Location getAddress() {
         return this.address;
     }
