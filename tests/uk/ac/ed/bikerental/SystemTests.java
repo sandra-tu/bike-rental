@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
+import uk.ac.ed.bikerental.Booking.BookingStatuses;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,8 +37,8 @@ public class SystemTests {
     private static Input input1, input2, input3, input4, input5, input6;
     private static Controller c;
     private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
-    
-    private static Quote quote1, quote2, quote3;
+    private static Quote quoteMock, quote1, quote2, quote3, quote4;
+    private static Booking bookingMock, booking1, booking2, booking3, booking4;
     
 
     @BeforeAll
@@ -159,7 +160,7 @@ public class SystemTests {
         //Mock quote
         Quote quoteMock = new Quote(provider1Stock, provider1, 
                 new DateRange(LocalDate.of(1,1,1), LocalDate.of(1,1,1)), locationP1);
-        
+        quoteMock.setIsPaid(true);
         //Mock bookings
         Booking bookingMock = new Booking(quoteMock, false);
         
@@ -228,13 +229,20 @@ public class SystemTests {
        
         //Quotes
         quote1 = new Quote(provider4Stock, provider4, 
-                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);
+                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);//This should thechnically be P4 because a quote like this would never be made
         quote2 = new Quote(provider2Stock, provider2,
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP2);
         quote3 = new Quote(provider3Stock, provider3,
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP3);
+        quote4 = new Quote(provider1Stock, provider1, dateRange1, locationP1);
 
+        quote4.setIsPaid(true);
+        
         //Bookings
+        booking1 = new Booking(quote4, true, locationC1, provider3); //Delivery required, returned to partner prov
+        booking2 = new Booking(quote4, false, provider3); //No delivery, returned to partner prov
+        booking3 = new Booking(quote4, true, locationC1); //Delivery required, retured to main prov
+        booking4 = new Booking(quote4, false); //No delivery, returned to main prov      
         
     }
     
@@ -340,17 +348,12 @@ public class SystemTests {
     void testNoQuotesReturned() {
         assertTrue(quotes2.isEmpty());
     }
-    
-    
-    
-    
-    
+        
     //Tests: Use Case 2 - Booking a quote
 //    Place a booking 
 //    Unique booking number
 //    If customer has requested DeliveryService then should return
         
-    
     //Test 2.1: Checks that a quote is only booked if a payment has been made
     @Test
     void testBookingWithoutPayment() {
@@ -361,7 +364,7 @@ public class SystemTests {
     }
     
     @Test
-    void testBookingWithPayment() {
+    void testBookingWithPayment() { //What are you testing here?
         quotes1.get(0).setIsPaid(true);
         c.bookQuote(quotes1.get(0), false);
     }
@@ -398,7 +401,7 @@ public class SystemTests {
         c.bookQuote(quote3, true, locationP3);
     }
     
-    //Test 2.3: Checks that an Invoice is returned and that it contains the right details
+    //Test 2.4: Checks that an Invoice is returned and that it contains the right details
     @Test
     void testInvoice(){
         quotes3.get(0).setIsPaid(true);
@@ -411,7 +414,7 @@ public class SystemTests {
                      new BigDecimal(0.25*(100.00+110.00+120.00)));
     }
     
-    //Test 2.4: Checks that bookings are added to the respective providers
+    //Test 2.5: Checks that bookings are added to the respective providers
     @Test
     void testBookingsAdded() {
         int[] expectedOrderNum1 = {2};
@@ -444,11 +447,72 @@ public class SystemTests {
             i++;
         }
         
-        
+        System.out.println(booking1.getOrderNum());
+
     }
     
-    
     //Test: Use Case 3 - Returning bikes
+     
+    //Test 3.1: Check if the correct booking is found
+    
+    @Test
+    void testCorrectBookingFound() {
+        Booking bookingFound = c.findBookingByNumber(booking1.getOrderNum());
+        //assertEquals(booking1, bookingFound);
+    }
+    
+    @Test 
+    void test() {
+
+        System.out.println(booking1.getOrderNum());
+        booking1.printSummary();
+        //Booking bookingFound = c.findBookingByNumber(booking1.getOrderNum());
+        Set<Booking> book = c.getAllSystemBookings();
+        System.out.println(c.getAllSystemBookings());
+        System.out.println(c.getAllSystemBookings().size());
+        for (Booking bo : book) {
+            bo.printSummary();
+        }
+        System.out.println("booking1 order num: " + booking1.getOrderNum());
+        System.out.println("Provider1's bookings" + provider1.getBookings());
+        //System.out.println(bookingMock == null);
+       // System.out.println("Order num: " + bookingMock.getOrderNum());
+    }
+    
+    //Test 3.2: Check if the deposit is returned on each booking
+    @Test
+    void testDepositIsReturned() {
+        c.returnBikesToProvider((Integer) 5);
+        Booking b = c.findBookingByNumber((Integer) 5);
+        assertEquals(5, b.getOrderNum());
+        assertTrue(b.getDepositReturned());
+    }
+    
+    //Test 3.3: Check the status of the booking
+    @Test
+    void test1BookingStatus() {
+        c.returnBikesToProvider((Integer) 5);
+        Booking b = c.findBookingByNumber((Integer) 5);
+        assertEquals(5, b.getOrderNum());
+        assertEquals(BookingStatuses.COMPLETE, b.getBookingStatus());
+    }
+    
+    @Test
+    void test2BookingStatus() {
+        c.returnBikesToProvider((Integer) 6);
+        Booking b = c.findBookingByNumber((Integer) 6);
+        assertEquals(6, b.getOrderNum());
+        assertEquals(BookingStatuses.COMPLETE, b.getBookingStatus());
+    }
+    
+    //Test 3.4: Check the status of the bikes in the booking
+    @Test
+    void testBikeStatus() {
+        c.returnBikesToProvider((Integer) 5);
+        Booking b = c.findBookingByNumber((Integer) 5);
+        assertEquals(5, b.getOrderNum());
+        assertTrue(b.getDepositReturned());
+    }
     
     //Test: Extension - Multiday Pricing Discounts
 }

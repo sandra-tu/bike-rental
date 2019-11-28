@@ -1,6 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,7 +31,9 @@ public class Bike{
         this.provider = provider;
         this.bikeType = bikeType;
         this.replacementValue = bikeType.getReplacementValue();
+        assertNotNull(provider.getDailyRentalPrice(bikeType));
         this.dailyRentalPrice = provider.getDailyRentalPrice(bikeType);
+        assertNotNull(this.dailyRentalPrice);
         this.bikeStatus = BikeStatuses.AT_MAIN_PROVIDER;
     }
 

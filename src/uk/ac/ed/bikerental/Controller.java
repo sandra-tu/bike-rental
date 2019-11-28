@@ -12,6 +12,8 @@ import uk.ac.ed.bikerental.Booking.BookingStatuses;
 public class Controller {
     
     private Set<Provider> providers = new HashSet<Provider>();
+    public void addProvider(Provider p) {this.providers.add(p);}
+    public Set<Provider> getProviders() {return this.providers;}
     
     //Use case 1:
     
@@ -150,11 +152,7 @@ public class Controller {
             throw new IllegalArgumentException("Payment needs to be made before Booking is created");
         }
     }
-    
-    public void addProvider(Provider p) {
-        this.providers.add(p);
-    }
-    
+        
     //Use case 3:
     
     public void returnBikesToProvider(Integer bookingNumber) {
@@ -178,8 +176,7 @@ public class Controller {
             LocalDate pickupDate = booking.getBookingDateRange().getEnd();
 
             bookingDelivery.scheduleDelivery(bikeCol, pickUp, dropOff, pickupDate);
-        }
-        
+        }   
     }
     
     //Helper methods: 
@@ -203,10 +200,10 @@ public class Controller {
                 output = booking;
             }
         }
-        if (output.equals(null)) {
+        if (output == null) {
             throw new NoSuchElementException("Error: No booking found with this booking number");
         }
-        return null;
+        return output;
     }    
     
     //Other:
