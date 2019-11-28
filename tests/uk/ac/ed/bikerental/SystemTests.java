@@ -158,11 +158,11 @@ public class SystemTests {
         provider4.setStock(provider4Stock);
         
         //Mock quote
-        Quote quoteMock = new Quote(provider1Stock, provider1, 
+        quoteMock = new Quote(provider1Stock, provider1, 
                 new DateRange(LocalDate.of(1,1,1), LocalDate.of(1,1,1)), locationP1);
         quoteMock.setIsPaid(true);
         //Mock bookings
-        Booking bookingMock = new Booking(quoteMock, false);
+        bookingMock = new Booking(quoteMock, false);
         
         //Add mock booking to all providers
         
@@ -446,9 +446,6 @@ public class SystemTests {
             assertEquals(b.getOrderNum(), expectedOrderNum4[i]);
             i++;
         }
-        
-        System.out.println(booking1.getOrderNum());
-
     }
     
     //Test: Use Case 3 - Returning bikes
@@ -457,8 +454,17 @@ public class SystemTests {
     
     @Test
     void testCorrectBookingFound() {
-        Booking bookingFound = c.findBookingByNumber(booking1.getOrderNum());
-        //assertEquals(booking1, bookingFound);
+        Booking booking1Found = c.findBookingByNumber(booking1.getOrderNum());
+        assertEquals(booking1, booking1Found);
+        
+        Booking booking2Found = c.findBookingByNumber(booking2.getOrderNum());
+        assertEquals(booking1, booking2Found);
+        
+        Booking booking3Found = c.findBookingByNumber(booking3.getOrderNum());
+        assertEquals(booking1, booking3Found);
+        
+        Booking booking4Found = c.findBookingByNumber(booking4.getOrderNum());
+        assertEquals(booking4, booking1Found);
     }
     
     @Test 
@@ -501,18 +507,25 @@ public class SystemTests {
     void test2BookingStatus() {
         c.returnBikesToProvider((Integer) 6);
         Booking b = c.findBookingByNumber((Integer) 6);
+        //b.carryOutPickUps(b.getBookingDateRange().getEnd());
+        
         assertEquals(6, b.getOrderNum());
         assertEquals(BookingStatuses.COMPLETE, b.getBookingStatus());
     }
     
-    //Test 3.4: Check the status of the bikes in the booking
     @Test
-    void testBikeStatus() {
-        c.returnBikesToProvider((Integer) 5);
-        Booking b = c.findBookingByNumber((Integer) 5);
-        assertEquals(5, b.getOrderNum());
-        assertTrue(b.getDepositReturned());
+    void test1() {
+        System.out.println((bookingMock == null));
     }
+    
+    //Test 3.4: Check the status of the bikes in the booking
+//    @Test
+//    void testBikeStatus() {
+//        c.returnBikesToProvider((Integer) 5);
+//        Booking b = c.findBookingByNumber((Integer) 5);
+//        assertEquals(5, b.getOrderNum());
+//        Set<Bike> bikesInBooking = b.getBikeCollectionz();
+//    }
     
     //Test: Extension - Multiday Pricing Discounts
 }

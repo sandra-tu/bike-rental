@@ -43,7 +43,7 @@ public class Booking {
         if (this == null) {
             throw new IllegalArgumentException("This booking is null for some reason!");
         }
-        //this.provider.addProviderBooking(this);
+        this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }
     
@@ -59,7 +59,7 @@ public class Booking {
             throw new IllegalArgumentException("Please pass customer location");
         }
         this.setReturnProvider(returnProvider);
-        //this.provider.addProviderBooking(this);
+        this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }
     
@@ -75,7 +75,7 @@ public class Booking {
         if(deliveryRequired) {
             this.setDeliveryRequired(customerLocation);;
         }
-        //this.provider.addProviderBooking(this);
+        this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }
     
@@ -94,7 +94,7 @@ public class Booking {
         if (this == null) {
             throw new IllegalArgumentException("This booking is null for some reason!");
         }
-        //this.provider.addProviderBooking(this);
+        this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }
     
