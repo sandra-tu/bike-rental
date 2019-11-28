@@ -25,7 +25,7 @@ public class DateRange {
     public DateRange(LocalDate start, LocalDate end) {
         this.start = start;
         this.end = end;
-        assert !this.start.isAfter(this.end);
+        assert !this.end.isBefore(this.start);
     }
     
     /**

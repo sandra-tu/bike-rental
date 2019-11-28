@@ -37,6 +37,8 @@ public class SystemTests {
     private static Controller c;
     private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
     
+    private static Quote quote1;
+    
 
     @BeforeAll
     static void setUp() throws Exception {
@@ -221,8 +223,11 @@ public class SystemTests {
         //quotes6 = c.generateQuotes(input6);
        
         //Quotes
-        
+        quote1 = new Quote(provider1Stock, provider1, 
+                new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);
 
+        //Bookings
+        
     }
     
     // TODO: Write system tests covering the three main use cases
@@ -283,6 +288,17 @@ public class SystemTests {
     }
     
     //Test 1.3: Checks all the bikes are available for the required dateRange
+    
+    @Test
+    void testQuoteReturnsAvailibleBikes() {
+        ArrayList<BikeType> requestedBike = new ArrayList<>();
+        requestedBike.add(roadBike);
+        Input inputTest = new Input(dateRange1, requestedBike, locationC3);
+        Booking booking1 = new Booking(quote1, false);
+        bike4_5.addBikeBooking(booking1);
+        ArrayList<Quote> quotesTest = c.generateQuotes(inputTest);
+        assertTrue(quotesTest.isEmpty());
+    }
     
     //Test 1.4: Checks daily rental price is correct
     
