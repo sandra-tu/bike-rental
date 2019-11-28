@@ -34,8 +34,8 @@ public class Quote {
         this.deliveryToCustomer = delivery;
     }
     
-    public void setToPaid() {
-        this.isPaid = true;
+    public void setIsPaid(boolean b) {
+        this.isPaid = b;
     }
     
     //Set the total rental price for the quote
