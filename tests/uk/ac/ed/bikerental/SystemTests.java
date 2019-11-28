@@ -40,6 +40,9 @@ public class SystemTests {
         // Setup mock delivery service before each tests
         DeliveryServiceFactory.setupMockDeliveryService();
         
+        Controller c = new Controller();
+
+        
         // Put your test setup here
         
         //Bike types
@@ -69,6 +72,11 @@ public class SystemTests {
         this.provider2 = new Provider("Provider2", locationP2, new BigDecimal(0.15));
         this.provider3 = new Provider("Provider3", locationP3, new BigDecimal(0.1));
         this.provider4 = new Provider("Provider4", locationP4, new BigDecimal(0.25));
+        
+        c.addProvider(provider1);
+        c.addProvider(provider2);
+        c.addProvider(provider3);
+        c.addProvider(provider4);
         
         provider1.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
         
@@ -202,7 +210,6 @@ public class SystemTests {
 //        this.input6 = new Input(dateRange1, this.requestedBikes3, locationC3);
         
         //Generated Quotes
-        Controller c = new Controller();
         this.quotes1 = c.generateQuotes(input1);
         this.quotes2 = c.generateQuotes(input2);
         this.quotes3 = c.generateQuotes(input3);
