@@ -227,7 +227,21 @@ public class SystemTests {
     
     @BeforeEach
     void setupEach() {
+        for(Quote q : quotes1) {
+            q.setIsPaid(false);
+        }
         
+        for(Quote q : quotes2) {
+            q.setIsPaid(false);
+        }
+        
+        for(Quote q : quotes3) {
+            q.setIsPaid(false);
+        }
+        
+        for(Quote q : quotes4) {
+            q.setIsPaid(false);
+        }
     }
     
     // TODO: Write system tests covering the three main use cases
