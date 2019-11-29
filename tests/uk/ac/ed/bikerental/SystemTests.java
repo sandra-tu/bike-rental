@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
+import uk.ac.ed.bikerental.Bike.BikeStatuses;
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 import uk.ac.ed.bikerental.Booking.BookingStatuses;
 
@@ -451,7 +452,6 @@ public class SystemTests {
     //Test: Use Case 3 - Returning bikes
      
     //Test 3.1: Check if the correct booking is found
-    
     @Test
     void testCorrectBookingFound() {
         Booking booking1Found = c.findBookingByNumber(booking1.getOrderNum());
@@ -467,65 +467,69 @@ public class SystemTests {
         assertEquals(booking4, booking4Found);
     }
     
-    @Test 
-    void test() {
-
-        System.out.println(booking1.getOrderNum());
-        booking1.printSummary();
-        //Booking bookingFound = c.findBookingByNumber(booking1.getOrderNum());
-        Set<Booking> book = c.getAllSystemBookings();
-        System.out.println(c.getAllSystemBookings());
-        System.out.println(c.getAllSystemBookings().size());
-        for (Booking bo : book) {
-            bo.printSummary();
-        }
-        System.out.println("booking1 order num: " + booking1.getOrderNum());
-        System.out.println("Provider1's bookings" + provider1.getBookings());
-        //System.out.println(bookingMock == null);
-       // System.out.println("Order num: " + bookingMock.getOrderNum());
-    }
-    
     //Test 3.2: Check if the deposit is returned on each booking
     @Test
     void testDepositIsReturned() {
-        c.returnBikesToProvider((Integer) 5);
-        Booking b = c.findBookingByNumber((Integer) 5);
-        assertEquals(5, b.getOrderNum());
+        c.returnBikesToProvider((Integer) 1);
+        Booking b = c.findBookingByNumber((Integer) 1);
+        assertEquals(1, b.getOrderNum());
         assertTrue(b.getDepositReturned());
     }
     
     //Test 3.3: Check the status of the booking
     @Test
-    void test1BookingStatus() {
-        c.returnBikesToProvider((Integer) 5);
-        Booking b = c.findBookingByNumber((Integer) 5);
-        assertEquals(5, b.getOrderNum());
+    void test1BookingStatus() { 
+        //Booking that was returned to main provider
+        c.returnBikesToProvider((Integer) 4);
+        Booking b = c.findBookingByNumber((Integer) 4);
+        assertEquals(4, b.getOrderNum());
         assertEquals(BookingStatuses.COMPLETE, b.getBookingStatus());
     }
     
     @Test
-    void test2BookingStatus() {
-        c.returnBikesToProvider((Integer) 6);
-        Booking b = c.findBookingByNumber((Integer) 6);
-        //b.carryOutPickUps(b.getBookingDateRange().getEnd());
+    void test2BookingStatus() { 
+        //Booking that was returned to partner provider (and needs delivery 
+        //    to main provider to get status COMPLETE)
+        c.returnBikesToProvider((Integer) 1);
+        Booking b = c.findBookingByNumber((Integer) 1);
         
-        assertEquals(6, b.getOrderNum());
+        assertEquals(1, b.getOrderNum());
         assertEquals(BookingStatuses.COMPLETE, b.getBookingStatus());
-    }
-    
-    @Test
-    void test1() {
-        System.out.println((bookingMock == null));
     }
     
     //Test 3.4: Check the status of the bikes in the booking
-//    @Test
-//    void testBikeStatus() {
-//        c.returnBikesToProvider((Integer) 5);
-//        Booking b = c.findBookingByNumber((Integer) 5);
-//        assertEquals(5, b.getOrderNum());
-//        Set<Bike> bikesInBooking = b.getBikeCollectionz();
-//    }
+    @Test
+    void test1BikeStatus() {
+        //Booking that was returned to main provider
+        c.returnBikesToProvider((Integer) 4);
+        Booking b = c.findBookingByNumber((Integer) 4);
+        assertEquals(4, b.getOrderNum());
+        Set<Bike> bikesInBooking = b.getBikeCollection();
+        boolean allStatusesCorrect = true;
+        for (Bike bike : bikesInBooking) {
+            if (bike.getBikeStatus() != BikeStatuses.AT_MAIN_PROVIDER) {
+                allStatusesCorrect = false;
+            }
+        }
+        assertTrue(allStatusesCorrect);
+    }
+    
+    @Test
+    void test2BikeStatus() {
+      //Booking that was returned to partner provider (and needs delivery 
+        //    to main provider to get status AT_MAIN_PROVIDER)
+        c.returnBikesToProvider((Integer) 1);
+        Booking b = c.findBookingByNumber((Integer) 1);
+        assertEquals(1, b.getOrderNum());
+        Set<Bike> bikesInBooking = b.getBikeCollection();
+        boolean allStatusesCorrect = true;
+        for (Bike bike : bikesInBooking) {
+            if (bike.getBikeStatus() != BikeStatuses.AT_MAIN_PROVIDER) {
+                allStatusesCorrect = false;
+            }
+        }
+        assertTrue(allStatusesCorrect);
+    }
     
     //Test: Extension - Multiday Pricing Discounts
 }
