@@ -6,8 +6,6 @@ import uk.ac.ed.bikerental.Booking.BookingStatuses;
 
 public class BikeCollection implements Deliverable {
     private Booking booking;
-    private Set<Bike> bikeSet;
-    private Provider provider;
     
     public BikeCollection(Booking b) {
         this.booking = b;
