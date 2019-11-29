@@ -167,6 +167,10 @@ public class Controller {
         } else {
             //Booking returned to partner provider
             booking.setBookingStatus(BookingStatuses.AT_PARTNER);
+            Set<Bike> bikes = booking.getBikeCollection();
+            Bike[] bikeArray = new Bike[bikes.size()];
+            bikes.toArray(bikeArray);
+            System.out.println(bikeArray[0].getBikeStatus());
             booking.setDepositReturned();
             DeliveryService bookingDelivery = DeliveryServiceFactory.getDeliveryService();
             BikeCollectionFromPartnerToMainProv bikeCol = 

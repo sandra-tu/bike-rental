@@ -510,7 +510,7 @@ public class SystemTests {
     
     @Test
     void test2BikeStatus() {
-      //Booking that was returned to partner provider (and needs delivery 
+        //Booking that was returned to partner provider (and needs delivery 
         //    to main provider to get status AT_MAIN_PROVIDER)
         c.returnBikesToProvider((Integer) 1);
         Booking b = c.findBookingByNumber((Integer) 1);
