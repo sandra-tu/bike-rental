@@ -38,6 +38,7 @@ public class PricingPolicyTests {
         Bike arrayProvider1[] = {bike1_1, bike1_2, bike1_3, bike1_4};
         this.provider1Stock = new HashSet<>(Arrays.asList(arrayProvider1));
         provider1.setStock(provider1Stock);
+        System.out.println(provider1Stock.size());
     }
     
     //Test E.1: Check that the pricing policy is assigned

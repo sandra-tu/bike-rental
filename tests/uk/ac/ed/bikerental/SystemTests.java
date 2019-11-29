@@ -245,6 +245,8 @@ public class SystemTests {
         booking3 = new Booking(quote4, true, locationC1); //Delivery required, retured to main prov
         booking4 = new Booking(quote4, false); //No delivery, returned to main prov      
         
+        System.out.println(provider1Stock.size());
+
     }
     
     // TODO: Write system tests covering the three main use cases
