@@ -24,9 +24,9 @@ public class Bike{
         this.provider = provider;
         this.bikeType = bikeType;
         this.replacementValue = bikeType.getReplacementValue();
-        //assertNotNull(provider.getDailyRentalPrice(bikeType));
+        assertNotNull(provider.getDailyRentalPrice(bikeType));
         this.dailyRentalPrice = provider.getDailyRentalPrice(bikeType);
-        //assertNotNull(this.dailyRentalPrice);
+        assertNotNull(this.dailyRentalPrice);
         this.bikeStatus = BikeStatuses.AT_MAIN_PROVIDER;
     }
 

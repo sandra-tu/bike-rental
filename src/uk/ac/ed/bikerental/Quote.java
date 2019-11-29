@@ -49,7 +49,7 @@ public class Quote {
         }
         if(this.provider.hasPP()) {
             sum = sum.multiply(numDays);
-            sum = sum.multiply(BigDecimal.valueOf(this.provider.getPP().getDiscount(numDaysLong)));
+            sum = sum.multiply(BigDecimal.valueOf(1 - this.provider.getPP().getDiscount(numDaysLong)));
             return sum;
         } else {
             return sum.multiply(numDays);
