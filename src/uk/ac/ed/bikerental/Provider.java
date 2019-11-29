@@ -95,6 +95,10 @@ public class Provider {
         return (this.dailyRentalPrice).get(bikeType);
     }
     
+    public HashMap<BikeType, BigDecimal> getDailyRentalPriceList(){
+        return this.dailyRentalPrice;
+    }
+    
     public Set<BikeType> getStockedBikeTypes() {
         return dailyRentalPrice.keySet();
     }
