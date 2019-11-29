@@ -40,7 +40,7 @@ public class SystemTests {
     private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
     private static Quote quoteMock, quote1, quote2, quote3, quote4;
     private static Booking bookingMock, booking1, booking2, booking3, booking4;
-    
+    private static MultidayPricingPolicy pricingPolicy1;
 
     @BeforeAll
     static void setUp() throws Exception {
@@ -367,7 +367,8 @@ public class SystemTests {
     @Test
     void testBookingWithPayment() { //What are you testing here?
         quotes1.get(0).setIsPaid(true);
-        c.bookQuote(quotes1.get(0), false);
+        ;
+        assertEquals((c.bookQuote(quotes1.get(0), false)).getClass(), Invoice.class);
     }
     
     //Test 2.2: Checks that verify partner works
@@ -385,21 +386,21 @@ public class SystemTests {
     @Test
     void testBookingDevliveryPartnerReturn() {
         quote1.setIsPaid(true);
-        c.bookQuote(quote1, true, locationP1, provider3);
+        assertEquals(c.bookQuote(quote1, true, locationP1, provider3).getClass(), Invoice.class);
     }
     
     //Test 2.3.2: Make a booking that doesn't require delivery but return to partner
     @Test
     void testBookingNoDeliveryPartnerReturn() {
         quote2.setIsPaid(true);
-        c.bookQuote(quote2, false, provider3);
+        assertEquals(c.bookQuote(quote2, false, provider3).getClass(), Invoice.class);
     }
     
     //Test 2.3.3: Make a booking that requires delivery but return to original provider
     @Test
     void testBookingDeliveryOriginalReturn() {
         quote3.setIsPaid(true);
-        c.bookQuote(quote3, true, locationP3);
+        assertEquals(c.bookQuote(quote3, true, locationP3).getClass(), Invoice.class);
     }
     
     //Test 2.4: Checks that an Invoice is returned and that it contains the right details
@@ -424,28 +425,20 @@ public class SystemTests {
         int[] expectedOrderNum4 = {4};
         ArrayList<Provider> providers = new ArrayList<Provider>();
         providers.addAll(c.getProviders());
-        int i = 0;
         for(Booking b : providers.get(0).getBookings()){
-            assertEquals(b.getOrderNum(), expectedOrderNum1[i]);
-            i++;
+            assertEquals(b.getOrderNum(), expectedOrderNum1[0]);
         }
         
-        i = 0;
         for(Booking b : providers.get(1).getBookings()) {
-            assertEquals(b.getOrderNum(), expectedOrderNum2[i]);
-            i++;
+            assertEquals(b.getOrderNum(), expectedOrderNum2[0]);
         }
         
-        i = 0;
         for(Booking b : providers.get(2).getBookings()) {
-            assertEquals(b.getOrderNum(), expectedOrderNum3[i]);
-            i++;
+            assertEquals(b.getOrderNum(), expectedOrderNum3[0]);
         }
         
-        i = 0;
         for(Booking b : providers.get(3).getBookings()) {
-            assertEquals(b.getOrderNum(), expectedOrderNum4[i]);
-            i++;
+            assertEquals(b.getOrderNum(), expectedOrderNum4[0]);
         }
     }
     
@@ -532,4 +525,53 @@ public class SystemTests {
     }
     
     //Test: Extension - Multiday Pricing Discounts
+    //Test E.1: Check that the pricing policy is assigned
+    @Test
+    void testPricingPolicyAssign() {
+        int[] thresholds = {2, 6, 13};
+        double[] discounts = {0.05, 0.1, 0.15};
+        pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
+        assertEquals(pricingPolicy1, provider1.getPP());
+    }
+    
+    //Test E.2: Check that threshold and discounts have to be equal in size;
+    @Test
+    void testPricingPolicyUnequalArgumentSizes() {
+        int[] thresholds = {2, 6, 13, 14};
+        double[] discounts = {0.05, 0.1, 0.15};
+        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+            pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
+        });
+    }
+    
+    //Test E.3: Check that the right discounts are applied for respective thresholds
+    @Test
+    void testPricingPolicyThresholds() {
+        int[] thresholds = {2, 6, 13};
+        double[] discounts = {0.05, 0.1, 0.15};
+        pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
+        long days1 = 2;
+        long days2 = 4;
+        long days3 = 9;
+        long days4 = 13;
+        long days5 = 20;
+        double discount1 = pricingPolicy1.getDiscount(days1);
+        double discount2 = pricingPolicy1.getDiscount(days2);
+        double discount3 = pricingPolicy1.getDiscount(days3);
+        double discount4 = pricingPolicy1.getDiscount(days4);
+        double discount5 = pricingPolicy1.getDiscount(days5);
+        assertEquals(discount3, discount4);
+        assertEquals(discount1, 0);
+        assertEquals(discount2, 0.05);
+        assertEquals(discount3, 0.1);
+        assertEquals(discount5, 0.15);
+    }
+    
+    //Test E.4: Check that the correct discounted prices are returned
+    @Test
+    void testPricingPolicyPrices() {
+        
+    }
+    
+    //Integrated Tests
 }
