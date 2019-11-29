@@ -19,11 +19,11 @@ public class BikeType {
         }
         
         //Throws error if the replacement value has already been set for a bike type
-        if (bikeTypeSet.contains(this.bikeType)) {
-            throw new IllegalArgumentException("This bike type already exists");
-        } else {
-            bikeTypeSet.add(this.bikeType);
-        }
+//        if (bikeTypeSet.contains(this.bikeType)) {
+//            throw new IllegalArgumentException("This bike type already exists");
+//        } else {
+//            bikeTypeSet.add(this.bikeType);
+//        }
                 
     }
         
