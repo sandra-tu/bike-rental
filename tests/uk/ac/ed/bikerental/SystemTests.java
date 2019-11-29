@@ -1,5 +1,11 @@
 package uk.ac.ed.bikerental;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.*;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
@@ -7,8 +13,6 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 import uk.ac.ed.bikerental.Booking.BookingStatuses;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,15 +1,14 @@
 package uk.ac.ed.bikerental;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Arrays;
-
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
