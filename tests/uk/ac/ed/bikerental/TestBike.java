@@ -1,25 +1,17 @@
 package uk.ac.ed.bikerental;
 
-<<<<<<< HEAD
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-=======
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
->>>>>>> c7733edb88f7ac2fdcaf4521f195574c88280a17
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Arrays;
-<<<<<<< HEAD
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-=======
 
->>>>>>> c7733edb88f7ac2fdcaf4521f195574c88280a17
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class TestBike {
