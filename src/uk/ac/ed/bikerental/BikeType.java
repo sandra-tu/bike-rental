@@ -16,15 +16,7 @@ public class BikeType {
             throw new IllegalArgumentException("Replacement vlaue cannot be negative");
         } else {
             this.replacementValue = replacementValue;
-        }
-        
-        //Throws error if the replacement value has already been set for a bike type
-//        if (bikeTypeSet.contains(this.bikeType)) {
-//            throw new IllegalArgumentException("This bike type already exists");
-//        } else {
-//            bikeTypeSet.add(this.bikeType);
-//        }
-                
+        }         
     }
         
     public enum BikeTypes {
