@@ -124,7 +124,6 @@ public class SystemTests {
         provider1Stock = new HashSet<>(Arrays.asList(arrayProvider1));
         provider1.setStock(provider1Stock);
         
-        
         bike2_1 = new Bike(provider2, roadBike);
         bike2_2 = new Bike(provider2, roadBike);
         bike2_3 = new Bike(provider2, roadBike);
