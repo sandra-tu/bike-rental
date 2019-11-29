@@ -88,9 +88,7 @@ public class Booking {
         if(deliveryRequired) {
             throw new IllegalArgumentException("Please pass customer location");
         }
-        if (this == null) {
-            throw new IllegalArgumentException("This booking is null for some reason!");
-        }
+
         this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }
@@ -156,7 +154,7 @@ public class Booking {
         if(this.getProvider().verifyPartner(provider)) {
             this.returnProvider = provider;
         }else {
-            throw new IllegalArgumentException("Requested return provider is not a partner"); //should I throw an exception here??
+            throw new IllegalArgumentException("Requested return provider is not a partner");
         }
     }
     
@@ -170,7 +168,7 @@ public class Booking {
         Location providerAddress = this.getProvider().getAddress();
         LocalDate pickupDate = this.getBookingDateRange().getStart();
         //Deliverable deliverable = new Deliverable();
-        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(bikeCol, //So with one bike object it seems to work
+        DeliveryServiceFactory.getDeliveryService().scheduleDelivery(bikeCol, 
                 providerAddress, customerLocation, pickupDate);
     }
     
@@ -199,43 +197,6 @@ public class Booking {
         Booking other = (Booking) obj;
         return Objects.equals(orderNum, other.orderNum);
     }
-    
-//    public static void main(String[] args) {
-//        
-//        Location locationP1 = new Location("EH89QE", "Street name");
-//        Location locationP3 = new Location("G138AB", "Street name");
-//        Location locationC1 = new Location("EH45AH", "Street name");
-//
-//        DateRange dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
-//        Provider provider3 = new Provider("Provider3", locationP3, new BigDecimal(0.1));
-//        Provider provider1 = new Provider("Provider1", locationP1, new BigDecimal(0.2));
-//
-//        Set<Provider> partnersOf1 = new HashSet<>();
-//        provider1.setPartnerProviders(partnersOf1);
-//        partnersOf1.add(provider3);
-//        BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
-//        BikeType roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(110.00));
-//        BikeType eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(120.00));
-//        System.out.println("ho");
-//        provider1.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
-//        provider3.setDailyRentalPrice(mountainBike, new BigDecimal(10.00));
-//        provider3.setDailyRentalPrice(roadBike, new BigDecimal(10.00));
-//        provider3.setDailyRentalPrice(eBike, new BigDecimal(10.00));
-//        System.out.println("ho");
-//        Bike bike1_1 = new Bike(provider1, mountainBike);
-//        Set<Bike> provider1Stock = new HashSet<>();
-//        provider1Stock.add(bike1_1);
-//        System.out.println("ho");
-//        System.out.println(bike1_1.getDailyRentalPrice());
-//        System.out.println(bike1_1.getDailyRentalPrice());
-//        bike1_1.printSummary();
-//        System.out.println(provider1.getDailyRentalPrice(mountainBike));
-//
-//        Quote quote4 = new Quote(provider1Stock, provider1, dateRange1, locationP1);
-//
-//        Booking booking1 = new Booking(quote4, true, locationC1, provider3); //Delivery required, returned to partner prov
-//        System.out.println(booking1.getOrderNum());
-//    }
 
     public void printSummary() {
       System.out.println("Booking order no.:  " + this.orderNum);
