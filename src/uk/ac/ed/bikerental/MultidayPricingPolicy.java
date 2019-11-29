@@ -34,7 +34,7 @@ public class MultidayPricingPolicy implements PricingPolicy{
         }
         int thresholdsCopy[] = Arrays.copyOf(thresholds, thresholds.length);
         Arrays.sort(thresholdsCopy);
-        if (Arrays.equals(thresholdsCopy, thresholds)) {
+        if (!Arrays.equals(thresholdsCopy, thresholds)) {
             throw new IllegalArgumentException("The days in threshold argument must be in "
                     + "order, and correspond to the values in the discount array");
         }
@@ -54,7 +54,7 @@ public class MultidayPricingPolicy implements PricingPolicy{
         double discountRate = 0.00; //If the number of days is less than the first 
         //threshold in the given array
         for(int i = 0; i < this.thresholds.length; i++) {
-            if(days >= this.thresholds[i]) {
+            if(days > this.thresholds[i]) {
                 discountRate = this.discountRates[i];
             }
         }

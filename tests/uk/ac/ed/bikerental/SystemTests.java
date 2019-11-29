@@ -540,7 +540,7 @@ public class SystemTests {
     @Test
     void testPricingPolicyUnequalArgumentSizes() {
         int[] thresholds = {2, 6, 13, 14};
-        double[] discounts = {0.95, 0.9, 0.85};
+        double[] discounts = {0.05, 0.1, 0.15};
         Assertions.assertThrows(IllegalArgumentException.class, ()->{
             pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
         });
@@ -550,7 +550,7 @@ public class SystemTests {
     @Test
     void testPricingPolicyThresholds() {
         int[] thresholds = {2, 6, 13};
-        double[] discounts = {0.95, 0.9, 0.85};
+        double[] discounts = {0.05, 0.10, 0.15};
         pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
         long days1 = 2;
         long days2 = 4;
@@ -564,16 +564,16 @@ public class SystemTests {
         double discount5 = pricingPolicy1.getDiscount(days5);
         assertEquals(discount3, discount4);
         assertEquals(discount1, 0);
-        assertEquals(discount2, 0.95);
-        assertEquals(discount3, 0.9);
-        assertEquals(discount5, 0.85);
+        assertEquals(discount2, 0.05);
+        assertEquals(discount3, 0.10);
+        assertEquals(discount5, 0.15);
     }
     
     //Test E.4: Check that the correct discounted prices are returned
     @Test
     void testPricingPolicyPrices() {
         int[] thresholds = {2, 6, 13};
-        double[] discounts = {0.95, 0.9, 0.85};
+        double[] discounts = {0.05, 0.10, 0.15};
         pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
         DateRange dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 2));
         DateRange dateRange2 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
