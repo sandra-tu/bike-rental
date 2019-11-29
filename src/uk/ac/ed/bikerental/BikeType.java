@@ -27,7 +27,7 @@ public class BikeType {
                 
     }
         
-    public enum BikeTypes{
+    public enum BikeTypes {
         ROADBIKE,
         MOUNTAINBIKE,
         HYBRIDBIKE,
@@ -56,13 +56,5 @@ public class BikeType {
         BikeType other = (BikeType) obj;
         return Objects.equals(bikeType, other.bikeType) 
                 && Objects.equals(replacementValue, other.replacementValue);
-    }
-    
-    public static void main(String[] args) {
-        BikeType mountain = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(30.00));
-        BikeType city = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(20.00));
-        System.out.println(mountain.getReplacementValue());
-        System.out.println(city.getReplacementValue());
-    }
-    
+    }    
 }

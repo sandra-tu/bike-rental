@@ -1,6 +1,5 @@
 package uk.ac.ed.bikerental;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
@@ -9,7 +8,6 @@ import java.time.LocalDate;
 import java.math.BigDecimal;
 
 import uk.ac.ed.bikerental.Bike.BikeStatuses;
-import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 public class Booking {
         
@@ -88,11 +86,9 @@ public class Booking {
         if(deliveryRequired) {
             throw new IllegalArgumentException("Please pass customer location");
         }
-
         this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }
-    
     private Integer createOrderNum() {
         return Integer.valueOf(String.valueOf(orderNumCounter.getAndIncrement()));
     }
@@ -118,17 +114,14 @@ public class Booking {
                 for(Bike bike : bikeCollection) {
                     bike.setBikeStatus(BikeStatuses.OUT_FOR_DELIVERY);
                 }
-                
             case IN_USE:
                 for(Bike bike : bikeCollection) {
                     bike.setBikeStatus(BikeStatuses.IN_USE);
                 }
-                
             case AT_PARTNER:
                 for(Bike bike : bikeCollection) {
                     bike.setBikeStatus(BikeStatuses.AT_PARTNER);
                 }
-                
             case OVERNIGHT_RETURN:
                 for(Bike bike : bikeCollection) {
                     bike.setBikeStatus(BikeStatuses.OVERNIGHT_TRANSIT);
@@ -193,14 +186,4 @@ public class Booking {
         Booking other = (Booking) obj;
         return Objects.equals(orderNum, other.orderNum);
     }
-
-    public void printSummary() {
-      System.out.println("Booking order no.:  " + this.orderNum);
-      System.out.println("Provider:           " + this.provider.getProviderID());
-      System.out.println("Total rental price: " + this.totalRentalPrice);
-      System.out.println("Total deposit.:     " + this.totalDeposit);
-      System.out.println("Booking pointer:    " + this + "\n");
-  
-    }
-
 }

@@ -1,6 +1,8 @@
 package uk.ac.ed.bikerental;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;

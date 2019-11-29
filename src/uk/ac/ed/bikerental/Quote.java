@@ -1,14 +1,9 @@
 package uk.ac.ed.bikerental;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import uk.ac.ed.bikerental.BikeType.BikeTypes;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class Quote {
     private final Set<Bike> bikes = new HashSet<>();
@@ -39,7 +34,6 @@ public class Quote {
     }
     
     public BigDecimal calculateTotalDailyRentalPrice() {
-
         BigDecimal sum = BigDecimal.ZERO;
         Long numDaysLong = this.getDateRange().toDays() + 1;
         BigDecimal numDays = new BigDecimal(numDaysLong);
@@ -95,16 +89,4 @@ public class Quote {
                 && Objects.equals(dateRange, other.dateRange)
                 && Objects.equals(locationOfHire, other.locationOfHire);
     }
-    
-    public void printSummary() {
-        System.out.println("Bikes:                " + bikes);
-        System.out.println("Provider:             " + provider);
-        System.out.println("DateRange:            " + dateRange);
-        System.out.println("locationOfHire:       " + locationOfHire);
-        System.out.println("Total rental price:   " + totalRentalPrice);
-        System.out.println("Total deposit price:  " + totalDepositPrice);
-        System.out.println("Delivery to customer: " + deliveryToCustomer);
-        System.out.println("Quote is paid for:    " + isPaid + "\n");
-    }
- 
 }

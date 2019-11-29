@@ -3,9 +3,6 @@ package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MultidayPricingPolicy implements PricingPolicy{
     

@@ -1,12 +1,8 @@
 package uk.ac.ed.bikerental;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
-import com.sun.istack.internal.Nullable;
-
-import uk.ac.ed.bikerental.BikeType.BikeTypes;
 import uk.ac.ed.bikerental.Booking.BookingStatuses;
 
 public class Controller {

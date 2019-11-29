@@ -5,7 +5,6 @@ import java.util.Objects;
 /** 
  * Represents a location in Scotland by a street address and postcode
  */
-
 public class Location {
     /**
      * Represents the parts of a location, namely its postcode and street address, both as Strings 
@@ -99,10 +98,5 @@ public class Location {
         Location other = (Location) obj;
         return Objects.equals(postcode, other.postcode) 
                 && Objects.equals(streetAddress, other.streetAddress);
-    }
-    
-    // You can add your own methods here
-    public String formatAddress() {
-        return this.streetAddress + ", " + this.postcode + ".";    
     }
 }

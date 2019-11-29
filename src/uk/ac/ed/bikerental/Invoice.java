@@ -20,7 +20,7 @@ public class Invoice {
     }
     
     public void printInvoice() {
-        //details for formatting invoiceOutput
+        //A method to print the details of the invoice to the UI
     }
     
     //GETTERS
@@ -46,5 +46,4 @@ public class Invoice {
         Invoice other = (Invoice) obj;
         return Objects.equals(invoiceNum, other.invoiceNum);
     }
-    
 }

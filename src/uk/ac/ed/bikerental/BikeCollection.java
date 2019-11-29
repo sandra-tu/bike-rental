@@ -1,7 +1,5 @@
 package uk.ac.ed.bikerental;
 
-import java.util.Set;
-
 import uk.ac.ed.bikerental.Booking.BookingStatuses;
 
 public class BikeCollection implements Deliverable {

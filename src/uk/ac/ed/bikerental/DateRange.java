@@ -3,7 +3,6 @@ package uk.ac.ed.bikerental;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-import java.util.function.BooleanSupplier;
 
 /**
  * Represents a range of dates, uses two LocalDate objects for start date and end date
@@ -118,6 +117,4 @@ public class DateRange {
         DateRange other = (DateRange) obj;
         return Objects.equals(end, other.end) && Objects.equals(start, other.start);
     }
-    
-    // You can add your own methods here
 }

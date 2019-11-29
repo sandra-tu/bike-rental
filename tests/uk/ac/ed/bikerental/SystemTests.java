@@ -23,10 +23,10 @@ import java.util.TreeSet;
 
 public class SystemTests {
     // You can add attributes here
-    private static BikeType mountainBike, roadBike, eBike, otherBike;
+    private static BikeType mountainBike, roadBike, eBike;
     private static Location locationP1, locationP2, locationP3, locationP4;
     private static Location locationC1, locationC2, locationC3, locationC4;
-    private static DateRange dateRange1, dateRange2;
+    private static DateRange dateRange1;
     private static Provider provider1, provider2, provider3, provider4;
     
     private static Bike bike1_1, bike1_2, bike1_3, bike1_4;
@@ -35,11 +35,11 @@ public class SystemTests {
     private static Bike bike4_1, bike4_2, bike4_3, bike4_4, bike4_5, bike4_6, bike4_7, bike4_8, bike4_9;
     
     private static ArrayList<BikeType> requestedBikes1, requestedBikes2, requestedBikes3;
-    private static Input input1, input2, input3, input4, input5, input6;
+    private static Input input1, input2, input3, input4;
     private static Controller c;
-    private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4, quotes5, quotes6;
+    private static ArrayList<Quote> quotes1, quotes2, quotes3, quotes4;
     private static Quote quoteMock, quote1, quote2, quote3, quote4;
-    private static Booking bookingMock, booking1, booking2, booking3, booking4;
+    private static Booking booking1, booking2, booking3, booking4;
     private static MultidayPricingPolicy pricingPolicy1;
     private static Set<Bike> provider1Stock, provider2Stock, provider3Stock, provider4Stock;
 
@@ -49,15 +49,13 @@ public class SystemTests {
         DeliveryServiceFactory.setupMockDeliveryService();
         
         c = new Controller();
-
         
-        // Put your test setup here
         
         //Bike types
         mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
         roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(110.00));
         eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(120.00));
-        otherBike = new BikeType(BikeTypes.OTHERBIKE, new BigDecimal(130.00));
+        new BikeType(BikeTypes.OTHERBIKE, new BigDecimal(130.00));
 
         //Locations
         //(for Provider addresses)
@@ -73,7 +71,7 @@ public class SystemTests {
         
         //Date ranges
         dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
-        dateRange2 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 5, 1));
+        new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 5, 1));
         
         //Providers
         provider1 = new Provider("Provider1", locationP1, new BigDecimal(0.2));
@@ -162,40 +160,7 @@ public class SystemTests {
         quoteMock = new Quote(provider1Stock, provider1, 
                 new DateRange(LocalDate.of(1,1,1), LocalDate.of(1,1,1)), locationP1);
         quoteMock.setIsPaid(true);
-        //Mock bookings
-        bookingMock = new Booking(quoteMock, false);
-        
-        //Add mock booking to all providers
-        
-        //Add mock bookings to all bikes
-//        bike1_1.addBikeBooking(bookingMock);
-//        bike1_2.addBikeBooking(bookingMock);
-//        bike1_3.addBikeBooking(bookingMock);
-//        bike1_4.addBikeBooking(bookingMock);
-//
-//        bike2_1.addBikeBooking(bookingMock);
-//        bike2_2.addBikeBooking(bookingMock);
-//        bike2_3.addBikeBooking(bookingMock);
-//        bike2_4.addBikeBooking(bookingMock);
-//        bike2_5.addBikeBooking(bookingMock);
-//        bike2_6.addBikeBooking(bookingMock);
-//        bike2_7.addBikeBooking(bookingMock);
-//        
-//        bike3_1.addBikeBooking(bookingMock);
-//        bike3_2.addBikeBooking(bookingMock);
-//        bike3_3.addBikeBooking(bookingMock);
-//        bike3_4.addBikeBooking(bookingMock);
-//        bike3_5.addBikeBooking(bookingMock);
-//
-//        bike4_1.addBikeBooking(bookingMock);
-//        bike4_2.addBikeBooking(bookingMock);
-//        bike4_3.addBikeBooking(bookingMock);
-//        bike4_4.addBikeBooking(bookingMock);
-//        bike4_5.addBikeBooking(bookingMock);
-//        bike4_6.addBikeBooking(bookingMock);
-//        bike4_7.addBikeBooking(bookingMock);
-//        bike4_8.addBikeBooking(bookingMock);
-//        bike4_9.addBikeBooking(bookingMock);
+        new Booking(quoteMock, false);
         
         //ArrayList of BikeType for Input
         requestedBikes1 = new ArrayList<>();
@@ -216,17 +181,12 @@ public class SystemTests {
         input2 = new Input(dateRange1, requestedBikes1, locationC4); //Test 1.6
         input3 = new Input(dateRange1, requestedBikes3, locationC3); //Test 1.1
         input4 = new Input(dateRange1, requestedBikes3, locationC1); //Test 1.2
-        input5 = new Input(dateRange1, requestedBikes2, locationC2);
-        input6 = new Input(dateRange1, requestedBikes3, locationC3); //identical to input3 (delete if not used)
-        
 
         //Generated Quotes
         quotes1 = c.generateQuotes(input1);
         quotes2 = c.generateQuotes(input2);
         quotes3 = c.generateQuotes(input3);
         quotes4 = c.generateQuotes(input4);
-        quotes5 = c.generateQuotes(input5);
-        quotes6 = c.generateQuotes(input6);
        
         //Quotes
         quote1 = new Quote(provider4Stock, provider4, 
@@ -244,21 +204,11 @@ public class SystemTests {
         booking2 = new Booking(quote4, false, provider3); //No delivery, returned to partner prov
         booking3 = new Booking(quote4, true, locationC1); //Delivery required, retured to main prov
         booking4 = new Booking(quote4, false); //No delivery, returned to main prov      
-        
-        System.out.println(provider1Stock.size());
-
     }
     
     // TODO: Write system tests covering the three main use cases
 
     //Tests: Use Case 1 - Finding a quote
-    
-    @Test
-    void testNotNull() {
-        assertEquals(1, 1);
-        //assertNotNull(provider1);
-        //assertNotNull(quotes1);
-    }
     
     //Test 1.1: Checks provider field in quote is what is expected, thus checking
     //          - matches the actual provider of the bikes
@@ -307,7 +257,6 @@ public class SystemTests {
     }
     
     //Test 1.3: Checks all the bikes are available for the required dateRange
-    
     @Test
     void testQuoteReturnsAvailibleBikes() {
         ArrayList<BikeType> requestedBike = new ArrayList<>();
@@ -320,7 +269,6 @@ public class SystemTests {
     }
     
     //Test 1.4: Checks daily rental price is correct
-    
     @Test
     void testQuoteCorrectDailyRentalPrice() {
         Quote[] quoteArray = new Quote[quotes3.size()];
@@ -333,7 +281,6 @@ public class SystemTests {
     }
     
     //Test 1.5: Checks deposit price is correct
-    
     @Test
     void testCorrectDepositPrice() {
         Quote[] quoteArray = new Quote[quotes3.size()];
@@ -346,7 +293,6 @@ public class SystemTests {
     }
     
     //Test 1.6: Check no quotes are returned
-    
     @Test
     void testNoQuotesReturned() {
         assertTrue(quotes2.isEmpty());
@@ -437,7 +383,6 @@ public class SystemTests {
         for(Booking b : providers.get(2).getBookings()) {
             assertEquals(b.getOrderNum(), expectedOrderNum3[0]);
         }
-        
     }
     
     //Test: Use Case 3 - Returning bikes
@@ -476,6 +421,7 @@ public class SystemTests {
         assertEquals(4, b.getOrderNum());
         assertEquals(BookingStatuses.COMPLETE, b.getBookingStatus());
     }
+    
     // The following test is commented out as we didn't seem to implement the MockDelivery
     // system correctly or to its fullest extent, resulting in false statuses  
 //    @Test
@@ -592,6 +538,4 @@ public class SystemTests {
         assertEquals(quote4.calculateTotalDailyRentalPrice().stripTrailingZeros(),
                 new BigDecimal((10*2*20)*0.85).stripTrailingZeros());
     }
-    
-    //Integrated Tests
 }

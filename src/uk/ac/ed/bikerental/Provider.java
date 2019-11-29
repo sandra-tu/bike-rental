@@ -1,12 +1,8 @@
 package uk.ac.ed.bikerental;
 
-import static org.junit.Assert.assertEquals;
-
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
-
-import uk.ac.ed.bikerental.BikeType.BikeTypes;
 
 import java.util.HashSet;
 
@@ -19,7 +15,7 @@ public class Provider {
     private String providerName;
     private Location providerAddress;
     private BigDecimal depositRate;
-    private HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>(); //change from dailyPrice to dailyRentalPrice in UML cwk2
+    private HashMap<BikeType, BigDecimal> dailyRentalPrice = new HashMap<>(); 
 
     private Set<Provider> partnerProviders = new HashSet<Provider>();
     private Set<Bike> stock = new HashSet<Bike>();
@@ -28,7 +24,7 @@ public class Provider {
     private MultidayPricingPolicy pricingPolicy;
 
     private static AtomicLong idCounter = new AtomicLong();
-    
+
     //Recheck constructor given rental price constructor
     public Provider(String providerName, Location providerAddress, BigDecimal depositRate) {
         this.providerID = createProviderID();
@@ -156,22 +152,6 @@ public class Provider {
             return false;
         Provider other = (Provider) obj;
         return Objects.equals(providerID, other.providerID);
-    }
-    
-    public void printSummary() {
-        System.out.println("Name:     " + getProviderName());
-        System.out.println("ID:       " + getProviderID());
-        System.out.println("Address:  " + getProviderAddress().formatAddress());
-        System.out.println("DepositR: " + getDepositRate() + "\n");
-    }
-
-    public static void main(String[] args) {
-        Location loc = new Location("EH165AY", "Street");
-        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
-        BikeType eBike = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
-        prov.setDailyRentalPrice(eBike, new BigDecimal(100.00));
-        System.out.println(prov.getDailyRentalPrice(eBike));
-    }
-    
+    }    
 }
     

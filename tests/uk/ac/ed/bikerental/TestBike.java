@@ -30,7 +30,7 @@ public class TestBike {
         this.bike3 = new Bike(provider1, mountainBike);
 
         this.provider1 = new Provider("Provider", new Location("EH20", "street"), 
-                                       new BigDecimal("0.0"));
+                                       new BigDecimal("1.0"));
         this.bikeArr = new Bike[]{bike1, bike2, bike3};
         this.bikeset = new HashSet<>(Arrays.asList(bikeArr));
         
@@ -38,7 +38,6 @@ public class TestBike {
                       LocalDate.of(2000, 02, 02)), new Location("EH2020", "quoteLoc"));
         
         this.booking1 = new Booking(quote1, false);
-
     }
     
     //Test that the createBikeID method is working correctly
