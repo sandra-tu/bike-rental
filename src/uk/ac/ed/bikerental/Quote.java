@@ -52,6 +52,7 @@ public class Quote {
 //    }
     
     public BigDecimal calculateTotalDailyRentalPrice() {
+
         BigDecimal sum = BigDecimal.ZERO;
         Long numDaysLong = this.getDateRange().toDays() + 1;
         BigDecimal numDays = new BigDecimal(numDaysLong);
@@ -59,7 +60,13 @@ public class Quote {
         for(Bike bike : this.bikes) {
             sum = sum.add(bike.getDailyRentalPrice());
         }
-        return sum.multiply(numDays);
+        if(this.provider.hasPP()) {
+            sum = sum.multiply(numDays);
+            sum = sum.multiply(BigDecimal.valueOf(this.provider.getPP().getDiscount(numDaysLong)));
+            return sum;
+        } else {
+            return sum.multiply(numDays);
+        }
     }
     
     private BigDecimal calculateTotalDepositPrice() {

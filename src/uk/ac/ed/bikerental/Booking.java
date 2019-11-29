@@ -40,9 +40,6 @@ public class Booking {
             this.setDeliveryRequired(customerLocation); // maybe should be another catch in here, make sure thatdeliveryRquired is true
         }
         this.setReturnProvider(returnProvider);
-        if (this == null) {
-            throw new IllegalArgumentException("This booking is null for some reason!");
-        }
         this.provider.addProviderBooking(this);
         this.orderNum = createOrderNum();
     }

@@ -41,6 +41,7 @@ public class SystemTests {
     private static Quote quoteMock, quote1, quote2, quote3, quote4;
     private static Booking bookingMock, booking1, booking2, booking3, booking4;
     private static MultidayPricingPolicy pricingPolicy1;
+    private static Set<Bike> provider1Stock, provider2Stock, provider3Stock, provider4Stock;
 
     @BeforeAll
     static void setUp() throws Exception {
@@ -120,7 +121,7 @@ public class SystemTests {
         bike1_3 = new Bike(provider1, mountainBike);
         bike1_4 = new Bike(provider1, mountainBike);
         Bike arrayProvider1[] = {bike1_1, bike1_2, bike1_3, bike1_4};
-        Set<Bike> provider1Stock = new HashSet<>(Arrays.asList(arrayProvider1));
+        provider1Stock = new HashSet<>(Arrays.asList(arrayProvider1));
         provider1.setStock(provider1Stock);
         
         
@@ -132,7 +133,7 @@ public class SystemTests {
         bike2_6 = new Bike(provider2, eBike);
         bike2_7 = new Bike(provider2, eBike);
         Bike arrayProvider2[] = {bike2_1, bike2_2, bike2_3, bike2_4, bike2_5, bike2_6, bike2_7};
-        Set<Bike> provider2Stock = new HashSet<>(Arrays.asList(arrayProvider2));
+        provider2Stock = new HashSet<>(Arrays.asList(arrayProvider2));
         provider2.setStock(provider2Stock);
 
         bike3_1 = new Bike(provider3, mountainBike);
@@ -141,7 +142,7 @@ public class SystemTests {
         bike3_4 = new Bike(provider3, eBike);
         bike3_5 = new Bike(provider3, eBike);
         Bike arrayProvider3[] = {bike3_1, bike3_2, bike3_3, bike3_4, bike3_5};
-        Set<Bike> provider3Stock = new HashSet<>(Arrays.asList(arrayProvider3));
+        provider3Stock = new HashSet<>(Arrays.asList(arrayProvider3));
         provider3.setStock(provider3Stock);
         
         bike4_1 = new Bike(provider4, mountainBike);
@@ -155,7 +156,7 @@ public class SystemTests {
         bike4_9 = new Bike(provider4, eBike);
         Bike arrayProvider4[] = {bike4_1, bike4_2, bike4_3, bike4_4, bike4_5, bike4_6, 
                 bike4_7, bike4_8, bike4_9};
-        Set<Bike> provider4Stock = new HashSet<>(Arrays.asList(arrayProvider4));
+        provider4Stock = new HashSet<>(Arrays.asList(arrayProvider4));
         provider4.setStock(provider4Stock);
         
         //Mock quote
@@ -538,7 +539,7 @@ public class SystemTests {
     @Test
     void testPricingPolicyUnequalArgumentSizes() {
         int[] thresholds = {2, 6, 13, 14};
-        double[] discounts = {0.05, 0.1, 0.15};
+        double[] discounts = {0.95, 0.9, 0.85};
         Assertions.assertThrows(IllegalArgumentException.class, ()->{
             pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
         });
@@ -548,7 +549,7 @@ public class SystemTests {
     @Test
     void testPricingPolicyThresholds() {
         int[] thresholds = {2, 6, 13};
-        double[] discounts = {0.05, 0.1, 0.15};
+        double[] discounts = {0.95, 0.9, 0.85};
         pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
         long days1 = 2;
         long days2 = 4;
@@ -562,15 +563,36 @@ public class SystemTests {
         double discount5 = pricingPolicy1.getDiscount(days5);
         assertEquals(discount3, discount4);
         assertEquals(discount1, 0);
-        assertEquals(discount2, 0.05);
-        assertEquals(discount3, 0.1);
-        assertEquals(discount5, 0.15);
+        assertEquals(discount2, 0.95);
+        assertEquals(discount3, 0.9);
+        assertEquals(discount5, 0.85);
     }
     
     //Test E.4: Check that the correct discounted prices are returned
     @Test
     void testPricingPolicyPrices() {
-        
+        int[] thresholds = {2, 6, 13};
+        double[] discounts = {0.95, 0.9, 0.85};
+        pricingPolicy1 = new MultidayPricingPolicy(thresholds, discounts, provider1);
+        DateRange dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 2));
+        DateRange dateRange2 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
+        DateRange dateRange3 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 9));
+        DateRange dateRange4 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 20));
+
+
+        Quote quote1 = new Quote(provider1Stock, provider1, dateRange1, locationP1);
+        Quote quote2 = new Quote(provider1Stock, provider1, dateRange2, locationP1);
+        Quote quote3 = new Quote(provider1Stock, provider1, dateRange3, locationP1);
+        Quote quote4 = new Quote(provider1Stock, provider1, dateRange4, locationP1);
+
+        assertEquals(quote1.calculateTotalDailyRentalPrice().stripTrailingZeros(),
+                     new BigDecimal(10*2*2).stripTrailingZeros());
+        assertEquals(quote2.calculateTotalDailyRentalPrice().stripTrailingZeros(),
+                     new BigDecimal((10*2*3)*0.95).stripTrailingZeros());
+        assertEquals(quote3.calculateTotalDailyRentalPrice().stripTrailingZeros(),
+                new BigDecimal((10*2*9)*0.9).stripTrailingZeros());
+        assertEquals(quote4.calculateTotalDailyRentalPrice().stripTrailingZeros(),
+                new BigDecimal((10*2*20)*0.85).stripTrailingZeros());
     }
     
     //Integrated Tests

@@ -30,7 +30,7 @@ public class MultidayPricingPolicy implements PricingPolicy{
     }
     
     public double getDiscount(long days) {
-        double discountRate = 0;
+        double discountRate = 1;
         for(int i = 0; i < this.thresholds.length; i++) {
             if(days > this.thresholds[i]) {
                 discountRate = this.discountRates[i];
@@ -59,7 +59,8 @@ public class MultidayPricingPolicy implements PricingPolicy{
         
         double discountRate = this.getDiscount(duration.toDays());
         
-        BigDecimal total = rawTotal.multiply(BigDecimal.valueOf(discountRate));
+        BigDecimal dayTotal = rawTotal.multiply(BigDecimal.valueOf(duration.toDays() + 1));
+        BigDecimal total = dayTotal.multiply(BigDecimal.valueOf(discountRate));
         return total;
     }
 
