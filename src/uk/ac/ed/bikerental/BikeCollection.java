@@ -9,8 +9,6 @@ public class BikeCollection implements Deliverable {
     
     public BikeCollection(Booking b) {
         this.booking = b;
-        this.bikeSet = b.getBikeCollection();
-        this.provider = b.getProvider();
     }
     
     @Override
