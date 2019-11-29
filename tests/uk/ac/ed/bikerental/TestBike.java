@@ -26,7 +26,7 @@ public class TestBike {
     private static int boop = 1;
     
     @BeforeEach
-    public static void setUp() {
+    public void setUp() {
         System.out.println("boo");
         provider1 = new Provider("Provider", new Location("EH20lklkj", "street"), 
                 new BigDecimal("1.0"));
