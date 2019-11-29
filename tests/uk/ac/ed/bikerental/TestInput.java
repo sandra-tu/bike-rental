@@ -30,17 +30,5 @@ public class TestInput {
         Location location = new Location("EH165AY", "Street name");
         this.input1 = new Input(dateRange, bikesRequested1, location);
         this.input2 = new Input(dateRange, bikesRequested2, location);
-    }
-    
-    @Test(expected = IllegalArgumentException.class)
-    public void constructorExceptionTest() {
-        DateRange dateRange = new DateRange(LocalDate.of(2019, 1, 7), LocalDate.of(2019, 1, 10));
-        BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(20.00));
-        ArrayList<BikeType> bikesRequested1 = new ArrayList<BikeType>(
-                Arrays.asList(mountainBike));
-        Location location = new Location("EH165AY", "Street name");
-    
-        this.input3 = new Input(dateRange, null, location);
-        this.input4 = new Input(dateRange, bikesRequested1, null);
-    }    
+    }  
 }
