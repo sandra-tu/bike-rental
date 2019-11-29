@@ -6,14 +6,19 @@ import java.util.HashMap;
 
 public class MultidayPricingPolicy implements PricingPolicy{
     
-    private int[] thresholds; //   [2, 6, 13]
-    private double[] discountRates;// [0.05, 0.1, 0,15]
+    private int[] thresholds; //   
+    private double[] discountRates;// 
     private Provider provider;
     
     public MultidayPricingPolicy(int[] thresholds, double[] discountRates, Provider p) {
         this.thresholds = thresholds;
         this.discountRates = discountRates;
+        if(thresholds.length != discountRates.length) {
+            throw new IllegalArgumentException("Threshold must contain same number of elements" +
+                                               " as discount rates");
+        }
         this.provider = p;
+        p.setPP(this);
     }
     
     public int[] getThresholds(){
@@ -22,6 +27,16 @@ public class MultidayPricingPolicy implements PricingPolicy{
     
     public double[] getDiscountRates() {
         return this.discountRates;
+    }
+    
+    public double getDiscount(long days) {
+        double discountRate = 0;
+        for(int i = 0; i < this.thresholds.length; i++) {
+            if(days > this.thresholds[i]) {
+                discountRate = this.discountRates[i];
+            }
+        }
+        return discountRate;
     }
     
     public void setThresholds(int[] t) {
@@ -42,13 +57,8 @@ public class MultidayPricingPolicy implements PricingPolicy{
             rawTotal = rawTotal.add(bike.getDailyRentalPrice());
         }
         
-        double discountRate = 0;
-        for(int i = 0; i < this.thresholds.length; i++) {
-            if(duration.toDays() < this.thresholds[i]) {
-                discountRate = this.discountRates[i];
-                break;
-            }
-        }
+        double discountRate = this.getDiscount(duration.toDays());
+        
         BigDecimal total = rawTotal.multiply(BigDecimal.valueOf(discountRate));
         return total;
     }
