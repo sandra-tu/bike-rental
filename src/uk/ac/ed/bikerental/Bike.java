@@ -45,9 +45,7 @@ public class Bike{
         return this.provider.getProviderID();
     }
 
-    //Should this method not perhaps be private?
-    //Or maybe it doesn't need to be if the id field is final
-    public Integer createBikeID() {
+    private Integer createBikeID() {
         return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
     }
 

@@ -11,7 +11,6 @@ public class BikeType {
     public static Set<BikeTypes> bikeTypeSet = new HashSet<>();
     
     public BikeType(BikeTypes bikeType, BigDecimal replacementValue) {
-//        assert !bikeTypeSet.contains(bikeType);
         this.bikeType = bikeType;
         if (replacementValue.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Replacement vlaue cannot be negative");

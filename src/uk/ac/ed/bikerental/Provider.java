@@ -24,9 +24,8 @@ public class Provider {
     private Set<Provider> partnerProviders = new HashSet<Provider>();
     private Set<Bike> stock = new HashSet<Bike>();
     private Set<Booking> providerBookings = new HashSet<Booking>();
-    private Location address;
-    private boolean hasPP;
-    private MultidayPricingPolicy pp;
+    private boolean hasPricingPolicy;
+    private MultidayPricingPolicy pricingPolicy;
 
     private static AtomicLong idCounter = new AtomicLong();
     
@@ -38,7 +37,7 @@ public class Provider {
         this.depositRate = depositRate;
     }
     
-    public Integer createProviderID() { //make private?
+    private Integer createProviderID() { 
         return Integer.valueOf(String.valueOf(idCounter.getAndIncrement()));
       }
     
@@ -63,11 +62,11 @@ public class Provider {
     }
     
     public MultidayPricingPolicy getPP() {
-        return this.pp;
+        return this.pricingPolicy;
     }
     
     public void setHasPP(boolean b) {
-        this.hasPP = b;
+        this.hasPricingPolicy = b;
     }
     
     public void setPartnerProviders(Set<Provider> partners) {
@@ -88,12 +87,12 @@ public class Provider {
     }
     
     public void setPP(MultidayPricingPolicy pp) {
-        this.pp = pp;
+        this.pricingPolicy = pp;
         this.setHasPP(true);
     }
     
     public boolean hasPP() {
-        return this.hasPP;
+        return this.hasPricingPolicy;
     }
     
     public void addProviderBooking(Booking booking) {
@@ -128,10 +127,6 @@ public class Provider {
     
     public Set<Booking> getProviderBookings() {
         return this.providerBookings;
-    }
-    
-    public Location getAddress() {
-        return this.address;
     }
     
     public void addPartnerProvider(Provider p) {

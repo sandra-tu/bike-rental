@@ -12,18 +12,8 @@ import uk.ac.ed.bikerental.BikeType.BikeTypes;
 public class TestInput {
     private Input input1, input2, input3, input4;
     
-    //@Sandra - please help
-    //Is the duplicated code in the two tests necessary? Or is there some way to avoid that?
-    //Is the setUp() basically a constructor test? Because it feels like it might be exactly what
-    //    it's doing
-    
     @BeforeEach
     void setUp() throws Exception {
-//        BikeType mountainBike = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(20.00));
-//        BikeType roadBike = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(15.00));
-//        BikeType[] bikesRequested1 = {mountainBike};
-//        BikeType[] bikesRequested2 = {mountainBike, mountainBike, roadBike};
-//        Location location = new Location("Eh165AY", "Street name");
     }
     
     @Test
@@ -52,8 +42,5 @@ public class TestInput {
     
         this.input3 = new Input(dateRange, null, location);
         this.input4 = new Input(dateRange, bikesRequested1, null);
-    }
-    
-    //Still need to test all methods
-    
+    }    
 }

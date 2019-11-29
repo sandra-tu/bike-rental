@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Input {
-    //Do we need equals and hash methods for this class?
     
     private DateRange dateRange;
     private ArrayList<BikeType> bikesRequested; 
@@ -38,10 +37,5 @@ public class Input {
     }
 
     //No need for extendDateRange method (stated in cw3 pg 8)
-    
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
-    }
 
 }

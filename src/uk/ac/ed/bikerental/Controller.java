@@ -30,7 +30,8 @@ public class Controller {
             for (BikeType bikeType : bikesRequested) {
                 if (providerHasBikeType(provider, bikeType)) {
                     Set<Bike> bikesOfType = bikesOfType(providerStock, bikeType);
-                    Set<Bike> bikesAvailible = bikesAvailibleDateRange(providerStock, dateRangeRequested);
+                    Set<Bike> bikesAvailible = bikesAvailableDateRange(providerStock, 
+                                                                       dateRangeRequested);
                     Set<Bike> intersection = new HashSet<>(bikesOfType);
                     intersection.retainAll(bikesAvailible);
                     if (intersection.isEmpty()) {break;}
@@ -84,7 +85,7 @@ public class Controller {
     }
     
     //Returns bikes that are available for a given date range
-    public Set<Bike> bikesAvailibleDateRange(Set<Bike> bikeSet, DateRange dateRangeRequested) {
+    public Set<Bike> bikesAvailableDateRange(Set<Bike> bikeSet, DateRange dateRangeRequested) {
         Set<Bike> bikesAvailible = new HashSet<>();
         for (Bike bike : bikeSet) {
             ArrayList<DateRange>  dateRanges = bike.getDateRangesBooked();
@@ -107,8 +108,8 @@ public class Controller {
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation,
                              Provider returnProvider) {
         if(quote.getIsPaid()) {
-            Booking booking = new Booking(quote, deliveryRequired, customerLocation, returnProvider);
-            //booking.getProvider().addProviderBooking(booking);
+            Booking booking = new Booking(quote, deliveryRequired, customerLocation, 
+                                          returnProvider);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -121,7 +122,6 @@ public class Controller {
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Location customerLocation) {
         if(quote.getIsPaid()) {
             Booking booking = new Booking(quote, deliveryRequired, customerLocation);
-            //booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -133,7 +133,6 @@ public class Controller {
     public Invoice bookQuote(Quote quote, boolean deliveryRequired, Provider returnProvider) {
         if(quote.getIsPaid()) {
             Booking booking = new Booking(quote, deliveryRequired, returnProvider);
-            //booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -145,7 +144,6 @@ public class Controller {
     public Invoice bookQuote(Quote quote, boolean deliveryRequired) {
         if(quote.getIsPaid()) {
             Booking booking = new Booking(quote, deliveryRequired);
-            //booking.getProvider().addProviderBooking(booking);
             Invoice invoice = new Invoice(booking);
             return invoice;
         } else {
@@ -175,8 +173,8 @@ public class Controller {
             DeliveryService bookingDelivery = DeliveryServiceFactory.getDeliveryService();
             BikeCollectionFromPartnerToMainProv bikeCol = 
                     new BikeCollectionFromPartnerToMainProv(booking);
-            Location pickUp = booking.getReturnProvider().getAddress();
-            Location dropOff =  booking.getProvider().getAddress();
+            Location pickUp = booking.getReturnProvider().getProviderAddress();
+            Location dropOff =  booking.getProvider().getProviderAddress();
             LocalDate pickupDate = booking.getBookingDateRange().getEnd();
 
             bookingDelivery.scheduleDelivery(bikeCol, pickUp, dropOff, pickupDate);
@@ -209,31 +207,5 @@ public class Controller {
         }
         return output;
     }    
-    
-    //Other:
-    
-    public static void main(String[] args) {
-        Location location = new Location("EH165AY", "Holyrood rd.");
-        BigDecimal depositRate = new BigDecimal(0.2);
-        Provider provider1 = new Provider("Provider1", location, depositRate);
-        BikeType mountainBikeType = new BikeType(BikeTypes.MOUNTAINBIKE, new BigDecimal(100.00));
-        BikeType roadBikeType = new BikeType(BikeTypes.ROADBIKE, new BigDecimal(110.00));
-        Bike bike1 = new Bike(provider1, mountainBikeType);
-        Bike bike2 = new Bike(provider1, mountainBikeType);
-        Bike bike3 = new Bike(provider1, mountainBikeType);
-        Bike bike4 = new Bike(provider1, roadBikeType);
-        Bike bike5 = new Bike(provider1, roadBikeType);
-        Set<Bike> stock = new HashSet<>();
-        stock.add(bike1);
-        stock.add(bike2);
-        stock.add(bike3);
-        stock.add(bike4);
-        stock.add(bike5);
-        Set<BikeType> requestedBikeTypes = new HashSet<>();
-        requestedBikeTypes.add(mountainBikeType);
-        //Set<Quotes>
-        
-        
-    }
 
 }

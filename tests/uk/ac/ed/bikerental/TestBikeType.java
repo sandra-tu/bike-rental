@@ -32,6 +32,4 @@ class TestBikeType {
         });
     }
     
-    //More tests once interface has been implemented
-
 }

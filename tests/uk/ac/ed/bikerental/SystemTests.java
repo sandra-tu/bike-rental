@@ -231,7 +231,7 @@ public class SystemTests {
        
         //Quotes
         quote1 = new Quote(provider4Stock, provider4, 
-                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP1);//This should thechnically be P4 because a quote like this would never be made
+                 new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP4);
         quote2 = new Quote(provider2Stock, provider2,
                  new DateRange(LocalDate.of(2019,1,1), LocalDate.of(2019,1,2)), locationP2);
         quote3 = new Quote(provider3Stock, provider3,
@@ -482,8 +482,8 @@ public class SystemTests {
     
     @Test
     void test2BookingStatus() { 
-        //Booking that was returned to partner provider (and needs delivery 
-        //    to main provider to get status COMPLETE)
+        // Booking that was returned to partner provider (and needs delivery 
+        // to main provider to get status COMPLETE)
         c.returnBikesToProvider((Integer) 1);
         Booking b = c.findBookingByNumber((Integer) 1);
         

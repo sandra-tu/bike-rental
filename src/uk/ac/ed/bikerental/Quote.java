@@ -38,19 +38,6 @@ public class Quote {
         this.isPaid = b;
     }
     
-    //Set the total rental price for the quote
-//    public void calculateTotalRentalPrice() {
-//        for (Bike bike : this.bikes) {
-//            if (bike.getDailyRentalPrice() == null) {
-//                throw new IllegalArgumentException("daily rental price null 1");
-//            }
-//            this.totalRentalPrice = this.totalRentalPrice.add(bike.getDailyRentalPrice());
-//        }
-//        if (this.totalRentalPrice == null) {
-//            throw new IllegalArgumentException("daily rental price null 2");
-//        }
-//    }
-    
     public BigDecimal calculateTotalDailyRentalPrice() {
 
         BigDecimal sum = BigDecimal.ZERO;
@@ -118,27 +105,6 @@ public class Quote {
         System.out.println("Total deposit price:  " + totalDepositPrice);
         System.out.println("Delivery to customer: " + deliveryToCustomer);
         System.out.println("Quote is paid for:    " + isPaid + "\n");
-    }
-    
-    public static void main(String[] args) {
-        Location loc = new Location("EH165AY", "Street");
-        Provider prov = new Provider("name", loc, new BigDecimal(0.2));
-        BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100.00));
-        DateRange dateRange1 = new DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 3));
-        prov.setDailyRentalPrice(bikeType, new BigDecimal(10.00));
-
-        Bike bike = new Bike(prov, bikeType);
-        Set<Bike> set = new HashSet<>();
-        set.add(bike);
-        Quote quote = new Quote(set, prov, dateRange1, loc);
-        quote.calculateTotalDailyRentalPrice();
-        
-        System.out.println(bike.getDailyRentalPrice());
-        System.out.println(quote.getTotalRentalPrice());
-        System.out.println(quote.getTotalDepositPrice());
-        quote.printSummary();
-
-        //setTotalRentalPrice(set);
     }
  
 }

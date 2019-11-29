@@ -20,7 +20,7 @@ public class Booking {
     private Provider returnProvider;
     private boolean depositPaid = false;
     private boolean depositReturned = false;
-    private boolean deliveryRequired = false; //ADD TO CWK2
+    private boolean deliveryRequired = false;
     private BigDecimal totalRentalPrice;
     private BigDecimal totalDeposit;
     private BookingStatuses bookingStatus;
@@ -37,7 +37,7 @@ public class Booking {
         this.totalRentalPrice = quote.getTotalRentalPrice();
         this.totalDeposit = quote.getTotalDepositPrice();
         if(deliveryRequired) {
-            this.setDeliveryRequired(customerLocation); // maybe should be another catch in here, make sure thatdeliveryRquired is true
+            this.setDeliveryRequired(customerLocation);
         }
         this.setReturnProvider(returnProvider);
         this.provider.addProviderBooking(this);
@@ -93,7 +93,7 @@ public class Booking {
         this.orderNum = createOrderNum();
     }
     
-    public Integer createOrderNum() {
+    private Integer createOrderNum() {
         return Integer.valueOf(String.valueOf(orderNumCounter.getAndIncrement()));
     }
     
@@ -159,15 +159,11 @@ public class Booking {
     }
     
     public void setDeliveryRequired(Location customerLocation) {
-        //Dummy bike object just to see
-        //BikeType bikeType = new BikeType(BikeTypes.EBIKE, new BigDecimal(100)); 
-        //Bike bike = new Bike(provider, bikeType);
         BikeCollection bikeCol = new BikeCollection(this);
         
         this.deliveryRequired = true;
-        Location providerAddress = this.getProvider().getAddress();
+        Location providerAddress = this.getProvider().getProviderAddress();
         LocalDate pickupDate = this.getBookingDateRange().getStart();
-        //Deliverable deliverable = new Deliverable();
         DeliveryServiceFactory.getDeliveryService().scheduleDelivery(bikeCol, 
                 providerAddress, customerLocation, pickupDate);
     }
