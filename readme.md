@@ -3,3 +3,9 @@ This is a software engineering project where a bike rental system is designed an
 
 ## Requirements and Design
 We started by creating a requirements document, identifying our stakeholders, key use cases, and system states. We then designed the system using various diagrams, including UML and sequence diagrams. Both the requirements and design documents are in the documents folder (the green highlights were for marking purposes).
+
+## Implementation
+The system was implemented using Java, the classes are in the src folder. We also wrote JUnit tests, which are in the tests folder.
+
+## Takeaway
+We both genuinely enjoyed the course very much and learned more about collaborative coding, as well as the process of software design. We received a grade of 97.6% for this project!
