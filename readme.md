@@ -7,5 +7,7 @@ We started by creating a requirements document, identifying our stakeholders, ke
 ## Implementation
 The system was implemented using Java, the classes are in the src folder. We also wrote JUnit tests, which are in the tests folder.
 
-## Takeaway
-We both genuinely enjoyed the course very much and learned more about collaborative coding, as well as the process of software design. We received a grade of 97.6% for this project!
+## Takeaway and Results
+We both genuinely enjoyed the course very much and learned more about collaborative coding, as well as the process of software design. We feel our teamwork skills have vastly improved after this project. We also learned more about Java concepts such as Interfaces, which we weren't familiar with before.
+
+We were very happy that we received a grade of 97.6% for this project!
